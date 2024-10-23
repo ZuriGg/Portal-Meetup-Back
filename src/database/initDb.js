@@ -14,57 +14,60 @@ const main = async () => {
 
         console.log('Creando tablas...');
 
-        // Tabla de usuarios --> comentario en cada tabla indicando lo que hace
+        // Tabla de usuarios --> información de los usuarios registrados en el sistema
         await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 email VARCHAR(100) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL,
-                avatar VARCHAR(100),
-                active BOOLEAN DEFAULT false, /* en caso de usuario organizador, el admin le da el activo para subir eventos (q le llegue correo al usuario admin)*/
-                role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
-                registrationCode CHAR(30),
-                recoverPassCode CHAR(10),
+                meetupOwner VARCHAR(100), /* si es organizador de algún meetup */
+                avatar VARCHAR(100), /* Ruta o URL del avatar del usuario */
+                active BOOLEAN DEFAULT false, /* Estado del usuario, 'false' por defecto. Los admin activan a los organizadores para subir eventos */
+                role ENUM('organizador', 'normal', 'admin', 'invitado') DEFAULT 'invitado', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
+                registrationCode CHAR(30), /* Código de registro para activación */
+                recoverPassCode CHAR(10), /* Código para recuperar contraseña */
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )	
         `);
 
-        // Creamos la tabla de location.
+        // Creamos la tabla de location --> guarda la información de ubicaciones para los eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS location (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 city VARCHAR(50) NOT NULL,
                 address VARCHAR(100),
-                notes VARCHAR(100) NOT NULL,
-                pc CHAR(5) UNSIGNED NOT NULL, /* CHAR ocupa menos espacio */
+                notes VARCHAR(100) NOT NULL, /* lugar en concreto, ej: sala de usos múltiples */
+                zip CHAR(5) UNSIGNED NOT NULL, /* CHAR ocupa menos espacio */
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP 
             )
         `);
 
-        // Tabla de meetups.
+        // Tabla de meetups --> registra los eventos creados por los usuarios
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetups (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 title VARCHAR(50) NOT NULL,
                 description TEXT NOT NULL, 
-                DATE NOT NULL, /* fecha de inicio */
+                startDate DATE NOT NULL, /* fecha de inicio */
                 oneSession BOOLEAN DEFAULT FALSE, /* ej. determinar si es una única sesión, como el martes 29*/
                 hourMeetup TIME,
                 dayOfTheWeek ENUM('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') /* NO PONER NOT NULL por si no es un día en concreto*/
                 aforoMax TINYINT UNSIGNED INT,
-                userId CHAR(36) NOT NULL,
+                userId CHAR(36) NOT NULL, /* usuario relacionado (puede ser asistente o co-organizador) */
+                owner CHAR(36) NOT NULL,
                 locationId CHAR(36) NOT NULL,
                 categoryId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
+                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
-                FOREIGN KEY (categoryId) REFERENCES category(id)
+                FOREIGN KEY (categoryId) REFERENCES category(id),
                 FOREIGN KEY (locationId) REFERENCES location(id)
             )
         `);
 
-        // Tabla de category.
+        // Tabla de category --> almacena las diferentes categorías de los eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS category (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -72,7 +75,7 @@ const main = async () => {
             )
         `);
 
-        // Tabla de attendance.
+        // Tabla de attendance --> registra la asistencia de los usuarios a los eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS attendance (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -84,7 +87,7 @@ const main = async () => {
             )
         `);
 
-        // Tabla de outOfService --> comentario en cada tabla indicando lo que hace
+        // Tabla de outOfService --> registra la cancelación o inhabilitación de eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS outOfService (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -95,18 +98,18 @@ const main = async () => {
             )
         `);
 
-        // Tabla de fotos.
+        // Tabla de fotos --> almacena las fotos asociadas a los eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetupPhotos (
                 id CHAR(36) PRIMARY KEY NOT NULL,
-                name VARCHAR(100) NOT NULL,
+                url VARCHAR(100) NOT NULL,
                 meetupId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)
             )
         `);
 
-        // Tabla de votos.
+        // Tabla de votos --> permite que los usuarios califiquen los eventos según asistencia (sesión)
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetupVotes (
                 id CHAR(36) PRIMARY KEY NOT NULL,

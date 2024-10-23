@@ -5,8 +5,10 @@ app.get('/', (req, res) => {
     res.send('¡Hola, mundo!');
 });
 
-// Iniciar el servidor en el puerto 3000
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
+//implementacion middelwares de control de ruta no encontrada y de errores
+
+//middleware de manejo de errores
+app.use((error, req, res, next) => {
+    console.log(error);
+
+    res

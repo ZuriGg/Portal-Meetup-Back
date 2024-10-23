@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 //Middleware de manejo de errores
-server.use((error, req, res, next) => {
+app.use((error, req, res, next) => {
     console.log(error);
 
     res.status(error.httpStatus || 500).send({

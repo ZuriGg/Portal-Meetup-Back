@@ -51,8 +51,16 @@ const main = async () => {
                 city VARCHAR(50) NOT NULL,
                 address VARCHAR(100),
                 notes VARCHAR(100) NOT NULL, /* lugar en concreto, ej: sala de usos múltiples */
-                zip CHAR(5) UNSIGNED NOT NULL, /* CHAR ocupa menos espacio */
+                zip CHAR(5) NOT NULL, /* CHAR ocupa menos espacio */
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP 
+            )
+        `);
+
+        // Tabla de category --> almacena las diferentes categorías de los eventos
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS category (
+                id CHAR(36) PRIMARY KEY NOT NULL,
+                name VARCHAR(50) NOT NULL
             )
         `);
 
@@ -65,25 +73,17 @@ const main = async () => {
                 startDate DATE NOT NULL, /* fecha de inicio */
                 oneSession BOOLEAN DEFAULT FALSE, /* ej. determinar si es una única sesión, como el martes 29*/
                 hourMeetup TIME,
-                dayOfTheWeek ENUM('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') /* NO PONER NOT NULL por si no es un día en concreto*/
-                aforoMax TINYINT UNSIGNED INT,
+                dayOfTheWeek ENUM ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'), /* NO PONER NOT NULL por si no es un día en concreto*/
+                aforoMax TINYINT UNSIGNED,
                 userId CHAR(36) NOT NULL, /* usuario relacionado (puede ser asistente o co-organizador) */
                 owner CHAR(36) NOT NULL,
                 locationId CHAR(36) NOT NULL,
                 categoryId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
-                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
+                modifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
                 FOREIGN KEY (categoryId) REFERENCES category(id),
                 FOREIGN KEY (locationId) REFERENCES location(id)
-            )
-        `);
-
-        // Tabla de category --> almacena las diferentes categorías de los eventos
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS category (
-                id CHAR(36) PRIMARY KEY NOT NULL,
-                name VARCHAR(50) NOT NULL,
             )
         `);
 
@@ -91,7 +91,7 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS attendance (
                 id CHAR(36) PRIMARY KEY NOT NULL,
-                date DATETIME NOT NULL CHECK (date >= CURRENT_TIMESTAMP),
+                date DATETIME NOT NULL,
                 userId CHAR(36) NOT NULL,
                 meetupId CHAR(36) NOT NULL,
                 FOREIGN KEY (userId) REFERENCES users(id),
@@ -104,7 +104,7 @@ const main = async () => {
             CREATE TABLE IF NOT EXISTS outOfService (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 notes VARCHAR(100) NOT NULL, /* motivo por el que se cancela: aforoMax, huelga de basura */
-                date DATETIME NOT NULL CHECK (date >= CURRENT_TIMESTAMP),
+                date DATETIME NOT NULL,
                 meetupId CHAR(36) NOT NULL,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)
             )

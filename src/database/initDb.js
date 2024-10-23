@@ -6,6 +6,18 @@ const main = async () => {
     try {
         pool = await getPool();
 
+        console.log('Eliminando base de datos...');
+
+        await pool.query('DROP DATABASE IF EXISTS meetup');
+
+        console.log('Creando base de datos meetup...');
+
+        await pool.query('CREATE DATABASE meetup');
+
+        console.log('Seleccionando base de datos...');
+
+        await pool.query('USE meetup');
+
         console.log('Borrando tablas...');
 
         await pool.query(

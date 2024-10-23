@@ -1,8 +1,16 @@
 import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
 
 const app = express();
 
 app.use(express.json());
+
+// Middleware MORGAN: muestra por consola información sobre la petición entrante.
+app.use(morgan('dev'));
+
+// Middleware CORS: evita que interfieran cuando conectemos front con back
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('¡Hola, mundo!');

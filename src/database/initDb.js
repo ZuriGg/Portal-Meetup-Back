@@ -36,7 +36,7 @@ const main = async () => {
                 meetupOwner VARCHAR(100), /* si es organizador de algún meetup */
                 avatar VARCHAR(100), /* Ruta o URL del avatar del usuario */
                 active BOOLEAN DEFAULT false, /* Estado del usuario, 'false' por defecto. Los admin activan a los organizadores para subir eventos */
-                role ENUM('organizador', 'normal', 'admin', 'invitado') DEFAULT 'invitado', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
+                role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
                 registrationCode CHAR(30), /* Código de registro para activación */
                 recoverPassCode CHAR(10), /* Código para recuperar contraseña */
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
@@ -87,6 +87,17 @@ const main = async () => {
             )
         `);
 
+        // Tabla de fotos --> almacena las fotos asociadas a los eventos
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS meetupPhotos (
+                id CHAR(36) PRIMARY KEY NOT NULL,
+                url VARCHAR(100) NOT NULL,
+                meetupId CHAR(36) NOT NULL,
+                FOREIGN KEY (meetupId) REFERENCES meetups(id),
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
         // Tabla de attendance --> registra la asistencia de los usuarios a los eventos
         await pool.query(`
             CREATE TABLE IF NOT EXISTS attendance (
@@ -106,17 +117,6 @@ const main = async () => {
                 notes VARCHAR(100) NOT NULL, /* motivo por el que se cancela: aforoMax, huelga de basura */
                 date DATETIME NOT NULL,
                 meetupId CHAR(36) NOT NULL,
-                FOREIGN KEY (meetupId) REFERENCES meetups(id)
-            )
-        `);
-
-        // Tabla de fotos --> almacena las fotos asociadas a los eventos
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS meetupPhotos (
-                id CHAR(36) PRIMARY KEY NOT NULL,
-                url VARCHAR(100) NOT NULL,
-                meetupId CHAR(36) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)
             )
         `);

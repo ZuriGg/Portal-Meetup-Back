@@ -16,7 +16,9 @@ app.get('/', (req, res) => {
     res.send('¡Hola, mundo!');
 });
 
-//Middleware de manejo de errores
+//implementacion middelwares de control de ruta no encontrada y de errores
+
+//middleware de manejo de errores
 app.use((error, req, res, next) => {
     console.log(error);
 

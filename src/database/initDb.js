@@ -64,6 +64,17 @@ const main = async () => {
             )
         `);
 
+        // Tabla de fotos --> almacena las fotos asociadas a los eventos
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS meetupPhotos (
+                id CHAR(36) PRIMARY KEY NOT NULL,
+                url VARCHAR(100) NOT NULL,
+                meetupId CHAR(36) NOT NULL,
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (meetupId) REFERENCES meetups(id)
+            )
+        `);
+
         // Tabla de meetups --> registra los eventos creados por los usuarios
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetups (
@@ -108,17 +119,6 @@ const main = async () => {
                 notes VARCHAR(100) NOT NULL, /* motivo por el que se cancela: aforoMax, huelga de basura */
                 date DATETIME NOT NULL,
                 meetupId CHAR(36) NOT NULL,
-                FOREIGN KEY (meetupId) REFERENCES meetups(id)
-            )
-        `);
-
-        // Tabla de fotos --> almacena las fotos asociadas a los eventos
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS meetupPhotos (
-                id CHAR(36) PRIMARY KEY NOT NULL,
-                url VARCHAR(100) NOT NULL,
-                meetupId CHAR(36) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)
             )
         `);

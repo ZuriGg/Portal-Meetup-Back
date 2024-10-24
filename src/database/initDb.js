@@ -64,17 +64,6 @@ const main = async () => {
             )
         `);
 
-        // Tabla de fotos --> almacena las fotos asociadas a los eventos
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS meetupPhotos (
-                id CHAR(36) PRIMARY KEY NOT NULL,
-                url VARCHAR(100) NOT NULL,
-                meetupId CHAR(36) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (meetupId) REFERENCES meetups(id)
-            )
-        `);
-
         // Tabla de meetups --> registra los eventos creados por los usuarios
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetups (
@@ -90,13 +79,22 @@ const main = async () => {
                 owner CHAR(36) NOT NULL,
                 locationId CHAR(36) NOT NULL,
                 categoryId CHAR(36) NOT NULL,
-                photoId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
                 FOREIGN KEY (categoryId) REFERENCES category(id),
-                FOREIGN KEY (locationId) REFERENCES location(id),
-                FOREIGN KEY (photoId) REFERENCES meetupPhotos(id)
+                FOREIGN KEY (locationId) REFERENCES location(id)
+            )
+        `);
+
+        // Tabla de fotos --> almacena las fotos asociadas a los eventos
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS meetupPhotos (
+                id CHAR(36) PRIMARY KEY NOT NULL,
+                url VARCHAR(100) NOT NULL,
+                meetupId CHAR(36) NOT NULL,
+                FOREIGN KEY (meetupId) REFERENCES meetups(id),
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
 

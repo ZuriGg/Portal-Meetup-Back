@@ -36,7 +36,7 @@ const main = async () => {
                 meetupOwner VARCHAR(100), /* si es organizador de algún meetup */
                 avatar VARCHAR(100), /* Ruta o URL del avatar del usuario */
                 active BOOLEAN DEFAULT false, /* Estado del usuario, 'false' por defecto. Los admin activan a los organizadores para subir eventos */
-                role ENUM('organizador', 'normal', 'admin', 'invitado') DEFAULT 'invitado', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
+                role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
                 registrationCode CHAR(30), /* Código de registro para activación */
                 recoverPassCode CHAR(10), /* Código para recuperar contraseña */
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 

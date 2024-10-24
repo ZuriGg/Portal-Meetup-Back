@@ -79,11 +79,13 @@ const main = async () => {
                 owner CHAR(36) NOT NULL,
                 locationId CHAR(36) NOT NULL,
                 categoryId CHAR(36) NOT NULL,
+                photoId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
                 FOREIGN KEY (categoryId) REFERENCES category(id),
-                FOREIGN KEY (locationId) REFERENCES location(id)
+                FOREIGN KEY (locationId) REFERENCES location(id),
+                FOREIGN KEY (photoId) REFERENCES meetupPhotos(id)
             )
         `);
 

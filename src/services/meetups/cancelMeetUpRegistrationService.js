@@ -5,7 +5,7 @@ const cancelMeetUpRegistrationService = async (userId, meetupId) => {
 
     await pool.query(
         `
-                DELETE FROM attendance WHERE userId = ? AND meetupId=?
+        DELETE FROM attendance WHERE userId = ? AND meetupId=?
             `,
         [userId, meetupId]
     );

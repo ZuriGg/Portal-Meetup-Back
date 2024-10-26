@@ -28,6 +28,12 @@ meetUpRouter.post(
     voteEntryController
 );
 
+//cancela inscripcion meetup
+meetUpRouter.delete(
+    '/meetups/:meetupId/registration',
+    cancelMeetUpRegistrationContoller
+);
+
 //borra una entrada
 meetUpRouter.delete(
     '/meetupentries/:entryId',

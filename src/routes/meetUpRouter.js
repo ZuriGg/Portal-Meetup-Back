@@ -1,12 +1,15 @@
 import express from 'express';
+import listMeetUppEntriesController from '../controllers/meetups/listMeetUppEntriesController.js';
+import cancelMeetUpRegistrationContoller from '../controllers/meetups/cancelMeetUpRegistrationContoller.js';
+import newMeetUpEntryController from '../controllers/meetups/newMeetUpEntryController.js';
 
 const meetUpRouter = express.Router();
 
 //crea una nueva entrada
-meetUpRouter.post('/meetupentries', authUser, newEntryController);
+meetUpRouter.post('/meetupentries', authUser, newMeetUpEntryController);
 
 //muestra todas las entradaas
-meetUpRouter.get('/meetupentries', listEntriesController);
+meetUpRouter.get('/meetupentries', listMeetUppEntriesController);
 
 //muestra una entrada en concreta
 meetUpRouter.get('/meetupentries/:entryId', entryExists, getEntryController);

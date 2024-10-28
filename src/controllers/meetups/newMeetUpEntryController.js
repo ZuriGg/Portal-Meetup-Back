@@ -8,16 +8,24 @@ const newMeetUpEntryController = async (req, res, next) => {
             startDate,
             category,
             idLocation,
+            city,
+            address,
+            notes,
+            zip,
             hourMeetUp,
             aforoMax,
         } = req.body;
 
-        const entryId = await insertMeetUpEntryService(
+        const entry = await insertMeetUpEntryService(
             title,
             description,
             startDate,
             category,
             idLocation,
+            city,
+            address,
+            notes,
+            zip,
             hourMeetUp,
             aforoMax,
             meetUpPhotos
@@ -29,9 +37,10 @@ const newMeetUpEntryController = async (req, res, next) => {
             for (let photo of Object.values(req.files).slice(0, 1)) {
                 let photoName = await savePhotoUtils(photo, 600);
 
+                //NO SE HA CREADO SERVICIO insertPhotoEntrieService
                 const photoId = await insertPhotoEntrieService(
                     photoName,
-                    entryId
+                    entry
                 );
 
                 photos.push({
@@ -45,7 +54,7 @@ const newMeetUpEntryController = async (req, res, next) => {
             status: 'ok',
             data: {
                 entry: {
-                    id: title,
+                    title,
                     description,
                     startDate,
                     category,

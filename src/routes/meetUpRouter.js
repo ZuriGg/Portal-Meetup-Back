@@ -11,7 +11,7 @@ meetUpRouter.post('/meetupentries', authUser, newMeetUpEntryController);
 //muestra todas las entradaas
 meetUpRouter.get('/meetupentries', listMeetUppEntriesController);
 
-//muestra una entrada en concreta
+//muestra una entrada en concreta ANGELLLLL
 meetUpRouter.get('/meetupentries/:entryId', entryExists, getEntryController);
 
 //edita una entrada

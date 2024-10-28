@@ -1,10 +1,10 @@
 import joi from 'joi';
 
-// Importamos los mensajes de error personalizados.
+// Mensajes de error personalizados.
 import joiErrorMessages from '../joiErrorMessages.js';
 
 // Esquema donde comprobamos todas las propiedades necesarias.
-const voteEntrySchema = joi.object({
+const voteMeetupSchema = joi.object({
     value: joi
         .number()
         .integer()
@@ -14,4 +14,4 @@ const voteEntrySchema = joi.object({
         .messages(joiErrorMessages),
 });
 
-export default voteEntrySchema;
+export default voteMeetupSchema;

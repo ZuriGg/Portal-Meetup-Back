@@ -3,7 +3,7 @@ import joi from 'joi';
 // Importamos el esquema que verifica una imagen.
 import imgSchema from '../imgSchema.js';
 
-// Importamos los mensajes de error personalizados.
+// Mensajes de error personalizados.
 import joiErrorMessages from '../joiErrorMessages.js';
 
 // Creamos el esquema para comprobar todas las propiedades.

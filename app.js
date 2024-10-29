@@ -6,6 +6,7 @@ const app = express();
 
 app.use(express.json());
 
+
 // Middleware MORGAN: muestra por consola información sobre la petición entrante.
 app.use(morgan('dev'));
 

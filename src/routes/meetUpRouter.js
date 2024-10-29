@@ -2,6 +2,9 @@ import express from 'express';
 import listMeetUppEntriesController from '../controllers/meetups/listMeetUppEntriesController.js';
 import cancelMeetUpRegistrationContoller from '../controllers/meetups/cancelMeetUpRegistrationContoller.js';
 import newMeetUpEntryController from '../controllers/meetups/newMeetUpEntryController.js';
+import entryExists from '../middlewares/entryExists.js';
+import getEntryController from '../controllers/getEntryController.js';
+
 
 const meetUpRouter = express.Router();
 

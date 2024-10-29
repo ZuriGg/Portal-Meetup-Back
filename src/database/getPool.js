@@ -32,11 +32,15 @@ const getPool = async () => {
                 timezone: 'local',
             });
         }
-
+    
         return pool;
     } catch (err) {
         throw err;
     }
+    
 };
 
 export default getPool;
+
+
+

@@ -19,7 +19,8 @@
         "jsonwebtoken": "^9.0.2",
         "mysql": "^2.18.1",
         "mysql2": "^3.11.3",
-        "nodemailer": "^6.9.16"
+        "nodemailer": "^6.9.16",
+        "uuid": "^11.0.2"
     },
     "devDependencies": {
         "eslint": "^9.13.0",

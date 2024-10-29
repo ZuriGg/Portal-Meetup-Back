@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import generateErrorsUtils from '../utils/generateErrorsUtils.js'; /* falta este archivo por si alguna operacion da error en este middleware */
+import  from '../utils/generateErrorsUtils.js'; /* falta este archivo por si alguna operacion da error en este middleware */
 import 'dotenv/config';
 
 // Controlador de ruta para el TOKEN
@@ -16,7 +16,7 @@ const authUser = (req, res, next) => {
         try {
             tokenInfo = jwt.verify(authorization, process.env.SECRET); //'authorization' es el token y 'process.env.SECRET' es la clave secreta
         } catch (error) {
-            throw generateErrorsUtils('Credenciales inválidas', 401);
+            throw errorService('Credenciales inválidas', 401);
         }
 
         req.user = tokenInfo; //Se asigna la información decodificada del token (almacenada en tokenInfo) al objeto req.user. Esto q permite que los siguientes controladores en la cadena puedan acceder a los datos del usuario autenticado.

@@ -18,7 +18,8 @@
         "joi": "^17.13.3",
         "jsonwebtoken": "^9.0.2",
         "mysql": "^2.18.1",
-        "mysql2": "^3.11.3"
+        "mysql2": "^3.11.3",
+        "nodemailer": "^6.9.16"
     },
     "devDependencies": {
         "eslint": "^9.13.0",

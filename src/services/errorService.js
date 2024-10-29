@@ -22,7 +22,6 @@ export const emailAlreadyRegisteredError = () => {
     };
 };
 
-//usar en el login
 export const invalidCredentialsError = () => {
     throw {
         httpStatus: 401, // Unauthorized

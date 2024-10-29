@@ -50,4 +50,4 @@ const selectAllMeetupsModel = async (keyword = '', userId = '') => {
 
 export default selectAllMeetupsModel;
 
-/* selectAllMeetupsModel.js es una función que consulta la base de datos para obtener un listado de meetups con información detallada. */
+/* selectAllMeetupsModel.js es una función que consulta la base de datos para obtener un listado de meetups con información detallada. xx*/

@@ -62,4 +62,4 @@ const selectMeetupByIdModel = async (meetupId, userId = '') => {
 
 export default selectMeetupByIdModel;
 
-/* La función selectMeetupByIdModel obtiene información detallada de un "meetup" específico a partir de su ID.  */
+/* La función selectMeetupByIdModel obtiene información detallada de un "meetup" específico a partir de su ID. xxx */

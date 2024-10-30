@@ -1,22 +1,25 @@
-
 import randomstring from 'randomstring';
 
-// --------     A la espera de importar modelos  ------   !!!!!!!
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
+import { notFoundError } from '../../services/errorService.js';
 import { invalidCredentialsError } from '../../services/errorService.js';
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+import editUserPassController from './editUserPassController.js';
 
-
+// Validamos a un usuario recién registrado:
 const sendRecoverPassController = async (req, res, next) => {
     try {
-       
         const { email } = req.body;
+
+        // Pendiente validación con Joi.
+        /*  await validateSchemaUtil(editUserPassController, req.body); */
 
         const user = await selectUserByEmailModel(email);
 
         if (!user) {
-            invalidCredentialsError();
+            notFoundError('usuario');
         }
 
         const recoverPassCode = randomstring.generate(10);
@@ -33,4 +36,3 @@ const sendRecoverPassController = async (req, res, next) => {
 };
 
 export default sendRecoverPassController;
-

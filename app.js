@@ -8,40 +8,32 @@ import {
     notFoundController,
 } from './src/controllers/errors/index.js';
 
+//creación del servidor
 const app = express();
 
 app.use(express.json());
 
-// Middleware MORGAN: muestra por consola información sobre la petición entrante.
+//middleware MORGAN: muestra en consola info de la petición.
 app.use(morgan('dev'));
 
-// Middleware CORS: evita que interfieran cuando conectemos front con back
+//middleware CORS: evita que interfieran cuando conectemos front con back
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('¡Hola, mundo!');
-});
+//middleware de rutas.
+app.use(routes);
 
-//middleware de manejo de errores --> sustituir por errorController()
-app.use((error, req, res, next) => {
-    console.log(error);
+//middleware de manejo de errores
+app.use(errorController);
 
-    res.status(error.httpStatus || 500).send({
-        status: 'error!!!',
-        message: error.message,
-    });
-});
-
-//middelware de ruta no encontrada --> sustituir por notFoundController()
-app.use((req, res) => {
-    res.status(404).send({
-        status: 'error',
-        message: 'Not Found',
-    });
-});
+//middelware de ruta no encontrada
+app.use(notFoundController);
 
 // Iniciar el servidor en el puerto 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
+/* FALTAN 
+- middleware del form Data
+- middleware de directorios estáticos */

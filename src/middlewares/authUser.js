@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import  from '../utils/generateErrorsUtils.js'; /* falta este archivo por si alguna operacion da error en este middleware */
 import 'dotenv/config';
 import {
     invalidCredentialsError,

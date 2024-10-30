@@ -1,3 +1,4 @@
+/* RUTA SÓLO PARA USUARIOS AUTENTICADOS */
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import {

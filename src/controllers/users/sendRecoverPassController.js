@@ -4,9 +4,9 @@ import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
 import { notFoundError } from '../../services/errorService.js';
-import { invalidCredentialsError } from '../../services/errorService.js';
+
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
-import editUserPassController from './editUserPassController.js';
+import recoverPassSchema from '../../schemas/users/recoverPassSchema.js';
 
 // Validamos a un usuario recién registrado:
 const sendRecoverPassController = async (req, res, next) => {
@@ -14,7 +14,7 @@ const sendRecoverPassController = async (req, res, next) => {
         const { email } = req.body;
 
         // Pendiente validación con Joi.
-        /*  await validateSchemaUtil(editUserPassController, req.body); */
+        await validateSchemaUtil(recoverPassSchema, req.body);
 
         const user = await selectUserByEmailModel(email);
 

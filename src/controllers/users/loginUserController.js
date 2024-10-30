@@ -1,15 +1,17 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import generateErrorsUtils from "../../utils/generateErrorsUtils.js";
+import { invalidCredentialsError, pendingActivationError } from '../../services/errorService.js';
+import { pendingActivationError } from '../../services/errorService.js';
 import selectUserByEmailService from "../../services/users/selectUserByEmailService.js";
+import { invalidCredentialsError } from '../../services/errorService.js';
 
 const loginUserController = async (req, res, next) => {
     try {
         
         const {email, password} = req.body;
 
-        if(!email || !password) throw generateErrorsUtils('Se esperaba email o contraseña', 400);
+        if(!email || !password) invalidCredentialsError()
 
         const user = await selectUserByEmailService(email);
 
@@ -20,13 +22,13 @@ const loginUserController = async (req, res, next) => {
         }
 
         if(!user || !validPassword){
-            throw generateErrorsUtils('Usuario o contraseña incorrecta', 401);
+            invalidCredentialsError();
         }
 
         /*
             comprobar que el active esté en 1
         */
-        if(!user.active) throw generateErrorsUtils('Usuario pendiente de activación',403);
+        if(!user.active) pendingActivationError();
         
         /**
          * generar el token

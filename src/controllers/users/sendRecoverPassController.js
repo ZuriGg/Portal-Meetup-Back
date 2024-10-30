@@ -5,8 +5,7 @@ import randomstring from 'randomstring';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
-
-import { generateErrorsUtils } from '../../utils/generateErrorsUtils.js';
+import { invalidCredentialsError } from '../../services/errorService.js';
 
 
 const sendRecoverPassController = async (req, res, next) => {
@@ -17,7 +16,7 @@ const sendRecoverPassController = async (req, res, next) => {
         const user = await selectUserByEmailModel(email);
 
         if (!user) {
-            generateErrorsUtils('usuario');
+            invalidCredentialsError();
         }
 
         const recoverPassCode = randomstring.generate(10);

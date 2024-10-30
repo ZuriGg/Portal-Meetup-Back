@@ -1,4 +1,4 @@
-import cancelMeetUpRegistrationService from '../../services/meetups/cancelMeetUpRegistrationService,js';
+import cancelMeetUpRegistrationService from '../../services/meetups/cancelMeetUpRegistrationService.js';
 
 const cancelMeetUpRegistrationContoller = async (req, res, next) => {
     try {

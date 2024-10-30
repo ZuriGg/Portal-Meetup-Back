@@ -1,6 +1,12 @@
 import express from 'express';
+import fileUpload from 'express-fileupload'; /* librería para subir imágenes */
 import cors from 'cors';
 import morgan from 'morgan';
+
+import {
+    errorController,
+    notFoundController,
+} from './src/controllers/errors/index.js';
 
 const app = express();
 
@@ -16,9 +22,7 @@ app.get('/', (req, res) => {
     res.send('¡Hola, mundo!');
 });
 
-//implementacion middelwares de control de ruta no encontrada y de errores
-
-//middleware de manejo de errores
+//middleware de manejo de errores --> sustituir por errorController()
 app.use((error, req, res, next) => {
     console.log(error);
 
@@ -28,15 +32,13 @@ app.use((error, req, res, next) => {
     });
 });
 
-//middelware de ruta no encontrada
+//middelware de ruta no encontrada --> sustituir por notFoundController()
 app.use((req, res) => {
     res.status(404).send({
         status: 'error',
         message: 'Not Found',
     });
 });
-
-
 
 // Iniciar el servidor en el puerto 3000
 const PORT = process.env.PORT || 3000;

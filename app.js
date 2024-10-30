@@ -3,7 +3,7 @@ import fileUpload from 'express-fileupload'; /* librería para subir imágenes *
 import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './src/routes/userRoutes.js';
-import meetUpRouter from './src/routes/meetUpRouter.js';
+import meetUpRouter from './src/routes/meetupRoutes.js';
 
 import {
     errorController,

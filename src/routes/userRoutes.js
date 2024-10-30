@@ -1,32 +1,51 @@
 import express from 'express';
 
-import registerUserController from '../controllers/users/registerUserController.js';
-import loginUserController from '../controllers/users/loginUserController.js';
-import validateUserController from '../controllers/users/validateUserController.js';
-import getOwnUserController from '../controllers/users/getOwnUserController.js';
-import editUserAvatarController from '../controllers/users/editUserAvatarController.js';
-import editUserController from '../controllers/users/editUserController.js';
-import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
-import editUserPasswordController from '../controllers/users/editUserPasswordController.js';
+// Importamos las funciones controladoras intermedias.
+import { authUser, userExistsController } from '../middlewares/index.js';
 
-import authUser from '../middlewares/authUser.js';
+// Importamos las funciones controladoras finales.
+import {
+    newUserController,
+    loginUserController,
+    getUserProfileController,
+    getOwnUserController,
+    editUserAvatarController,
+    editUserPassController,
+    validateUserController,
+    sendRecoverPassController,
+} from '../controllers/users/index.js';
 
 const userRouter = express.Router();
 
 //rutas de usarios (endpoint)
-userRouter.post('/users/register', registerUserController)
+userRouter.post('/users/register', newUserController);
 userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 userRouter.post('/users/login', loginUserController);
 
-//obtener el perfil privado del usuario
-userRouter.get('/users', authUser,getOwnUserController);
+// Obtener perfil privado de un usuario.
+userRouter.get('/users', authUser, userExistsController, getOwnUserController);
 
 userRouter.put('/users/edit/:userId', authUser, editUserController);
-userRouter.put('/users/avatar', authUser, editUserAvatarController);
 
+// Obtener perfil público de un usuario.
+userRouter.get(
+    '/users/:userId',
+    userExistsController,
+    getUserProfileController
+);
 
+userRouter.put(
+    '/users/avatar',
+    authUser,
+    userExistsController,
+    editUserAvatarController
+);
+
+// email de recuperación de contraseña.
 userRouter.post('/users/password/recover', sendRecoverPassController);
-userRouter.put('/users/password', editUserPasswordController);
+
+// Editar la contraseña de un usuario con un código de recuperación.
+userRouter.put('/users/password', editUserPassController);
 
 export default userRouter;

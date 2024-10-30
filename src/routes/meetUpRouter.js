@@ -1,7 +1,7 @@
 import express from 'express';
 import listMeetUppEntriesController from '../controllers/meetups/listMeetUppEntriesController.js';
 import cancelMeetUpRegistrationContoller from '../controllers/meetups/cancelMeetUpRegistrationContoller.js';
-import newMeetUpEntryController from '../controllers/meetups/newMeetUpEntryController.js';
+import newMeetUpEntryController from '../controllers/meetups/newMeetUpController.js';
 import meetUpCategoryController from '../controllers/meetups/meetUpCategoryController.js';
 import authUser from '../middlewares/authUser.js';
 

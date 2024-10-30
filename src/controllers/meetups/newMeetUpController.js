@@ -1,6 +1,6 @@
 import insertMeetUpEntryService from '../../services/meetups/insertMeetUpEntryService.js';
 
-const newMeetUpEntryController = async (req, res, next) => {
+const newMeetupController = async (req, res, next) => {
     try {
         const {
             title,
@@ -71,4 +71,4 @@ const newMeetUpEntryController = async (req, res, next) => {
     }
 };
 
-export default newMeetUpEntryController;
+export default newMeetupController;

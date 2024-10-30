@@ -2,6 +2,8 @@ import express from 'express';
 import fileUpload from 'express-fileupload'; /* librería para subir imágenes */
 import cors from 'cors';
 import morgan from 'morgan';
+import userRouter from './src/routes/userRoutes.js';
+import meetUpRouter from './src/routes/meetUpRouter.js';
 
 import {
     errorController,
@@ -19,8 +21,16 @@ app.use(morgan('dev'));
 //middleware CORS: evita que interfieran cuando conectemos front con back
 app.use(cors());
 
-//middleware de rutas.
-app.use(routes);
+//middleware que "desencripta" un body "form-data", creando las propiedades "body" y "files" en el objeto "request"
+app.use(fileUpload());
+
+//ruta estática para ser usada desde el front para pedir el envio de una imagen o cualquier archivo estatico
+const staticDir = path.join(process.cwd(), './src/uploads');
+app.use('/uploads', express.static(staticDir)); //uploads es un directorio estático/endpoint para pedir una imagen
+
+//middlewares de rutas.
+app.use(userRouter);
+app.use(meetUpRouter);
 
 //middleware de manejo de errores
 app.use(errorController);

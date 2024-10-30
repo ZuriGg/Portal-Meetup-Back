@@ -14,6 +14,8 @@ meetUpRouter.get('/meetupentries', listMeetUppEntriesController);
 //muestra una entrada en concreta ANGELLLLL
 meetUpRouter.get('/meetupentries/:entryId', entryExists, getEntryController);
 
+meetUpRouter.get('/categories', meetUpCategoryController);
+
 //edita una entrada
 meetUpRouter.put(
     '/meetupentries/:entryId/edit',

@@ -2,7 +2,9 @@ import selectAllEntriesMeetUpService from '../../services/meetups/selectAllEntri
 
 const listMeetUppEntriesController = async (req, res, next) => {
     try {
-        const meetUpEntries = selectAllEntriesMeetUpService();
+        const searchs = req.query;
+        const meetUpEntries = selectAllEntriesMeetUpService(searchs);
+
         res.send({
             status: 'ok',
             data: meetUpEntries,

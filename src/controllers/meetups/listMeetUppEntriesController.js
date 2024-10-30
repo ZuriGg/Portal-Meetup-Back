@@ -1,6 +1,6 @@
 import selectAllEntriesMeetUpService from '../../services/meetups/selectAllEntriesMeetUpService.js';
 
-const listMeetUppEntriesController = async (req, res, next) => {
+const listMeetUpController = async (req, res, next) => {
     try {
         const meetUpEntries = selectAllEntriesMeetUpService();
         res.send({
@@ -12,4 +12,4 @@ const listMeetUppEntriesController = async (req, res, next) => {
     }
 };
 
-export default listMeetUppEntriesController;
+export default listMeetUpController;

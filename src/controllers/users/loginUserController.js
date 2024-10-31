@@ -5,9 +5,6 @@ import {
     invalidCredentialsError,
     pendingActivationError,
 } from '../../services/errorService.js';
-import { pendingActivationError } from '../../services/errorService.js';
-import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
-import { invalidCredentialsError } from '../../services/errorService.js';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
 const loginUserController = async (req, res, next) => {

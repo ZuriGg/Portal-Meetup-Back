@@ -1,6 +1,5 @@
 import joi from 'joi';
 
-// Mensajes de error personalizados.
 import joiErrorMessages from '../joiErrorMessages.js';
 
 // Esquema donde comprobamos todas las propiedades necesarias.

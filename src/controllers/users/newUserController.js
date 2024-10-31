@@ -24,7 +24,7 @@ const newUserController = async (req, res, next) => {
         res.send({
             status: 'ok',
             message:
-                'Usuario creado. Por favor, verifica tu usuario mediante el email que has recibido en tu email',
+                'Usuario creado. Por favor, verifica el mensaje que has recibido en tu email',
         });
     } catch (err) {
         next(err);

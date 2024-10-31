@@ -1,4 +1,4 @@
-import insertMeetUpEntryService from '../../services/meetups/insertMeetUpEntryService.js';
+import insertMeetupModel from '../../models/meetups/insertMeetupModel.js';
 
 const newMeetupController = async (req, res, next) => {
     try {
@@ -16,7 +16,7 @@ const newMeetupController = async (req, res, next) => {
             aforoMax,
         } = req.body;
 
-        const entry = await insertMeetUpEntryService(
+        const entryId = await insertMeetupModel(
             title,
             description,
             startDate,
@@ -28,19 +28,20 @@ const newMeetupController = async (req, res, next) => {
             zip,
             hourMeetUp,
             aforoMax,
-            meetUpPhotos
+            meetUpPhotos,
+            req.user.id
         );
 
         let photos = [];
 
         if (req.files) {
-            for (let photo of Object.values(req.files).slice(0, 1)) {
+            for (let photo of Object.values(req.files).slice(0, 3)) {
                 let photoName = await savePhotoUtils(photo, 600);
 
                 //NO SE HA CREADO SERVICIO insertPhotoEntrieService
                 const photoId = await insertPhotoEntrieService(
                     photoName,
-                    entry
+                    entryId
                 );
 
                 photos.push({

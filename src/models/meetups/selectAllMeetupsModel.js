@@ -1,53 +1,81 @@
 import getPool from '../../database/getPool.js';
 
-// Realizamos una consulta a la BBDD para obtener el listado de meetups.
-const selectAllMeetupsModel = async (keyword = '', userId = '') => {
+//se toma como argumento el objeto req.query del controlador
+const selectAllMeetupsModel = async (keyword = {}) => {
     const pool = await getPool();
 
-    // Obtenemos el listado de entradas.
-    const [meetups] = await pool.query(
-        `
-            SELECT 
-                M.id,
-                M.title,
-                U.username,
-                BIT_OR(V.userId = ?) AS votedByMe, 
-                M.userId = ? AS owner,
-                AVG(IFNULL(V.value, 0)) AS votes,
-                M.createdAt
-            FROM meetups M
-            LEFT JOIN meetupVotes V ON V.meetupId = M.id
-            INNER JOIN users U ON U.id = M.userId
-            WHERE M.title LIKE ? OR M.description LIKE ?
-            GROUP BY M.id
-            ORDER BY M.createdAt DESC
-        `,
-        [userId, userId, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`]
-    );
+    const {
+        location,
+        minVotes,
+        category,
+        search,
+        order = 'createdAt',
+        page = 1,
+        limit = 20,
+    } = keyword;
 
-    // Recorremos el array de meetups para agregar a cada meetup la primera foto (si hay).
-    for (const meetup of meetups) {
-        // Buscamos las fotos de la entrada.
+    const conditions = [];
+    const values = [];
+
+    //insercion de valores
+    //location que fue lo que puso el usuario mediante req.query
+    //por eso es una incersion y evita inyeccion SQL
+    if (location) {
+        conditions.push('m.idLocation = ?');
+        values.push(location);
+    }
+
+    if (minVotes) {
+        conditions.push('AVG(IFNULL(v,value, 0))>=?');
+        values.push(minVotes);
+    }
+
+    if (category) {
+        conditions.push('m.categoryId = ?');
+        values.push(category);
+    }
+
+    //condicion para capturar lo que esta escribiendo el usuario referido a los parametros title y description
+    if (search) {
+        conditions.push('(m.title LIKE ? OR m.description LIKE ?)');
+        values.push(`%${search}%`, `%${search}%`);
+    }
+
+    //se calcula el offset para saber el limite que se muestra de meetups y cuantos se dejan fuera
+    const offset = (page - 1) * limit;
+
+    //consulta parametrizada con limit y offset
+    const query = `
+       SELECT m.meetupid, m.title, m.description, m.startDate, m.hourMeetup, m.dayOfTheWeek,
+        m.aforoMax, m.userId, m.owner, m.locationId, m.categoryId,
+        AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
+        FROM meetups m
+        LEFT JOIN meetup_votes v ON v.meetupid = m.id
+        INNER JOIN users u ON u.id = m.userId
+        ${category ? 'INNER JOIN category c ON m.categoryId = c.id' : ''}
+        ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
+        GROUP BY m.id
+        ORDER BY ${order === 'votes' ? 'votes DESC' : 'm.createdAt DESC'}
+        LIMIT ? OFFSET ?
+    `;
+
+    values.push(limit, offset);
+
+    //devuelve un array de objetos (meetup)
+    const [meetups] = await pool.query(query, values);
+
+    for (let meetup of meetups) {
         const [photos] = await pool.query(
-            `SELECT id, name FROM meetupVotes WHERE meetupId = ?`,
+            `
+                SELECT id, name FROM meetup_photos WHERE meetupId=?
+            `,
             [meetup.id]
         );
 
         // Agregamos las fotos a la entrada. Si no existe foto en la posición cero establecemos un valor null.
         meetup.photos = photos.length > 0 ? photos[0] : null;
-
-        // Establecemos como valores booleanos "votedByMe" y "owner"
-        meetup.votedByMe = Boolean(meetup.votedByMe);
-        meetup.owner = Boolean(meetup.owner);
-
-        // La media de votos es un valor de tipo String. Podemos convertirla a Number.
-        meetup.votes = Number(meetup.votes);
     }
-
-    // Retornamos las entradas.
     return meetups;
 };
 
 export default selectAllMeetupsModel;
-
-/* selectAllMeetupsModel.js es una función que consulta la base de datos para obtener un listado de meetups con información detallada. xx*/

@@ -1,45 +1,60 @@
-import { v4 as uuid } from 'uuid';
-
 import getPool from '../../database/getPool.js';
 
-// Realizamos una consulta a la BBDD para agregar una nueva entrada.
 const insertMeetupModel = async (
     title,
     description,
     startDate,
     oneSession,
-    hourMeetup,
-    dayOfTheWeek,
-    aforoMax,
+    category,
+    city,
+    address,
+    notes,
+    zip,
     userId,
-    locationId,
-    categoryId
+    hourMeetUp,
+    dayOfTheWeek,
+    aforoMax
 ) => {
     const pool = await getPool();
 
-    // Generamos el id del meetup.
-    const meetupId = uuid();
+    // Inserta la ubicación y obtiene el idLocation
+    const [locationResult] = await pool.query(
+        `INSERT INTO location (city, address, notes, zip) VALUES (?, ?, ?, ?)`,
+        [city, address, notes, zip]
+    );
+    const idLocation = locationResult.insertId;
 
-    // Insertamos el meetup.
-    await pool.query(
-        `INSERT INTO meetups(id, title, description, startDate, oneSession, hourMeetup, dayOfTheWeek, aforoMax, userId, locationId, categoryId) VALUES(?, ?, ?, ?, ?)`,
-        [
-            meetupId,
+    // Inserta el meetup usando el idLocation obtenido
+    const [meetupResult] = await pool.query(
+        `INSERT INTO meetups (
             title,
             description,
             startDate,
             oneSession,
-            hourMeetup,
+            categoryId,
+            idLocation,
+            hourMeetUp,
             dayOfTheWeek,
             aforoMax,
             userId,
-            locationId,
-            categoryId,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+            title,
+            description,
+            startDate,
+            oneSession,
+            category,
+            idLocation,
+            hourMeetUp,
+            dayOfTheWeek,
+            aforoMax,
+            userId,
         ]
     );
 
-    // Retornamos id del meetup.
-    return meetupId;
+    /* console.log(meetupResult); */
+    // const { insertId } = meetupResult;
+    // return insertId;
 };
 
 export default insertMeetupModel;

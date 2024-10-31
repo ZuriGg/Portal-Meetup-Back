@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './src/routes/userRoutes.js';
 import meetUpRouter from './src/routes/meetupRoutes.js';
+import path from 'path';
 
 import {
     errorController,

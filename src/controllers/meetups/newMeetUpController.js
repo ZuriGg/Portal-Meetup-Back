@@ -1,4 +1,4 @@
-import insertMeetUpEntryService from '../../services/meetups/insertMeetUpEntryService.js';
+import insertMeetupModel from '../../models/meetups/insertMeetupModel.js';
 
 const newMeetupController = async (req, res, next) => {
     try {
@@ -16,7 +16,7 @@ const newMeetupController = async (req, res, next) => {
             aforoMax,
         } = req.body;
 
-        const entry = await insertMeetUpEntryService(
+        const entry = await insertMeetupModel(
             title,
             description,
             startDate,

@@ -5,7 +5,12 @@ import {
     invalidCredentialsError,
     pendingActivationError,
 } from '../../services/errorService.js';
+import {
+    invalidCredentialsError,
+    pendingActivationError,
+} from '../../services/errorService.js';
 import { pendingActivationError } from '../../services/errorService.js';
+import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 import { invalidCredentialsError } from '../../services/errorService.js';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
@@ -34,11 +39,14 @@ const loginUserController = async (req, res, next) => {
         */
         if (!user.active) pendingActivationError();
 
+        if (!user.active) pendingActivationError();
+
         /**
          * generar el token
          */
         const tokenInfo = {
             id: user.id,
+            role: user.role,
             role: user.role,
         };
 
@@ -51,10 +59,15 @@ const loginUserController = async (req, res, next) => {
             token: {
                 token,
             },
+            token: {
+                token,
+            },
         });
     } catch (error) {
         next(error);
     }
 };
+};
 
 export default loginUserController;
+

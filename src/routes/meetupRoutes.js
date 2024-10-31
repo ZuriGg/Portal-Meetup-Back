@@ -4,6 +4,7 @@ import cancelMeetUpRegistrationContoller from '../controllers/meetups/cancelMeet
 import newMeetUpEntryController from '../controllers/meetups/newMeetUpController.js';
 import meetUpCategoryController from '../controllers/meetups/meetUpCategoryController.js';
 import authUser from '../middlewares/authUser.js';
+import voteMeetupController from '../controllers/meetups/voteMeetupController.js';
 
 const meetUpRouter = express.Router();
 
@@ -32,7 +33,7 @@ meetUpRouter.post(
     '/meetupentries/:entryId/votes',
     authUser,
     entryExists,
-    voteEntryController
+    voteMeetupController
 );
 
 //cancela inscripcion meetup

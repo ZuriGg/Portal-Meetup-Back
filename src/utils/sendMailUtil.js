@@ -22,10 +22,11 @@ const sendMailUtil = async (email, subject, body) => {
             from: SMTP_USER,
             to: email,
             subject,
-            text: body,
+            html: body,
         };
 
-        await transport.sendMail(mailOptions);
+        const algo = await transport.sendMail(mailOptions);
+        console.log('ALGO>>>>>>>', algo);
     } catch (err) {
         console.error(err);
         sendEmailError();

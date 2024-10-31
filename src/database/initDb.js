@@ -32,15 +32,15 @@ const main = async () => {
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 email VARCHAR(100) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
-                firstName VARCHAR(30) UNIQUE NOT NULL,
-                lastname VARCHAR(30) UNIQUE NOT NULL,
+                firstName VARCHAR(30),
+                lastname VARCHAR(30),
                 password VARCHAR(100) NOT NULL,
-                meetupOwner VARCHAR(100), /* si es organizador de algún meetup */
-                avatar VARCHAR(100), /* Ruta o URL del avatar del usuario */
-                active BOOLEAN DEFAULT false, /* Estado del usuario, 'false' por defecto. Los admin activan a los organizadores para subir eventos */
-                role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal', /* crear evento desde normal u organizador, pero los admin confirman que esos usuarios son válidos  */
-                registrationCode CHAR(30), /* Código de registro para activación */
-                recoverPassCode CHAR(10), /* Código para recuperar contraseña */
+                meetupOwner VARCHAR(100),
+                avatar VARCHAR(100), 
+                active BOOLEAN DEFAULT false,
+                role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal', 
+                registrationCode CHAR(30),
+                recoverPassCode CHAR(10),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )	
@@ -52,8 +52,8 @@ const main = async () => {
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 city VARCHAR(50) NOT NULL,
                 address VARCHAR(100),
-                notes VARCHAR(100) NOT NULL, /* lugar en concreto, ej: sala de usos múltiples */
-                zip CHAR(5) NOT NULL, /* CHAR ocupa menos espacio */
+                notes VARCHAR(100) NOT NULL,
+                zip CHAR(5) NOT NULL, 
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP 
             )
         `);
@@ -72,12 +72,12 @@ const main = async () => {
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 title VARCHAR(50) NOT NULL,
                 description TEXT NOT NULL, 
-                startDate DATE NOT NULL, /* fecha de inicio */
-                oneSession BOOLEAN DEFAULT FALSE, /* ej. determinar si es una única sesión, como el martes 29*/
+                startDate DATE NOT NULL, 
+                oneSession BOOLEAN DEFAULT FALSE,
                 hourMeetup TIME,
-                dayOfTheWeek ENUM ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'), /* NO PONER NOT NULL por si no es un día en concreto*/
+                dayOfTheWeek ENUM ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'), 
                 aforoMax TINYINT UNSIGNED,
-                userId CHAR(36) NOT NULL, /* usuario relacionado (puede ser asistente o co-organizador) */
+                userId CHAR(36) NOT NULL, 
                 owner CHAR(36) NOT NULL,
                 locationId CHAR(36) NOT NULL,
                 categoryId CHAR(36) NOT NULL,
@@ -116,7 +116,7 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS outOfService (
                 id CHAR(36) PRIMARY KEY NOT NULL,
-                notes VARCHAR(100) NOT NULL, /* motivo por el que se cancela: aforoMax, huelga de basura */
+                notes VARCHAR(100) NOT NULL, 
                 date DATETIME NOT NULL,
                 meetupId CHAR(36) NOT NULL,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)

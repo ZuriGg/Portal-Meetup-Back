@@ -12,6 +12,8 @@ import {
     userAlreadyRegisteredError,
 } from '../../services/errorService.js';
 
+import { URL_FRONT } from '../../../env.js';
+
 // Realizamos una consulta a la BBDD para crear un nuevo usuario.
 const insertUserModel = async (username, email, password, registrationCode) => {
     const pool = await getPool();
@@ -34,6 +36,15 @@ const insertUserModel = async (username, email, password, registrationCode) => {
         userAlreadyRegisteredError();
     }
 
+    // Encriptamos la contraseña.
+    const hashedPass = await bcrypt.hash(password, 10);
+
+    // Insertamos el usuario.
+    await pool.query(
+        `INSERT INTO users(id, username, email, password, registrationCode) VALUES(?, ?, ?, ?, ?)`,
+        [uuid(), username, email, hashedPass, registrationCode]
+    );
+
     // Creamos el asunto del email de verificación.
     const emailSubject = 'Activa tu usuario en nuestra app de Meet Ups 🌟';
 
@@ -43,20 +54,13 @@ const insertUserModel = async (username, email, password, registrationCode) => {
 
             Gracias por registrarte en nuestra app de Meet Ups. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="http://localhost:8000/users/validate/${registrationCode}">Activar mi cuenta</a>
+            <a href="${URL_FRONT}/${registrationCode}">Activar mi cuenta</a>
         `;
+
+    // Crear en el .env una variable de entorno URL_FRONT.
 
     // Enviamos el email de verificación al usuario.
     await sendMailUtil(email, emailSubject, emailBody);
-
-    // Encriptamos la contraseña.
-    const hashedPass = await bcrypt.hash(password, 10);
-
-    // Insertamos el usuario.
-    await pool.query(
-        `INSERT INTO users(id, username, email, password, registrationCode) VALUES(?, ?, ?, ?, ?)`,
-        [uuid(), username, email, hashedPass, registrationCode]
-    );
 };
 
 export default insertUserModel;

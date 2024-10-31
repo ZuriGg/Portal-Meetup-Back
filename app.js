@@ -44,7 +44,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
-
-/* FALTAN 
-- middleware del form Data
-- middleware de directorios estáticos */

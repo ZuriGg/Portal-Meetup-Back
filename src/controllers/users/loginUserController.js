@@ -18,22 +18,21 @@ const loginUserController = async (req, res, next) => {
         // Validamos el body con Joi.
         await validateSchemaUtil(loginUserSchema, req.body);
 
-        const user = await selectUserByEmailModel(email, password);
+        //buscamos usuario por email
+        const user = await selectUserByEmailModel(email);
 
-        let validPass;
-
-        if (user) {
-            validPass = await bcrypt.compare(password, user.password);
-        }
-
-        if (!user || !validPass) {
+        if (!user) {
             invalidCredentialsError();
         }
 
-        /*
-            comprobar que el active esté en 1
-        */
+        //comprobar que el active esté en 1
         if (!user.active) pendingActivationError();
+
+        // Compara la contraseña ingresada con el hash almacenado.
+        const validPass = await bcrypt.compare(password, user.password);
+        if (!validPass) {
+            return invalidCredentialsError();
+        }
 
         /**
          * generar el token

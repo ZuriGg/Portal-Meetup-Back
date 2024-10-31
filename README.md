@@ -4,11 +4,11 @@ Este proyecto es una API RESTful para gestionar meetups (eventos y reuniones). P
 
 ## Contribuyentes:
 
-Sergio Manzano
-Paula Fernández
-Jonathan Mendez
-Diego Iván García
-Angel Suárez
+1. Sergio Manzano
+2. Paula Fernández
+3. Jonathan Mendez
+4. Diego Iván García
+5. Angel Suárez
 
 ## Descripción
 
@@ -29,33 +29,33 @@ Esta API facilita la creación y gestión de meetups. Los usuarios pueden buscar
 git clone git@github.com:ZuriGg/Proyecto-integrador.git
 cd Proyecto-integrador
 
-2- Instalar las dependencias:
-npm i
+2. Instalar las dependencias:
+   npm i
 
-3- Crear un archivo .env a partir del .env.example en la raíz del proyecto con las siguientes variables de entorno:
-MYSQL_HOST=
-MYSQL_USER=
-MYSQL_PASS=
-MYSQL_DB=
-MYSQL_PORT=
-PORT=
-SECRET=
-SMTP_HOST=
-SMTP_PORT=
-SMTP_USER=
-SMTP_PASS=
+3. Crear un archivo .env a partir del .env.example en la raíz del proyecto con las siguientes variables de entorno:
+   MYSQL_HOST=
+   MYSQL_USER=
+   MYSQL_PASS=
+   MYSQL_DB=
+   MYSQL_PORT=
+   PORT=
+   SECRET=
+   SMTP_HOST=
+   SMTP_PORT=
+   SMTP_USER=
+   SMTP_PASS=
 
-4- Para la ejecución en modo desarrollo:
-npm run dev
+4. Para la ejecución en modo desarrollo:
+   npm run dev
 
-5- Para la ejecución en producción:
-npm start
+5. Para la ejecución en producción:
+   npm start
 
-6- La API estará disponible en http://localhost:(puerto que configures).
+6. La API estará disponible en http://localhost:(puerto que configures).
 
 ## Base de Datos
 
-![tablas de la Base de Datos](image.png)
+![tablas de la Base de Datos](src/uploads/img-readme/image.png)
 
 ## Diseño de la Web
 
@@ -63,6 +63,15 @@ https://www.figma.com/proto/RVCmN0c1zJkctI68DpmXjI/Portal-Meetups?node-id=35-101
 
 Ejemplo del Home de nuestra página Web
 
-![Ejemplo de home](image-1.png)
+![Ejemplo de home](src/uploads/img-readme/image-1.png)
 
 ## Lista de Endpoints
+
+## Pruebas con Postman
+
+Para facilitar las pruebas de la API, se incluye una colección de Postman en el archivo `portal_meetups.postman_collection.json`.
+
+1. Abre Postman.
+2. Ve a **File > Import**.
+3. Selecciona el archivo de colección `portal_meetups.postman_collection.json` ubicado en la raiz del proyecto.
+4. La colección aparecerá en tu panel de Postman con todas las rutas de la API preconfiguradas.

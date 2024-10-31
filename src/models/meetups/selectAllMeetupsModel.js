@@ -22,14 +22,14 @@ const selectAllMeetupsModel = async (keyword = '', userId = '') => {
             GROUP BY M.id
             ORDER BY M.createdAt DESC
         `,
-        [userId, userId, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`]
+        [userId, userId, `%${keyword}%`, `%${keyword}%`]
     );
 
     // Recorremos el array de meetups para agregar a cada meetup la primera foto (si hay).
     for (const meetup of meetups) {
         // Buscamos las fotos de la entrada.
         const [photos] = await pool.query(
-            `SELECT id, name FROM meetupVotes WHERE meetupId = ?`,
+            `SELECT id, name FROM meetup_photos WHERE meetupId = ?`,
             [meetup.id]
         );
 
@@ -37,11 +37,11 @@ const selectAllMeetupsModel = async (keyword = '', userId = '') => {
         meetup.photos = photos.length > 0 ? photos[0] : null;
 
         // Establecemos como valores booleanos "votedByMe" y "owner"
-        meetup.votedByMe = Boolean(meetup.votedByMe);
-        meetup.owner = Boolean(meetup.owner);
+        /*         meetup.votedByMe = Boolean(meetup.votedByMe);
+        meetup.owner = Boolean(meetup.owner); */
 
         // La media de votos es un valor de tipo String. Podemos convertirla a Number.
-        meetup.votes = Number(meetup.votes);
+        /*         meetup.votes = Number(meetup.votes); */
     }
 
     // Retornamos las entradas.

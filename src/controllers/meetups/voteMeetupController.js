@@ -1,4 +1,4 @@
-import voteMeetupService from '../../services/meetups/voteMeetupService.js';
+import insertVoteModel from '../../models/meetups/insertVoteModel.js';
 
 const voteMeetupController = async (req, res, next) => {
     try {
@@ -6,7 +6,7 @@ const voteMeetupController = async (req, res, next) => {
         const { userId } = req.user.id;
         const { date } = req.user.id;
 
-        await voteMeetupService(userId, meetupId, date);
+        await insertVoteModel(userId, meetupId, date);
 
         res.send({
             status: 'ok',

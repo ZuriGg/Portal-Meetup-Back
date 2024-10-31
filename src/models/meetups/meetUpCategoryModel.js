@@ -1,6 +1,6 @@
 import getPool from '../../database/getPool.js';
 
-const meetUpCategoryService = async () => {
+const meetUpCategoryModel = async () => {
     const pool = await getPool();
 
     const [categories] = await pool.query(`
@@ -11,4 +11,4 @@ const meetUpCategoryService = async () => {
     return categories;
 };
 
-export default meetUpCategoryService;
+export default meetUpCategoryModel;

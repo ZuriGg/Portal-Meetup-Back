@@ -1,3 +1,7 @@
+//AGREGAR PATH DEL ERRORRRRRRRRRRRRRRRR!
+
+import path from 'path';
+
 export const cannotVoteOwnMeetupError = () => {
     throw {
         httpStatus: 403, // Forbidden
@@ -7,35 +11,29 @@ export const cannotVoteOwnMeetupError = () => {
 };
 
 export const deleteFileError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'FILE_DELETED_FAILED',
-        message: 'Error al eliminar el archivo del disco',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const emailAlreadyRegisteredError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'EMAIL_ALREADY_REGISTERED',
-        message: 'El email ya está registrado',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    (error.httpStatus = '409'), // Conflict
+        (error.code = 'EMAIL_ALREADY_REGISTERED');
+    return error;
 };
 
 export const invalidCredentialsError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_CREDENTIALS',
-        message: 'Credenciales inválidas',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const invalidTokenError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_TOKEN',
-        message: 'Token inválido',
-    };
+    const error = new Error('error en el token', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const notAuthenticatedError = () => {
@@ -55,12 +53,9 @@ export const notFoundError = (resource) => {
 };
 
 export const pendingActivationError = () => {
-    throw {
-        httpStatus: 403, // Forbidden
-        code: 'PENDING_ACTIVATION',
-        message:
-            'Usuario pendiente de activar. Por favor, verifica tu cuenta antes de continuar.',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const photoLimitReachedError = () => {

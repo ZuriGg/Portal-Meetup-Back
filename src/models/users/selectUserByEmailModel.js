@@ -1,15 +1,14 @@
 import getPool from '../../database/getPool.js';
-import { notFoundError } from '../../services/errorService.js';
 
 // Realizamos una consulta a BBDD para seleccionar un usuario con un email dado.
 // Función que realiza una consulta a la base de datos para seleccionar a un usuario con un id dado.
-const selectUserByIdModel = async (userId) => {
+const selectUserByEmailModel = async (email) => {
     const pool = await getPool();
 
     // Comprobamos si hay algún usuario con el email proporcionado.
     const [users] = await pool.query(
-        `SELECT id, username, email, avatar, createdAt FROM users WHERE id = ?`,
-        [userId]
+        `SELECT id, password, role, recoverPassCode, active FROM users WHERE email = ?`,
+        [email]
     );
 
     // El array de usuarios solo podrá contener un único usuario dado que el email
@@ -18,4 +17,4 @@ const selectUserByIdModel = async (userId) => {
     return users[0];
 };
 
-export default selectUserByIdModel;
+export default selectUserByEmailModel;

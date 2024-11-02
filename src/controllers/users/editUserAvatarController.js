@@ -15,6 +15,8 @@ const editUserAvatarController = async (req, res, next) => {
     try {
         console.log(req.files.avatar);
 
+        const { avatar } = req.files;
+
         // Validamos el body con Joi. Si "files" no existe enviamos un objeto vacío.
         await validateSchemaUtil(editUserAvatarSchema, req.files || {});
 
@@ -28,14 +30,14 @@ const editUserAvatarController = async (req, res, next) => {
 
         // Guardamos el avatar en la carpeta de subida de archivos. Redimensionamos a un ancho
         // de 100 píxeles.
-        const avatarName = await savePhotoService(req.files.avatar, 100);
+        const avatarName = await savePhotoService(avatar, 100);
 
         // Actualizamos los datos del usuario con el nombre de avatar que hemos obtenido.
         await updateUserAvatarModel(avatarName, req.user.id);
 
         res.send({
             status: 'ok',
-            message: 'Usuario actualizado',
+            message: 'avatar de usuario actualizado',
         });
     } catch (err) {
         next(err);

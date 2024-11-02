@@ -15,7 +15,14 @@ import {
 import { URL_FRONT } from '../../../env.js';
 
 // Realizamos una consulta a la BBDD para crear un nuevo usuario.
-const insertUserModel = async (username, email, password, registrationCode) => {
+const insertUserModel = async (
+    username,
+    email,
+    password,
+    registrationCode,
+    firstName,
+    lastname
+) => {
     const pool = await getPool();
 
     // Buscamos en la BBDD usuarios con ese nombre.
@@ -41,8 +48,23 @@ const insertUserModel = async (username, email, password, registrationCode) => {
 
     // Insertamos el usuario.
     await pool.query(
-        `INSERT INTO users(id, username, email, password, registrationCode) VALUES(?, ?, ?, ?, ?)`,
-        [uuid(), username, email, hashedPass, registrationCode]
+        `INSERT INTO users(
+            id,
+            username,
+            email,
+            password,
+            registrationCode,
+            firstName,
+            lastname ) VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [
+            uuid(),
+            username,
+            email,
+            hashedPass,
+            registrationCode,
+            firstName,
+            lastname,
+        ]
     );
 
     // Creamos el asunto del email de verificación.
@@ -54,7 +76,7 @@ const insertUserModel = async (username, email, password, registrationCode) => {
 
             Gracias por registrarte en nuestra app de Meet Ups. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="${URL_FRONT}/${registrationCode}">Activar mi cuenta</a>
+            <a href="${URL_FRONT} / ${registrationCode}">Activar mi cuenta</a>
         `;
 
     // Crear en el .env una variable de entorno URL_FRONT.

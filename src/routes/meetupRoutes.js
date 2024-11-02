@@ -21,7 +21,7 @@ import {
 const meetUpRouter = express.Router();
 
 //crea una nueva entrada
-meetUpRouter.post('/meetupentries', authUser, newMeetupController);
+meetUpRouter.post('/meetupentries', /* authUser, */ newMeetupController);
 
 //muestra todas las entradaas
 meetUpRouter.get('/meetupentries', listMeetUpController);

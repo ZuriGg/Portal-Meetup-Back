@@ -6,50 +6,58 @@ const newMeetupController = async (req, res, next) => {
             title,
             description,
             startDate,
-            category,
-            idLocation,
+            oneSession,
+            categoryId,
+            locationId,
             city,
             address,
             notes,
             zip,
             hourMeetUp,
-            aforoMax,
+            dayOfTheWeek,
+            aforoMax, 
+            userId,
+            owner
         } = req.body;
 
         const entryId = await insertMeetupModel(
             title,
             description,
             startDate,
-            category,
-            idLocation,
+            oneSession,
+            categoryId,
+            locationId,
             city,
             address,
             notes,
             zip,
             hourMeetUp,
-            aforoMax,
-            meetUpPhotos,
-            req.user.id
+            dayOfTheWeek,
+            aforoMax, 
+            userId,
+            owner
+            /* meetUpPhotos, */
+            /*             req.user.id */
         );
 
-        let photos = [];
+/*         let photos = []; */
 
-        if (req.files) {
+/*         if (req.files) {
             for (let photo of Object.values(req.files).slice(0, 3)) {
                 let photoName = await savePhotoUtils(photo, 600);
 
                 //NO SE HA CREADO SERVICIO insertPhotoEntrieService
-                const photoId = await insertPhotoEntrieService(
+                                 const photoId = await insertPhotoEntrieService(
                     photoName,
                     entryId
-                );
+                ); 
 
-                photos.push({
+                                 photos.push({
                     id: photoId,
                     name: photoName,
-                });
+                }); 
             }
-        }
+        } */
 
         res.send({
             status: 'ok',
@@ -58,11 +66,18 @@ const newMeetupController = async (req, res, next) => {
                     title,
                     description,
                     startDate,
-                    category,
-                    idLocation,
+                    oneSession,
+                    categoryId,
+                    locationId,
+                    address,
+                    notes,
+                    zip,
                     hourMeetUp,
-                    aforoMax,
-                    meetUpPhotos,
+                    dayOfTheWeek,
+                    aforoMax, 
+                    userId,
+                    owner,
+
                     createdAt: new Date(),
                 },
             },

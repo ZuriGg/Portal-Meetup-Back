@@ -16,13 +16,13 @@ const selectMeetupByIdModel = async (meetupId, userId = '') => {
     }
 
     // Obtenemos el array de fotos del meetup.
-    const [photos] = await pool.query(
+/*     const [photos] = await pool.query(
         `SELECT id, name FROM meetupPhotos WHERE meetupId = ?`,
         [meetupId]
-    );
+    ); */
 
     // Agregamos el array de fotos al meetup.
-    meetups[0].photos = photos;
+/*     meetups[0].photos = photos; */
 
     // Establecemos como valores booleanos "votedByMe" y "owner"
     /*     meetups[0].votedByMe = Boolean(meetups[0].votedByMe);
@@ -33,7 +33,7 @@ const selectMeetupByIdModel = async (meetupId, userId = '') => {
 
     return {
         ...meetups[0],
-        photos,
+        /* photos, */
     };
 };
 

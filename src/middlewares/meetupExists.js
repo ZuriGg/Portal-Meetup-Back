@@ -2,12 +2,14 @@ import getPool from '../database/getPool.js';
 
 const meetupExists = async (req, res, next) => {
     try {
-        const { entryId } = req.params;
+        const { meetupId } = req.params;
+        console.log(meetupId);
+        
         const pool = await getPool();
 
         const [entry] = await pool.query(
             'SELECT id FROM meetups WHERE id = ?',
-            [entryId]
+            [meetupId]
         );
 
         if (entry.length === 0) {

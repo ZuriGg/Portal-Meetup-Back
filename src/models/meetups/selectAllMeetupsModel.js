@@ -21,7 +21,7 @@ const selectAllMeetupsModel = async (keyword = {}) => {
     //location que fue lo que puso el usuario mediante req.query
     //por eso es una incersion y evita inyeccion SQL
     if (location) {
-        conditions.push('m.idLocation = ?');
+        conditions.push('m.locationId = ?');
         values.push(location);
     }
 
@@ -46,11 +46,11 @@ const selectAllMeetupsModel = async (keyword = {}) => {
 
     //consulta parametrizada con limit y offset
     const query = `
-       SELECT m.meetupid, m.title, m.description, m.startDate, m.hourMeetup, m.dayOfTheWeek,
+       SELECT m.id, m.title, m.description, m.startDate, m.oneSession, m.hourMeetup, m.dayOfTheWeek,
         m.aforoMax, m.userId, m.owner, m.locationId, m.categoryId,
         AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
         FROM meetups m
-        LEFT JOIN meetup_votes v ON v.meetupid = m.id
+        LEFT JOIN meetupVotes v ON v.id = m.id
         INNER JOIN users u ON u.id = m.userId
         ${category ? 'INNER JOIN category c ON m.categoryId = c.id' : ''}
         ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
@@ -59,21 +59,21 @@ const selectAllMeetupsModel = async (keyword = {}) => {
         LIMIT ? OFFSET ?
     `;
 
-    values.push(limit, offset);
+    values.push(Number(limit), Number(offset));
 
     //devuelve un array de objetos (meetup)
     const [meetups] = await pool.query(query, values);
 
     for (let meetup of meetups) {
-        const [photos] = await pool.query(
+        /* const [photos] = await pool.query(
             `
                 SELECT id, name FROM meetup_photos WHERE meetupId=?
             `,
             [meetup.id]
-        );
+        ); */
 
         // Agregamos las fotos a la entrada. Si no existe foto en la posición cero establecemos un valor null.
-        meetup.photos = photos.length > 0 ? photos[0] : null;
+        /* meetup.photos = photos.length > 0 ? photos[0] : null; */
     }
     return meetups;
 };

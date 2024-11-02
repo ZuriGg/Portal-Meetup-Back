@@ -2,7 +2,13 @@ import selectMeetupByIdModel from '../../models/meetups/selectMeetupByIdModel.js
 
 const getMeetupController = async (req, res, next) => {
     try {
-        const meetUpEntries = selectMeetupByIdModel(keyword);
+
+        const {meetupId} = req.params;
+        console.log(meetupId);
+        
+
+        const meetUpEntries = await selectMeetupByIdModel(meetupId);
+        
         res.send({
             status: 'ok',
             data: meetUpEntries,

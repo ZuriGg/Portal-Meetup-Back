@@ -15,7 +15,14 @@ import {
 import { URL_FRONT } from '../../../env.js';
 
 // Realizamos una consulta a la BBDD para crear un nuevo usuario.
-const insertUserModel = async (username, email, password, registrationCode) => {
+const insertUserModel = async (
+    username,
+    email,
+    password,
+    registrationCode,
+    firstName,
+    lastname
+) => {
     const pool = await getPool();
 
     // Buscamos en la BBDD usuarios con ese nombre.
@@ -41,8 +48,23 @@ const insertUserModel = async (username, email, password, registrationCode) => {
 
     // Insertamos el usuario.
     await pool.query(
-        `INSERT INTO users(id, username, email, password, registrationCode) VALUES(?, ?, ?, ?, ?)`,
-        [uuid(), username, email, hashedPass, registrationCode]
+        `INSERT INTO users(
+            id,
+            username,
+            email,
+            password,
+            registrationCode,
+            firstName,
+            lastname ) VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [
+            uuid(),
+            username,
+            email,
+            hashedPass,
+            registrationCode,
+            firstName,
+            lastname,
+        ]
     );
 
     // Creamos el asunto del email de verificación.

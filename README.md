@@ -55,7 +55,7 @@ cd Proyecto-integrador
 
 ## Base de Datos
 
-![tablas de la Base de Datos](src/uploads/img-readme/image.png)
+![tablas de la Base de Datos](src/sprites_readme/image.png)
 
 ## Diseño de la Web
 
@@ -63,7 +63,7 @@ https://www.figma.com/proto/RVCmN0c1zJkctI68DpmXjI/Portal-Meetups?node-id=35-101
 
 Ejemplo del Home de nuestra página Web
 
-![Ejemplo de home](src/uploads/img-readme/image-1.png)
+![Ejemplo de home](src/sprites_readme/image-1.png)
 
 ## Lista de Endpoints
 

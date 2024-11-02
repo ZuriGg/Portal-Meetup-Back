@@ -11,19 +11,17 @@ export const cannotVoteOwnMeetupError = () => {
 };
 
 export const deleteFileError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'FILE_DELETED_FAILED',
-        message: 'Error al eliminar el archivo del disco',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const emailAlreadyRegisteredError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'EMAIL_ALREADY_REGISTERED',
-        message: 'El email ya está registrado',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    (error.httpStatus = '409'), // Conflict
+        (error.code = 'EMAIL_ALREADY_REGISTERED');
+    return error;
 };
 
 export const invalidCredentialsError = () => {
@@ -32,7 +30,11 @@ export const invalidCredentialsError = () => {
     return error;
 };
 
-export const invalidTokenError = () => {};
+export const invalidTokenError = () => {
+    const error = new Error('error en el token', path);
+    error.httpStatus = path;
+    return error;
+};
 
 export const notAuthenticatedError = () => {
     throw {

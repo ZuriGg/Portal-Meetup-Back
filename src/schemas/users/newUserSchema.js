@@ -1,9 +1,6 @@
 import joi from 'joi';
-
-// Mensajes de error personalizados.
 import joiErrorMessages from '../joiErrorMessages.js';
 
-// Esquema donde comprobamos todas las propiedades necesarias.
 const newUserSchema = joi.object({
     username: joi.string().required().messages(joiErrorMessages),
     password: joi
@@ -14,6 +11,8 @@ const newUserSchema = joi.object({
         .required()
         .messages(joiErrorMessages),
     email: joi.string().email().required().messages(joiErrorMessages),
+    firstName: joi.string().required().messages(joiErrorMessages), // Agregado
+    lastname: joi.string().required().messages(joiErrorMessages), // Agregado
 });
 
 export default newUserSchema;

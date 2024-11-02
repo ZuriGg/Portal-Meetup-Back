@@ -10,7 +10,8 @@ import newUserSchema from '../../schemas/users/newUserSchema.js';
 const newUserController = async (req, res, next) => {
     try {
         // Obtenemos los datos necesarios del body.
-        const { username, email, password } = req.body;
+        const { username, email, password, firstName, lastname } = req.body;
+        console.log(firstName, lastname);
 
         // Validamos el body con Joi.
         await validateSchemaUtil(newUserSchema, req.body);
@@ -19,7 +20,14 @@ const newUserController = async (req, res, next) => {
         const registrationCode = randomstring.generate(10);
 
         // Insertamos el usuario.
-        await insertUserModel(username, email, password, registrationCode);
+        await insertUserModel(
+            username,
+            email,
+            password,
+            registrationCode,
+            firstName,
+            lastname
+        );
 
         res.send({
             status: 'ok',

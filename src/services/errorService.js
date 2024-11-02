@@ -1,121 +1,149 @@
 export const cannotVoteOwnMeetupError = () => {
-    throw {
-        httpStatus: 403, // Forbidden
-        code: 'CANNOT_VOTE_OWN_ENTRY',
-        message: 'No puedes votar tu propio meetup',
-    };
+    
+    const error = new Error('No puedes votar tu propio meetup', path);
+    error.httpStatus = path;
+    error.httpStatus = "403", // Conflict
+    error.code ='CANNOT_VOTE_OWN_ENTRY'
+    return error;
+         
 };
 
 export const deleteFileError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'FILE_DELETED_FAILED',
-        message: 'Error al eliminar el archivo del disco',
-    };
+  
+        const error = new Error('error al eliminar archivo', path)
+        error.httpStatus = path;
+        error.httpStatus = "401"
+        error.code = 'CANNOT_DELETE_FILE'
+        return error;
+    
 };
 
 export const emailAlreadyRegisteredError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'EMAIL_ALREADY_REGISTERED',
-        message: 'El email ya está registrado',
-    };
+
+        const error = new Error('El email ya está registrado', path);
+        error.httpStatus = path;
+        error.httpStatus = "409", // Conflict
+        error.code = 'EMAIL_ALREADY_REGISTERED';
+        return error;
+    
 };
 
 export const invalidCredentialsError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_CREDENTIALS',
-        message: 'Credenciales inválidas',
-    };
+
+    const error = new Error('Credenciales inválidas', path);
+    error.httpStatus = path;
+    error.httpStatus = "401", // Conflict
+    error.code ='INVALID_CREDENTIALS'
+    return error;
+    
 };
 
 export const invalidTokenError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_TOKEN',
-        message: 'Token inválido',
-    };
+    
+    const error = new Error('Token inválido', path);
+    error.httpStatus = path;
+    error.httpStatus = "401", // Conflict
+    error.code ='INVALID_TOKEN'
+    return error;
+
 };
 
 export const notAuthenticatedError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'NOT_AUTHENTICATED',
-        message: `Debes enviar un token en el header 'Authorization'`,
-    };
+
+    const error = new Error('Debes enviar un token en el header', path);
+    error.httpStatus = path;
+    error.httpStatus = "401", // Conflict
+    error.code ='NOT_AUTHENTICATED'
+    return error;
+   
 };
 
 export const notFoundError = (resource) => {
-    throw {
-        httpStatus: 404, // Not Found
-        code: 'RESOURCE_NOT_FOUND',
-        message: `El recurso requerido '${resource}' no existe`,
-    };
+
+    const error = new Error(`El recurso requerido '${resource}' no existe`, path);
+    error.httpStatus = path;
+    error.httpStatus = "404", // Forbbiden
+    error.code = 'RESOURCE_NOT_FOUND'
+    return error;
+
 };
 
 export const pendingActivationError = () => {
-    throw {
-        httpStatus: 403, // Forbidden
-        code: 'PENDING_ACTIVATION',
-        message:
-            'Usuario pendiente de activar. Por favor, verifica tu cuenta antes de continuar.',
-    };
+
+    const error = new Error('Usuario pendiente de activar. Por favor, verifica tu cuenta antes de continuar.', path);
+    error.httpStatus = path;
+    error.httpStatus = "403", // Forbbiden
+    error.code = 'PENDING_ACTIVATION'
+    return error;
+
 };
 
 export const photoLimitReachedError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'PHOTO_LIMIT_REACHED',
-        message: 'Se ha alcanzado el límite de tres fotos en el meetup',
-    };
+    
+    const error = new Error('Se ha alcanzado el límite de tres fotos en el meetup', path);
+    error.httpStatus = path;
+    error.httpStatus = "409", // Conflict
+    error.code = 'PHOTO_LIMIT_REACHED'
+    return error;
+
 };
 
 export const recoveryCodeError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_RECOVERY_CODE',
-        message: 'Código de recuperación incorrecto',
-    };
+
+    const error = new Error('Se ha alcanzado el límite de tres fotos en el meetup', path);
+    error.httpStatus = path;
+    error.httpStatus = "401", // Unauthorized
+    error.code = 'INVALID_RECOVERY_CODE'
+    return error;
+   
 };
 
 export const saveFileError = () => {
-    throw {
-        httpStatus: 500, // Internal Server Error
-        code: 'FILE_SAVE_FAILED',
-        message: 'Error al guardar el archivo en el disco',
-    };
+
+    const error = new Error('Error al guardar el archivo en el disco', path);
+    error.httpStatus = path;
+    error.httpStatus = "500", // Internal Server Error
+    error.code = 'FILE_SAVE_FAILED'
+    return error;
+
 };
 
 export const sendEmailError = () => {
-    throw {
-        httpStatus: 500, // tipo de error --> Internal server error
-        code: 'SEND_EMAIL_FAILED', //identificador para el tipo de error
-        message: 'Error al enviar email', //mensaje que se mostrará al usuario
-    };
+
+    const error = new Error('Error al enviar el email', path);
+    error.httpStatus = path;
+    error.httpStatus = "500", // Internal Server Error
+    error.code = 'SEND_EMAIL_FAILED'
+    return error;
+
 };
 
 export const userAlreadyRegisteredError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'USER_ALREADY_REGISTERED',
-        message: 'El nombre de usuario ya está registrado',
-    };
+
+    const error = new Error('El nombre de usuario ya está registrado', path);
+    error.httpStatus = path;
+    error.httpStatus = "409", // Conflict
+    error.code ='USER_ALREADY_REGISTERED'
+    return error;
+         
 };
 
 export const unauthorizedUserError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'UNAUTHORIZED',
-        message: 'El usuario no está autorizado para hacer esta operación',
-    };
+
+    const error = new Error('El usuario no está autorizado para hacer esta operación', path);
+    error.httpStatus = path;
+    error.httpStatus = "409", // Conflict
+    error.code ='UNAUTHORIZED'
+    return error;
+
 };
 
 export const voteAlreadyExistsError = () => {
-    throw {
-        httpStatus: 409, // Conflict
-        code: 'VOTE_ALREADY_EXISTS',
-        message:
-            'No se puede votar más de una vez la misma asistencia a un meetup',
-    };
+
+    const error = new Error('No se puede votar más de una vez la misma asistencia a un meetup', path);
+    error.httpStatus = path;
+    error.httpStatus = "409", // Conflict
+    error.code ='VOTE_ALREADY_EXISTS'
+    return error;
+   
 };

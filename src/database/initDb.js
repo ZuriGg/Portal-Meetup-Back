@@ -32,8 +32,8 @@ const main = async () => {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 email VARCHAR(100) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
-                firstName VARCHAR(30) UNIQUE NOT NULL,
-                lastname VARCHAR(30) UNIQUE NOT NULL,
+                firstName VARCHAR(30) NOT NULL,
+                lastname VARCHAR(30) NOT NULL,
                 password VARCHAR(100) NOT NULL,
                 meetupOwner VARCHAR(100),
                 avatar VARCHAR(100),
@@ -41,7 +41,7 @@ const main = async () => {
                 role ENUM('organizador', 'normal', 'admin') DEFAULT 'normal',
                 registrationCode CHAR(30),
                 recoverPassCode CHAR(10),
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )
         `);

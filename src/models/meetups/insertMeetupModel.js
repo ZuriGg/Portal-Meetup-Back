@@ -47,7 +47,7 @@ const insertMeetupModel = async (
             startDate,
             oneSession,
             categoryId,
-            locationId,
+            idLocation,
             hourMeetUp,
             dayOfTheWeek,
             aforoMax, 

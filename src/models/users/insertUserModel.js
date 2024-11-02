@@ -49,22 +49,13 @@ const insertUserModel = async (
     // Insertamos el usuario.
     await pool.query(
         `INSERT INTO users(
-            id,
             username,
             email,
             password,
             registrationCode,
             firstName,
-            lastname ) VALUES(?, ?, ?, ?, ?, ?, ?)`,
-        [
-            uuid(),
-            username,
-            email,
-            hashedPass,
-            registrationCode,
-            firstName,
-            lastname,
-        ]
+            lastname ) VALUES( ?, ?, ?, ?, ?, ?)`,
+        [username, email, hashedPass, registrationCode, firstName, lastname]
     );
 
     // Creamos el asunto del email de verificación.

@@ -15,6 +15,8 @@ const authUser = (req, res, next) => {
             notAuthenticatedError(); //401 --> error de autorización
         }
 
+        // const token = authorization.split(' ')[1];
+
         let tokenInfo; //para guardar la verificación del token --> tokenInfo serán los datos del usuario
 
         try {

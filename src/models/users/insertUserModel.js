@@ -54,7 +54,7 @@ const insertUserModel = async (username, email, password, registrationCode) => {
 
             Gracias por registrarte en nuestra app de Meet Ups. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="${URL_FRONT}/${registrationCode}">Activar mi cuenta</a>
+            <a href="${URL_FRONT} / ${registrationCode}">Activar mi cuenta</a>
         `;
 
     // Crear en el .env una variable de entorno URL_FRONT.

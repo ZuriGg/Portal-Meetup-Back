@@ -16,7 +16,7 @@ const newUserController = async (req, res, next) => {
         await validateSchemaUtil(newUserSchema, req.body);
 
         // Creamos el código de registro.
-        const registrationCode = randomstring.generate(30);
+        const registrationCode = randomstring.generate(10);
 
         // Insertamos el usuario.
         await insertUserModel(username, email, password, registrationCode);

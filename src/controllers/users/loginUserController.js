@@ -33,7 +33,7 @@ const loginUserController = async (req, res, next) => {
         /*
             comprobar que el active esté en 1
         */
-        if (!user.active) pendingActivationError();
+        if (user.active != 1) pendingActivationError();
 
         /**
          * generar el token

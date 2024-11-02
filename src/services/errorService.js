@@ -1,3 +1,7 @@
+//AGREGAR PATH DEL ERRORRRRRRRRRRRRRRRR!
+
+import path from 'path';
+
 export const cannotVoteOwnMeetupError = () => {
     throw {
         httpStatus: 403, // Forbidden
@@ -23,20 +27,12 @@ export const emailAlreadyRegisteredError = () => {
 };
 
 export const invalidCredentialsError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_CREDENTIALS',
-        message: 'Credenciales inválidas',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
-export const invalidTokenError = () => {
-    throw {
-        httpStatus: 401, // Unauthorized
-        code: 'INVALID_TOKEN',
-        message: 'Token inválido',
-    };
-};
+export const invalidTokenError = () => {};
 
 export const notAuthenticatedError = () => {
     throw {
@@ -55,12 +51,9 @@ export const notFoundError = (resource) => {
 };
 
 export const pendingActivationError = () => {
-    throw {
-        httpStatus: 403, // Forbidden
-        code: 'PENDING_ACTIVATION',
-        message:
-            'Usuario pendiente de activar. Por favor, verifica tu cuenta antes de continuar.',
-    };
+    const error = new Error('error email, o contraseña incorrecta', path);
+    error.httpStatus = path;
+    return error;
 };
 
 export const photoLimitReachedError = () => {

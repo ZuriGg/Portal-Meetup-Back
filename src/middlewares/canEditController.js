@@ -8,10 +8,10 @@ import { unauthorizedUserError } from '../services/errorService.js';
 const canEditController = async (req, res, next) => {
     try {
         // Obtenemos el id de la entrada en la cuál tendra lugar el cambio.
-        const { entryId } = req.params;
+        const { meetupId } = req.params;
 
         // Obtenemos los datos de la entrada.
-        const entry = await selectMeetupByIdModel(meetupId);
+        const meetup = await selectMeetupByIdModel(meetupId);
 
         // Si no somos los propietarios lanzamos un error.
         if (meetup.userId !== req.user.id) {

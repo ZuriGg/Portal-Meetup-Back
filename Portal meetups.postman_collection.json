@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Mojon\",\r\n    \"description\":\"Ninguna, maquina\",\r\n    \"startDate\":\"ayer\",\r\n    \"oneSession\":\"no\",\r\n    \"category\":\"orina marcha atrás\",\r\n    \"city\":\"congo\",\r\n    \"address\":\"congo\",\r\n    \"notes\":\"congo\",\r\n    \"zip\":\"si\",\r\n    \"userId\":\"12\",\r\n    \"hourMeetUp\":\"4 de la mañana\",\r\n    \"dayOfTheWeek\":\"hoy\",\r\n    \"aforoMax\":\"1\"\r\n}",
+							"raw": "{\r\n    \"title\": \"almendra\",\r\n    \"description\": \"serwhwrghrghdfghfgh\",\r\n    \"startDate\": \"2024-11-01\",\r\n    \"oneSession\": false,\r\n    \"categoryId\": \"1\",\r\n    \"locationId\": \"1\",\r\n    \"city\":\"mayorca\",\r\n    \"address\": \"mayorca\",\r\n    \"notes\": \"mayorca\",\r\n    \"zip\": \"15345\",\r\n    \"userId\": \"1\",\r\n    \"owner\":\"1\",\r\n    \"hourMeetUp\": \"04:00:00\",\r\n    \"dayOfTheWeek\": \"lunes\",\r\n    \"aforoMax\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,39 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/meetupentries"
+						"url": {
+							"raw": "http://localhost:3000/meetupentries?location=1&category=1&search=&page=1&limit=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"meetupentries"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "1"
+								},
+								{
+									"key": "category",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -65,7 +97,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/meetupentries/34"
+						"url": "http://localhost:3000/meetupentries/1"
 					},
 					"response": []
 				},
@@ -79,7 +111,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"id\":\"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,25 +126,47 @@
 					"name": "Editar meetup",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMDU5OTg5NCwiZXhwIjoxNzMxMjA0Njk0fQ.tZDchtTNnY6KWqKCb9o8F2C_W8CFQk8Z3-SmdyJXZws",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"title\": \"dieguito\",\r\n    \"description\": \"Perro seco\",\r\n    \"startDate\": \"2024-11-01\",\r\n    \"oneSession\": false,\r\n    \"categoryId\": \"1\",\r\n    \"locationId\": \"1\",\r\n    \"userId\": \"1\",\r\n    \"owner\":\"1\",\r\n    \"hourMeetUp\": \"04:00:00\",\r\n    \"dayOfTheWeek\": \"lunes\",\r\n    \"aforoMax\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/23/edit"
+						"url": "http://localhost:3000/meetupentries/edit/1"
 					},
 					"response": []
 				},
 				{
-					"name": "Votar una entrada",
+					"name": "Inscribir una entrada",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMDU5OTg5NCwiZXhwIjoxNzMxMjA0Njk0fQ.tZDchtTNnY6KWqKCb9o8F2C_W8CFQk8Z3-SmdyJXZws",
+								"type": "text"
+							},
+							{
+								"key": "user",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "date",
+								"value": "2024-11-03 03:10:18",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -122,7 +176,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/23/votes"
+						"url": "http://localhost:3000/meetupentries/1/inscription"
 					},
 					"response": []
 				},
@@ -192,7 +246,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Manolo\",\r\n    \"email\": \"acariciameelcodo@gmail.com\",\r\n    \"password\": \"Manólo1234\"\r\n}\r\n",
+							"raw": "{\r\n    \"username\": \"chupacabras\",\r\n    \"firstName\":\"paquito\",\r\n    \"lastname\":\"chocolatero\",\r\n    \"email\": \"zurimanes@gmail.com\",\r\n    \"password\": \"Manolo1234!.\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -231,7 +285,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"acariciameelcodo@gmail.com\",\r\n    \"password\":\"Manólo1243\"\r\n}",
+							"raw": "{\r\n    \"email\":\"zurimanes@gmail.com\",\r\n    \"password\":\"Manólo1243\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,17 +303,39 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMDU5MTYxMywiZXhwIjoxNzMxMTk2NDEzfQ.ucPldQbYPTGEN5C2o12-3Sv8oTQratq_9AYYkygYIVs",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"raw": "{\r\n    \"userId\":\"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/users"
+						"url": {
+							"raw": "http://localhost:3000/users?=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
 					},
 					"response": []
 				},

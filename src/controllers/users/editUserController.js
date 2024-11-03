@@ -4,12 +4,13 @@ import { notFoundError } from '../../services/errorService.js';
 
 const editUserController = async (req, res, next) => {
     try {
-        const { userId } = req.query;
+        const { userId } = req.params;
+        console.log(userId);
 
         const { firstName, lastname, email, username, password, avatar } =
             req.body;
 
-        const { id } = selectUserByIdModel(userId);
+        const { id } = await selectUserByIdModel(userId);
 
         if (userId != id) throw notFoundError('userId');
 

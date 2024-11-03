@@ -4,9 +4,9 @@ import { notFoundError } from '../../services/errorService.js';
 
 const editUserController = async (req, res, next) => {
     try {
-        const { userId } = req.params;
+        const { userId } = req.query;
 
-        const { firstName, lastName, email, username, password, avatar } =
+        const { firstName, lastname, email, username, password, avatar } =
             req.body;
 
         const { id } = selectUserByIdModel(userId);
@@ -15,14 +15,21 @@ const editUserController = async (req, res, next) => {
 
         await editUserModel(
             firstName,
-            lastName,
+            lastname,
             email,
             username,
             password,
             avatar,
             userId
         );
-    } catch (error) {}
+
+        res.send({
+            message: 'Ok, usuario editado',
+            status: 200,
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 export default editUserController;

@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { v4 as uuid } from 'uuid';
 
 import getPool from '../../database/getPool.js';
 
@@ -24,6 +23,7 @@ const insertUserModel = async (
     lastname
 ) => {
     const pool = await getPool();
+    console.log(registrationCode);
 
     // Buscamos en la BBDD usuarios con ese nombre.
     let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
@@ -67,7 +67,7 @@ const insertUserModel = async (
 
             Gracias por registrarte en nuestra app de Meet Ups. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="${URL_FRONT} / ${registrationCode}">Activar mi cuenta</a>
+            <a href="${URL_FRONT}${registrationCode}">Activar mi cuenta</a>
         `;
 
     // Crear en el .env una variable de entorno URL_FRONT.

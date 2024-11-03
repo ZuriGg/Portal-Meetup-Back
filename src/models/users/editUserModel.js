@@ -2,10 +2,11 @@ import getPool from '../../database/getPool.js';
 
 const editUserModel = async (
     firstName,
-    lastName,
+    lastname,
     username,
     password,
     avatar,
+    email,
     userId
 ) => {
     const pool = await getPool();
@@ -13,10 +14,10 @@ const editUserModel = async (
     await pool.query(
         `
             UPDATE users
-            SET firstName=?, lastName=?, username=?, password=?, avatar=?
+            SET firstName=?, lastname=?, username=?, password=?, avatar=?, email=?
             WHERE id=?
         `,
-        [firstName, lastName, username, password, avatar, userId]
+        [firstName, lastname, username, password, avatar, email, userId]
     );
 };
 

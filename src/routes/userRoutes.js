@@ -27,6 +27,7 @@ userRouter.post('/users/login', loginUserController);
 // Obtener perfil privado de un usuario.
 userRouter.get('/users', authUser, userExistsController, getOwnUserController);
 
+//editar usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);
 
 // Obtener perfil público de un usuario.
@@ -36,6 +37,7 @@ userRouter.get(
     getUserProfileController
 );
 
+//editar avatar
 userRouter.put(
     '/users/avatar',
     authUser,

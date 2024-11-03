@@ -40,7 +40,7 @@ meetUpRouter.put(
     editMeetupController
 );
 
-//vota una entrada
+//Inscripcion a un meetup
 meetUpRouter.post(
     '/meetupentries/:meetupId/inscription',
     authUser,

@@ -4,12 +4,14 @@ const editUserModel = async (
     firstName,
     lastname,
     username,
+    email,
     password,
     avatar,
-    email,
     userId
 ) => {
     const pool = await getPool();
+
+    console.log(`${email} de model`);
 
     await pool.query(
         `

@@ -9,6 +9,7 @@ const editUserController = async (req, res, next) => {
 
         const { firstName, lastname, email, username, password, avatar } =
             req.body;
+        console.log(`${email} de controller`);
 
         const { id } = await selectUserByIdModel(userId);
 
@@ -17,8 +18,8 @@ const editUserController = async (req, res, next) => {
         await editUserModel(
             firstName,
             lastname,
-            email,
             username,
+            email,
             password,
             avatar,
             userId

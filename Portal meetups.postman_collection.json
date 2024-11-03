@@ -184,7 +184,13 @@
 					"name": "Cancela Incripcion meetup",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "user",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -194,7 +200,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/45/registration"
+						"url": "http://localhost:3000/meetups/1/registration"
 					},
 					"response": []
 				},

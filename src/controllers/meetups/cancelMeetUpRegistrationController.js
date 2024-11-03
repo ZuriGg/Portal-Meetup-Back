@@ -3,9 +3,9 @@ import cancelMeetUpRegistrationModel from '../../models/meetups/cancelMeetUpRegi
 const cancelMeetUpRegistrationContoller = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
-        const { userId } = req.user.id;
+        const { user } = req.headers;
 
-        await cancelMeetUpRegistrationModel(userId, meetupId);
+        await cancelMeetUpRegistrationModel(user, meetupId);
 
         res.send({
             status: 'ok',

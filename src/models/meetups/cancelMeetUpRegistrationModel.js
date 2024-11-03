@@ -1,7 +1,7 @@
 import getPool from '../../database/getPool.js';
 
-const cancelMeetUpRegistrationService = async (userId, meetupId) => {
-    const pool = getPool();
+const cancelMeetUpRegistrationModel = async (userId, meetupId) => {
+    const pool = await getPool();
 
     await pool.query(
         `
@@ -11,4 +11,4 @@ const cancelMeetUpRegistrationService = async (userId, meetupId) => {
     );
 };
 
-export default cancelMeetUpRegistrationService;
+export default cancelMeetUpRegistrationModel;

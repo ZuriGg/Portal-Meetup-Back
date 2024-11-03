@@ -2,22 +2,43 @@ import editMeetupModel from '../../models/meetups/editMeetupModel.js';
 
 const editMeetupController = async (req, res, next) => {
     try {
-        const { entryId } = req.params;
+        const { meetupId } = req.params;
 
-        const { title, place, description } = req.body;
+        const {
+            title,
+            description,
+            startDate,
+            oneSession,
+            categoryId,
+            locationId,
+            city,
+            address,
+            notes,
+            zip,
+            userId,
+            owner,
+            hourMeetUp,
+            dayOfTheWeek,
+            aforoMax,
+        } = req.body;
 
         await editMeetupModel(
             title,
             description,
             startDate,
             oneSession,
-            hourMeetup,
+            categoryId,
+            locationId,
+            city,
+            address,
+            notes,
+            zip,
+            userId,
+            owner,
+            hourMeetUp,
             dayOfTheWeek,
             aforoMax,
-            locationId,
-            categoryId,
-            modifiedAt,
-            entryId
+            meetupId
         );
 
         res.send({

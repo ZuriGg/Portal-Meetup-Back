@@ -5,20 +5,25 @@ const editMeetupModel = async (
     description,
     startDate,
     oneSession,
-    hourMeetup,
+    categoryId,
+    locationId,
+    city,
+    address,
+    notes,
+    zip,
+    userId,
+    owner,
+    hourMeetUp,
     dayOfTheWeek,
     aforoMax,
-    locationId,
-    categoryId,
-    modifiedAt,
-    entryId
+    meetupId
 ) => {
     const pool = await getPool();
 
     await pool.query(
         `
-            UPDATE meetups
-            SET title=?, description=?, startDate=?, oneSession=?, hourMeetup=?, dayOfTheWeek=?, aforoMax=?, locationId=?, categoryId=?, modifiedAt=?, 
+            UPDATE meetups 
+            SET title=?, description=?, startDate=?, oneSession=?, hourMeetup=?, dayOfTheWeek=?, aforoMax=?, locationId=?, categoryId=?,userId=?,owner=? 
             WHERE id=?
         `,
         [
@@ -26,13 +31,14 @@ const editMeetupModel = async (
             description,
             startDate,
             oneSession,
-            hourMeetup,
+            hourMeetUp,
             dayOfTheWeek,
             aforoMax,
             locationId,
             categoryId,
-            modifiedAt,
-            entryId,
+            userId,
+            owner,
+            meetupId,
         ]
     );
 };

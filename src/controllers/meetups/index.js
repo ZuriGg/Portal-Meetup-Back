@@ -5,7 +5,7 @@ import editMeetupController from './editMeetupController.js';
 import listMeetUpController from './listMeetUppController.js';
 import meetUpCategoryController from './meetUpCategoryController.js';
 import newMeetupController from './newMeetUpController.js';
-import voteMeetupController from './voteMeetupController.js';
+import inscriptionMeetupController from './inscriptionMeetupController.js';
 import getMeetupController from './getMeetupController.js';
 
 export {
@@ -16,6 +16,6 @@ export {
     listMeetUpController,
     meetUpCategoryController,
     newMeetupController,
-    voteMeetupController,
+    inscriptionMeetupController,
     getMeetupController,
 };

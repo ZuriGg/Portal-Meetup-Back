@@ -14,7 +14,7 @@ import {
     listMeetUpController,
     meetUpCategoryController,
     newMeetupController,
-    voteMeetupController,
+    inscriptionMeetupController,
     getMeetupController,
 } from '../controllers/meetups/index.js';
 
@@ -33,7 +33,7 @@ meetUpRouter.get('/categories', meetUpCategoryController);
 
 //edita una entrada
 meetUpRouter.put(
-    '/meetupentries/:entryId/edit',
+    '/meetupentries/edit/:meetupId',
     authUser,
     meetupExists,
     canEditController,
@@ -42,10 +42,10 @@ meetUpRouter.put(
 
 //vota una entrada
 meetUpRouter.post(
-    '/meetupentries/:entryId/votes',
+    '/meetupentries/:meetupId/inscription',
     authUser,
     meetupExists,
-    voteMeetupController
+    inscriptionMeetupController
 );
 
 //cancela inscripcion meetup
@@ -56,7 +56,7 @@ meetUpRouter.delete(
 
 //borra una entrada
 meetUpRouter.delete(
-    '/meetupentries/:entryId',
+    '/meetupentries/:meetupId',
     authUser,
     meetupExists,
     canEditController,
@@ -64,7 +64,7 @@ meetUpRouter.delete(
 );
 
 meetUpRouter.delete(
-    '/meetupentries/:entryId/photos/:photoId',
+    '/meetupentries/:meetupId/photos/:photoId',
     authUser,
     meetupExists,
     canEditController,

@@ -6,14 +6,13 @@ const insertMeetupModel = async (
     startDate,
     oneSession,
     categoryId,
-    locationId,
     city,
     address,
     notes,
     zip,
     hourMeetUp,
     dayOfTheWeek,
-    aforoMax, 
+    aforoMax,
     userId,
     owner
 ) => {
@@ -50,9 +49,9 @@ const insertMeetupModel = async (
             idLocation,
             hourMeetUp,
             dayOfTheWeek,
-            aforoMax, 
+            aforoMax,
             userId,
-            owner
+            owner,
         ]
     );
 

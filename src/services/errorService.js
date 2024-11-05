@@ -128,3 +128,12 @@ export const voteAlreadyExistsError = () => {
         (error.code = 'VOTE_ALREADY_EXISTS');
     return error;
 };
+
+export const trueOrFalseError = () => {
+    const error = new Error(
+        'No se ha recibido un valor "true" o "false", no se ha podido realizar la operación',
+        path
+    );
+    error.httpStatus = path;
+    (error.httpStatus = '400')((error.code = 'INVALID_KEY'));
+};

@@ -66,6 +66,10 @@ const main = async () => {
             )
         `);
 
+        await pool.query(`
+                INSERT INTO category(name) VALUES("default")
+            `);
+
         // Tabla de meetups --> registra los eventos creados por los usuarios
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetups (
@@ -78,7 +82,6 @@ const main = async () => {
                 dayOfTheWeek ENUM ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'),
                 aforoMax TINYINT UNSIGNED,
                 userId INT NOT NULL, /* Ahora es INT para referenciar a users.id */
-                owner INT NOT NULL,
                 locationId INT NOT NULL,
                 categoryId INT NOT NULL,
                 validated BOOLEAN DEFAULT false,
@@ -117,7 +120,7 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS outOfService (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                notes VARCHAR(100) NOT NULL,
+                notes VARCHAR(100),
                 date DATETIME NOT NULL,
                 meetupId INT NOT NULL,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)

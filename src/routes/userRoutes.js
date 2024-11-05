@@ -23,18 +23,18 @@ userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 userRouter.post('/users/login', loginUserController);
 
-// Obtener perfil privado de un usuario.
+// Obtener perfil privado de un usuario. (Entregar los datos del usuario segun su token, para el panel de usuario)
 userRouter.get('/users', authUser, userExistsController, getOwnUserController);
 
 //editar usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);
 
-// Obtener perfil público de un usuario.
-// userRouter.get(
-//     '/users/:userId',
-//     userExistsController,
-//     getUserProfileController
-// );
+// Obtener perfil público de un usuario. (Para poder mostrar datos de usuarios (En el detalles meetup) seleccionados por su id)
+userRouter.get(
+    '/users/:userId',
+    userExistsController
+    /* getUserProfileController */
+);
 
 //editar avatar
 userRouter.put(
@@ -45,9 +45,19 @@ userRouter.put(
 );
 
 // email de recuperación de contraseña.
-userRouter.post('/users/password/recover', sendRecoverPassController);
+userRouter.post(
+    '/users/password/recover',
+    authUser,
+    userExistsController,
+    sendRecoverPassController
+);
 
 // Editar la contraseña de un usuario con un código de recuperación.
-userRouter.put('/users/password', editUserPassController);
+userRouter.put(
+    '/users/password',
+    authUser,
+    userExistsController,
+    editUserPassController
+);
 
 export default userRouter;

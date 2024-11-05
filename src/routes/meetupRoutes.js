@@ -18,6 +18,7 @@ import {
     inscriptionMeetupController,
     getMeetupController,
     validateMeetupController,
+    newVoteController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
@@ -81,6 +82,14 @@ meetUpRouter.put(
     canEditController,
     canValidate,
     validateMeetupController
+);
+
+//endpoint de rating (1-5) y comentario de un meetup después de la fecha de realización
+meetUpRouter.post(
+    '/meetupentries/:meetupId/votes',
+    authUser, // que el usuario esté autenticado
+    meetupExists, // que el meetup existe
+    newVoteController //logica para gestionar el nuevo voto
 );
 
 export default meetUpRouter;

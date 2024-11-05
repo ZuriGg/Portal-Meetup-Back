@@ -1,4 +1,5 @@
 import getPool from '../../database/getPool.js';
+import bcrypt from 'bcrypt';
 
 const editUserModel = async (
     firstName,
@@ -11,6 +12,8 @@ const editUserModel = async (
 ) => {
     const pool = await getPool();
 
+    const hashedPass = await bcrypt.hash(password, 10);
+
     console.log(`${email} de model`);
 
     await pool.query(
@@ -19,7 +22,7 @@ const editUserModel = async (
             SET firstName=?, lastname=?, username=?, password=?, avatar=?, email=?
             WHERE id=?
         `,
-        [firstName, lastname, username, password, avatar, email, userId]
+        [firstName, lastname, username, hashedPass, avatar, email, userId]
     );
 };
 

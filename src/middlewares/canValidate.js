@@ -5,6 +5,8 @@ import { unauthorizedUserError } from '../services/errorService.js';
 const canValidate = async (req, res, next) => {
     try {
         //Comprobación para saber si el usuario es administrador, si no, lanzamos error
+        console.log(`El usuario es ${req.user.role}`);
+
         if (req.user.role !== 'admin') {
             unauthorizedUserError();
         }

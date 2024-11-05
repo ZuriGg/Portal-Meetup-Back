@@ -4,6 +4,7 @@ import canEditController from './canEditController.js';
 import meetupExists from './meetupExists.js';
 import meetupExistsController from './meetupExistsController.js';
 import userExistsController from './userExistsController.js';
+import canValidate from './canValidate.js';
 
 export {
     authUser,
@@ -12,4 +13,5 @@ export {
     meetupExists,
     meetupExistsController,
     userExistsController,
+    canValidate,
 };

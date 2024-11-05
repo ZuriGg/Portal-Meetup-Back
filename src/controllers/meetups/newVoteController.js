@@ -1,4 +1,8 @@
 import insertVoteModel from '../../models/meetups/insertVoteModel.js';
+import {
+    cantVoteBeforeEventError,
+    invalidVoteValueError,
+} from '../../services/errorService.js';
 import getMeetupController from './getMeetupController.js';
 
 const newVoteController = async (req, res, next) => {
@@ -10,16 +14,12 @@ const newVoteController = async (req, res, next) => {
         //asegurar que la fecha del meetup haya pasado
         const meetup = await getMeetupController(attendanceId); // Asegúrate de tener esta función
         if (new Date() < new Date(meetup.date)) {
-            return res
-                .status(403)
-                .json({ message: 'No se puede votar antes del evento.' });
+            throw cantVoteBeforeEventError();
         }
 
         //aseguramos que el valor sea 1-5
         if (value < 1 || value > 5) {
-            return res
-                .status(400)
-                .json({ message: 'La calificación debe estar entre 1 y 5.' });
+            throw invalidVoteValueError();
         }
 
         //llamamos a newVoteModel para interactuar con la BBDD

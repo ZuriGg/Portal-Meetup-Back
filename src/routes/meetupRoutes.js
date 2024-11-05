@@ -23,7 +23,7 @@ import {
 const meetUpRouter = express.Router();
 
 //crea una nueva entrada
-meetUpRouter.post('/meetupentries', /* authUser, */ newMeetupController);
+meetUpRouter.post('/meetupentries', authUser, newMeetupController);
 
 //muestra todas las entradaas
 meetUpRouter.get('/meetupentries', listMeetUpController);
@@ -73,7 +73,8 @@ meetUpRouter.delete(
     deletePhotoController
 );
 
-meetUpRouter.post(
+// Endpoint de validación de meetup (Establecerlo como público, verificado por un admin)
+meetUpRouter.put(
     '/meetupentries/:meetupId/validate',
     authUser,
     meetupExists,

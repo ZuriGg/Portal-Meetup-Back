@@ -7,6 +7,7 @@ import meetUpCategoryController from './meetUpCategoryController.js';
 import newMeetupController from './newMeetUpController.js';
 import inscriptionMeetupController from './inscriptionMeetupController.js';
 import getMeetupController from './getMeetupController.js';
+import validateMeetupController from './validateMeetupController.js';
 
 export {
     cancelMeetUpRegistrationController,
@@ -18,4 +19,5 @@ export {
     newMeetupController,
     inscriptionMeetupController,
     getMeetupController,
+    validateMeetupController,
 };

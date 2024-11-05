@@ -4,6 +4,7 @@ import {
     canEditController,
     meetupExists,
     authUser,
+    canValidate,
 } from '../middlewares/index.js';
 
 import {
@@ -16,12 +17,13 @@ import {
     newMeetupController,
     inscriptionMeetupController,
     getMeetupController,
+    validateMeetupController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
 
 //crea una nueva entrada
-meetUpRouter.post('/meetupentries', /* authUser, */ newMeetupController);
+meetUpRouter.post('/meetupentries', authUser, newMeetupController);
 
 //muestra todas las entradaas
 meetUpRouter.get('/meetupentries', listMeetUpController);
@@ -69,6 +71,16 @@ meetUpRouter.delete(
     meetupExists,
     canEditController,
     deletePhotoController
+);
+
+// Endpoint de validación de meetup (Establecerlo como público, verificado por un admin)
+meetUpRouter.put(
+    '/meetupentries/:meetupId/validate',
+    authUser,
+    meetupExists,
+    canEditController,
+    canValidate,
+    validateMeetupController
 );
 
 export default meetUpRouter;

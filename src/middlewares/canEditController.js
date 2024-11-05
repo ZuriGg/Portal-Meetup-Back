@@ -14,6 +14,9 @@ const canEditController = async (req, res, next) => {
         const meetup = await selectMeetupByIdModel(meetupId);
 
         // Si no somos los propietarios lanzamos un error.
+        console.log(meetup.userId);
+        console.log(req.user.id);
+
         if (meetup.userId !== req.user.id) {
             unauthorizedUserError();
         }

@@ -81,6 +81,7 @@ const main = async () => {
                 owner INT NOT NULL,
                 locationId INT NOT NULL,
                 categoryId INT NOT NULL,
+                validated BOOLEAN DEFAULT false,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),

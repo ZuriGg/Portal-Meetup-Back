@@ -4,6 +4,7 @@ import {
     canEditController,
     meetupExists,
     authUser,
+    canValidate,
 } from '../middlewares/index.js';
 
 import {
@@ -16,6 +17,7 @@ import {
     newMeetupController,
     inscriptionMeetupController,
     getMeetupController,
+    validateMeetupController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
@@ -69,6 +71,15 @@ meetUpRouter.delete(
     meetupExists,
     canEditController,
     deletePhotoController
+);
+
+meetUpRouter.post(
+    '/meetupentries/:meetupId/validate',
+    authUser,
+    meetupExists,
+    canEditController,
+    canValidate,
+    validateMeetupController
 );
 
 export default meetUpRouter;

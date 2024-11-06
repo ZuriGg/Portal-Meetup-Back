@@ -17,5 +17,5 @@ export {
     validateUserController,
     sendRecoverPassController,
     editUserController,
-    getUserProfileController,
+    getUserProfileController, //ver el perfil "público de un usuario"
 };

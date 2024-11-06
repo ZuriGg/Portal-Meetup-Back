@@ -11,15 +11,14 @@ const userExistsController = async (req, res, next) => {
         // no existe, obtenemos el id de los path params.
         const userId = req.user?.id || req.params.userId;
 
-        const [users] = await pool.query(`SELECT id FROM users WHERE id = ?`, [
-            userId,
-        ]);
+        const [users] = await pool.query(`SELECT id FROM users WHERE id = ?`, [userId]);
 
         // Lanzamos un error si el usuario no existe.
         if (users.length < 1) {
-            notFoundError('usuario');
+            return next(notFoundError('usuario'));
         }
 
+        //si existe usuario, se pasa al siguiente middleware
         next();
     } catch (err) {
         next(err);

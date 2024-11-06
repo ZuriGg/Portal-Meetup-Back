@@ -9,12 +9,6 @@ const getUserProfileController = async (req, res, next) => {
         // datos del usuario.
         const user = await selectUserByIdModel(userId);
 
-        if (!user) {
-            // Si no se encuentra el usuario, respondemos con un error 404.
-            throw notFoundError();
-        }
-
-
         // Eliminamos los datos privados del usuario.
         delete user.password;  // No enviar la contraseña.
         delete user.email;     // No enviar el correo electrónico.

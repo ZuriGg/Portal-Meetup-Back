@@ -128,3 +128,23 @@ export const voteAlreadyExistsError = () => {
         (error.code = 'VOTE_ALREADY_EXISTS');
     return error;
 };
+
+export const cantVoteBeforeEventError = () => {
+    const error = new Error(
+        'No puedes votar un evento antes de que suceda.',
+        path
+    );
+    error.httpStatus = '403'; // Forbidden
+    error.code = 'CANT_VOTE_BEFORE_EVENT';
+    return error;
+};
+
+export const invalidVoteValueError = () => {
+    const error = new Error(
+        'La calificación debe encontrarse entre 1 y 5.',
+        path
+    );
+    error.httpStatus = '400'; // Bad Request
+    error.code = 'INVALID_VOTE_VALUE';
+    return error;
+};

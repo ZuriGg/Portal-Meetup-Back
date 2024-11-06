@@ -8,6 +8,7 @@ import newMeetupController from './newMeetUpController.js';
 import inscriptionMeetupController from './inscriptionMeetupController.js';
 import getMeetupController from './getMeetupController.js';
 import validateMeetupController from './validateMeetupController.js';
+import newVoteController from './newVoteController.js';
 
 export {
     cancelMeetUpRegistrationController,
@@ -20,4 +21,5 @@ export {
     inscriptionMeetupController,
     getMeetupController,
     validateMeetupController,
+    newVoteController,
 };

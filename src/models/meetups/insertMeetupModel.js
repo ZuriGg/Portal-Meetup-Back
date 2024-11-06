@@ -6,16 +6,14 @@ const insertMeetupModel = async (
     startDate,
     oneSession,
     categoryId,
-    locationId,
     city,
     address,
     notes,
     zip,
     hourMeetUp,
     dayOfTheWeek,
-    aforoMax, 
-    userId,
-    owner
+    aforoMax,
+    userId
 ) => {
     const pool = await getPool();
 
@@ -38,9 +36,8 @@ const insertMeetupModel = async (
             hourMeetUp,
             dayOfTheWeek,
             aforoMax, 
-            userId,
-            owner
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            userId
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
             title,
             description,
@@ -50,9 +47,8 @@ const insertMeetupModel = async (
             idLocation,
             hourMeetUp,
             dayOfTheWeek,
-            aforoMax, 
+            aforoMax,
             userId,
-            owner
         ]
     );
 

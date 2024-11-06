@@ -8,7 +8,6 @@ const newMeetupController = async (req, res, next) => {
             startDate,
             oneSession,
             categoryId,
-            locationId,
             city,
             address,
             notes,
@@ -17,7 +16,6 @@ const newMeetupController = async (req, res, next) => {
             dayOfTheWeek,
             aforoMax,
             userId,
-            owner,
         } = req.body;
 
         await insertMeetupModel(
@@ -26,7 +24,6 @@ const newMeetupController = async (req, res, next) => {
             startDate,
             oneSession,
             categoryId,
-            locationId,
             city,
             address,
             notes,
@@ -34,8 +31,7 @@ const newMeetupController = async (req, res, next) => {
             hourMeetUp,
             dayOfTheWeek,
             aforoMax,
-            userId,
-            owner
+            userId
             /* meetUpPhotos, */
             /*             req.user.id */
         );
@@ -68,7 +64,6 @@ const newMeetupController = async (req, res, next) => {
                     startDate,
                     oneSession,
                     categoryId,
-                    locationId,
                     address,
                     notes,
                     zip,
@@ -76,7 +71,6 @@ const newMeetupController = async (req, res, next) => {
                     dayOfTheWeek,
                     aforoMax,
                     userId,
-                    owner,
 
                     createdAt: new Date(),
                 },

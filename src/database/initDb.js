@@ -78,7 +78,6 @@ const main = async () => {
                 dayOfTheWeek ENUM ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'),
                 aforoMax TINYINT UNSIGNED,
                 userId INT NOT NULL, /* Ahora es INT para referenciar a users.id */
-                owner INT NOT NULL,
                 locationId INT NOT NULL,
                 categoryId INT NOT NULL,
                 validated BOOLEAN DEFAULT false,

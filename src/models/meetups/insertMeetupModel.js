@@ -13,7 +13,7 @@ const insertMeetupModel = async (
     zip,
     hourMeetUp,
     dayOfTheWeek,
-    aforoMax, 
+    aforoMax,
     userId,
     owner
 ) => {
@@ -50,15 +50,15 @@ const insertMeetupModel = async (
             idLocation,
             hourMeetUp,
             dayOfTheWeek,
-            aforoMax, 
+            aforoMax,
             userId,
-            owner
+            owner,
         ]
     );
 
-    /* console.log(meetupResult); */
-    // const { insertId } = meetupResult;
-    // return insertId;
+    console.log(meetupResult);
+    const { insertId } = meetupResult;
+    return insertId;
 };
 
 export default insertMeetupModel;

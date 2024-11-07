@@ -15,12 +15,12 @@ const newMeetupController = async (req, res, next) => {
             zip,
             hourMeetUp,
             dayOfTheWeek,
-            aforoMax, 
+            aforoMax,
             userId,
-            owner
+            owner,
         } = req.body;
 
-        const entryId = await insertMeetupModel(
+        await insertMeetupModel(
             title,
             description,
             startDate,
@@ -33,16 +33,16 @@ const newMeetupController = async (req, res, next) => {
             zip,
             hourMeetUp,
             dayOfTheWeek,
-            aforoMax, 
+            aforoMax,
             userId,
             owner
             /* meetUpPhotos, */
             /*             req.user.id */
         );
 
-/*         let photos = []; */
+        /*         let photos = []; */
 
-/*         if (req.files) {
+        /*         if (req.files) {
             for (let photo of Object.values(req.files).slice(0, 3)) {
                 let photoName = await savePhotoUtils(photo, 600);
 
@@ -74,7 +74,7 @@ const newMeetupController = async (req, res, next) => {
                     zip,
                     hourMeetUp,
                     dayOfTheWeek,
-                    aforoMax, 
+                    aforoMax,
                     userId,
                     owner,
 

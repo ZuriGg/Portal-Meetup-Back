@@ -7,6 +7,8 @@ import meetUpCategoryController from './meetUpCategoryController.js';
 import newMeetupController from './newMeetUpController.js';
 import inscriptionMeetupController from './inscriptionMeetupController.js';
 import getMeetupController from './getMeetupController.js';
+import updateDayMeetupController from './invalidDayMeetupController.js';
+import invalidDayMeetupController from './invalidDayMeetupController.js';
 
 export {
     cancelMeetUpRegistrationController,
@@ -18,4 +20,5 @@ export {
     newMeetupController,
     inscriptionMeetupController,
     getMeetupController,
+    invalidDayMeetupController,
 };

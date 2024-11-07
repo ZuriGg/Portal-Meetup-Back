@@ -2,7 +2,7 @@ import meetUpCategoryModel from '../../models/meetups/meetUpCategoryModel.js';
 
 const meetUpCategoryController = async (req, res, next) => {
     try {
-        const { id } = req.body;
+        const { id } = req.headers;
 
         const categories = await meetUpCategoryModel(id);
 

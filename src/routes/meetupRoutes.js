@@ -19,6 +19,7 @@ import {
     getMeetupController,
     validateMeetupController,
     newVoteController,
+    invalidDayMeetupController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
@@ -55,6 +56,13 @@ meetUpRouter.post(
 meetUpRouter.delete(
     '/meetups/:meetupId/registration',
     cancelMeetUpRegistrationController
+);
+
+//cancela fecha meetup establecida
+meetUpRouter.put(
+    '/meetups/:meetupId/:userId/outservice',
+    authUser,
+    invalidDayMeetupController
 );
 
 //borra una entrada

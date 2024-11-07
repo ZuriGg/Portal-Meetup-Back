@@ -52,9 +52,9 @@ const insertMeetupModel = async (
         ]
     );
 
-    /* console.log(meetupResult); */
-    // const { insertId } = meetupResult;
-    // return insertId;
+    console.log(meetupResult);
+    const { insertId } = meetupResult;
+    return insertId;
 };
 
 export default insertMeetupModel;

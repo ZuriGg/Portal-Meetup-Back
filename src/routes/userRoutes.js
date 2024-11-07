@@ -13,6 +13,7 @@ import {
     validateUserController,
     sendRecoverPassController,
     editUserController,
+    getUserProfileController,
 } from '../controllers/users/index.js';
 
 const userRouter = express.Router();

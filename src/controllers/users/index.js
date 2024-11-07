@@ -6,7 +6,7 @@ import editUserPassController from './editUserPassController.js';
 import validateUserController from './validateUserController.js';
 import sendRecoverPassController from './sendRecoverPassController.js';
 import editUserController from './editUserController.js';
-import getUserProfileController from './editUserController.js';
+import getUserProfileController from './getUserProfileController.js';
 
 export {
     newUserController,

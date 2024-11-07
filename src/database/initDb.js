@@ -116,7 +116,7 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS outOfService (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                notes VARCHAR(100) NOT NULL,
+                notes VARCHAR(100) DEFAULT 'Día inhabilitado: ',
                 date DATETIME NOT NULL,
                 meetupId INT NOT NULL,
                 FOREIGN KEY (meetupId) REFERENCES meetups(id)

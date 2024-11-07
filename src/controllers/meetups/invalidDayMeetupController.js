@@ -4,6 +4,7 @@ const invalidDayMeetupController = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
         const { date } = req.body;
+        const { notes } = req.body;
 
         if (!date) {
             throw new Error(
@@ -11,7 +12,7 @@ const invalidDayMeetupController = async (req, res, next) => {
             );
         }
 
-        const resultId = await invalidDayMeetupModel(meetupId, date);
+        const resultId = await invalidDayMeetupModel(meetupId, date, notes);
 
         res.send({
             status: 'ok',
@@ -19,6 +20,7 @@ const invalidDayMeetupController = async (req, res, next) => {
             data: {
                 meetupId,
                 date,
+                notes,
                 recordId: resultId,
             },
         });

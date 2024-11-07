@@ -29,12 +29,12 @@ userRouter.get('/users', authUser, userExistsController, getOwnUserController);
 //editar usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);
 
-// Obtener perfil público de un usuario.
-// userRouter.get(
-//     '/users/:userId',
-//     userExistsController,
-//     getUserProfileController
-// );
+//Obtener perfil "público" de un usuario.
+userRouter.get(
+    '/users/:userId',
+    userExistsController,
+    getUserProfileController
+);
 
 //editar avatar
 userRouter.put(

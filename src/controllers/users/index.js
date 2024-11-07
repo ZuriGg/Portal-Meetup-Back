@@ -6,6 +6,7 @@ import editUserPassController from './editUserPassController.js';
 import validateUserController from './validateUserController.js';
 import sendRecoverPassController from './sendRecoverPassController.js';
 import editUserController from './editUserController.js';
+import getUserProfileController from './editUserController.js';
 
 export {
     newUserController,
@@ -16,4 +17,5 @@ export {
     validateUserController,
     sendRecoverPassController,
     editUserController,
+    getUserProfileController, //ver el perfil "público de un usuario"
 };

@@ -1,5 +1,4 @@
 import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
-import { notFoundError } from '../../services/errorService.js';
 
 const getUserProfileController = async (req, res, next) => {
     try {

@@ -1,8 +1,9 @@
 const joiErrorMessages = {
-    'any.required': 'El campo "{#key}" es requerido',
-    'string.base': 'El valor de "{#key}" debe ser una cadena',
-    'string.empty': 'El campo "{#key}" no debe estar vacío',
-    'number.base': 'El valor de "{#key}" debe ser un número',
+    //objeto que define una lista de mensajes de error personalizados, asignados a tipos específicos de errores de validación que Joi puede detectar.
+    'any.required': 'El campo "{#key}" es requerido', //any.required es para campos requeridos
+    'string.base': 'El valor de "{#key}" debe ser una cadena', //string.base es para campos que deben ser una cadena
+    'string.empty': 'El campo "{#key}" no debe estar vacío', //string.empty es para campos q no deben estar vacíos
+    'number.base': 'El valor de "{#key}" debe ser un número', //number.base, cuando se espera un número y se entrega otro dato
     'number.max': 'El archivo no debe exceder los 5 MB',
     'object.base': 'El valor de "{#key}" debe ser un objeto',
     'any.only': 'Solo se permiten fotos jpeg o png',
@@ -16,3 +17,5 @@ const joiErrorMessages = {
 };
 
 export default joiErrorMessages;
+
+//Esto se hace para mejorar la experiencia del usuario, haciendo que los mensajes de error sean más claros y comprensibles.

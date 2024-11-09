@@ -5,7 +5,10 @@ import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js
 
 import { notFoundError } from '../../services/errorService.js';
 
+//para validar el body con el esquema proporcionado
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+//importamos el esquema concreto
 import recoverPassSchema from '../../schemas/users/recoverPassSchema.js';
 
 // Validamos a un usuario recién registrado:
@@ -13,7 +16,7 @@ const sendRecoverPassController = async (req, res, next) => {
     try {
         const { email } = req.body;
 
-        // Pendiente validación con Joi.
+        // aplicamos la validacion con joi antes de seguir con el controlador
         await validateSchemaUtil(recoverPassSchema, req.body);
 
         const user = await selectUserByEmailModel(email);

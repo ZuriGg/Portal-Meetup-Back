@@ -2,8 +2,10 @@ import randomstring from 'randomstring';
 
 import insertUserModel from '../../models/users/insertUserModel.js';
 
+//necesario validateSchemaUtil para usar joi
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
+//importamos el esquema concreto
 import newUserSchema from '../../schemas/users/newUserSchema.js';
 
 // Función que crea un nuevo usuario:
@@ -11,7 +13,6 @@ const newUserController = async (req, res, next) => {
     try {
         // Obtenemos los datos necesarios del body.
         const { username, email, password, firstName, lastname } = req.body;
-        console.log(firstName, lastname);
 
         // Validamos el body con Joi.
         await validateSchemaUtil(newUserSchema, req.body);

@@ -12,6 +12,7 @@ const voteMeetupSchema = joi.object({
         .max(5)
         .required()
         .messages(joiErrorMessages),
+    coment: joi.string().min(1).required().messages(joiErrorMessages),
 });
 
 export default voteMeetupSchema;

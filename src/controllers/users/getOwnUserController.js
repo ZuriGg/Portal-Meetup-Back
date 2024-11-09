@@ -17,3 +17,5 @@ const getOwnUserController = async (req, res, next) => {
 };
 
 export default getOwnUserController;
+
+//como solo estamos leyendo los usuarios, no hace falta validar nada

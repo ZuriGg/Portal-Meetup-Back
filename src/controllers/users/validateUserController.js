@@ -19,3 +19,5 @@ const validateUserController = async (req, res, next) => {
 };
 
 export default validateUserController;
+
+//A LA ESPERA CONFIRMACIÓN DE SI ES NECESARIO VALIDAR LOS PARAMS

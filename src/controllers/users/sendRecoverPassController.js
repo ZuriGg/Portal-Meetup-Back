@@ -8,6 +8,7 @@ import { notFoundError } from '../../services/errorService.js';
 //para validar el body con el esquema proporcionado
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
+//importamos el esquema concreto
 import recoverPassSchema from '../../schemas/users/recoverPassSchema.js';
 
 // Validamos a un usuario recién registrado:

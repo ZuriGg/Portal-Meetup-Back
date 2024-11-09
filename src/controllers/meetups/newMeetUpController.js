@@ -1,5 +1,11 @@
 import insertMeetupModel from '../../models/meetups/insertMeetupModel.js';
 
+//para validar el body con el esquema proporcionado
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+//importamos el esquema concreto
+import newMeetupSchema from '../../schemas/meetups/newMeetupSchema.js';
+
 const newMeetupController = async (req, res, next) => {
     try {
         const {
@@ -7,6 +13,7 @@ const newMeetupController = async (req, res, next) => {
             description,
             startDate,
             oneSession,
+            locationId,
             categoryId,
             city,
             address,
@@ -18,11 +25,15 @@ const newMeetupController = async (req, res, next) => {
             userId,
         } = req.body;
 
+        // aplicamos la validacion con joi antes de seguir con el controlador
+        await validateSchemaUtil(newMeetupSchema, req.body);
+
         await insertMeetupModel(
             title,
             description,
             startDate,
             oneSession,
+            locationId,
             categoryId,
             city,
             address,

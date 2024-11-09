@@ -2,14 +2,21 @@ import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
 import editUserModel from '../../models/users/editUserModel.js';
 import { notFoundError } from '../../services/errorService.js';
 
+//importar siempre validateSchemaUtil para poder usar Joi
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+// Importamos el esquema concreto
+import editUserSchema from '../../schemas/users/editUserSchema.js';
+
 const editUserController = async (req, res, next) => {
     try {
         const { userId } = req.params;
-        console.log(userId);
 
         const { firstName, lastname, email, username, password, avatar } =
             req.body;
-        console.log(`${email} de controller`);
+
+        // Validamos el body con Joi antes de seguir con la lógica del controlador
+        await validateSchemaUtil(editUserSchema, req.body);
 
         const { id } = await selectUserByIdModel(userId);
 

@@ -1,6 +1,6 @@
 import validateMeetupModel from '../../models/meetups/validateMeetupModel.js';
 
-import { notFoundError } from '../../services/errorService.js';
+import { trueOrFalseError } from '../../services/errorService.js';
 
 // Controlador para validar (Hacer público) un meetup
 const validateMeetupController = async (req, res, next) => {
@@ -15,16 +15,8 @@ const validateMeetupController = async (req, res, next) => {
         console.log(`La id del meetup es: ${meetupId}`);
         console.log(`El meetup está validado? ${validated}`);
 
-        //Ejecución del model para validar el meetup ingresado
-        await validateMeetupModel(meetupId, isValidated);
-
         if (isValidated === null) {
-            throw {
-                httpStatus: 400,
-                code: 'INVALID_KEY',
-                message:
-                    'No se ha recibido un valor "true" o "false", no se ha podido realizar la operación',
-            };
+            throw trueOrFalseError();
         }
 
         if (isValidated) {
@@ -32,6 +24,9 @@ const validateMeetupController = async (req, res, next) => {
         } else {
             mensajeValidacion = 'ha sido invalidado';
         }
+
+        //Ejecución del model para validar el meetup ingresado
+        await validateMeetupModel(meetupId, isValidated);
 
         res.send({
             status: 'ok',

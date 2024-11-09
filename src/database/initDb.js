@@ -66,6 +66,10 @@ const main = async () => {
             )
         `);
 
+        await pool.query(`
+                INSERT INTO category(name) VALUES("default")
+            `);
+
         // Tabla de meetups --> registra los eventos creados por los usuarios
         await pool.query(`
             CREATE TABLE IF NOT EXISTS meetups (

@@ -15,7 +15,7 @@ import {
     listMeetUpController,
     meetUpCategoryController,
     newMeetupController,
-    inscriptionMeetupController,
+    inscriptionDateMeetupController,
     getMeetupController,
     validateMeetupController,
     newVoteController,
@@ -30,9 +30,10 @@ meetUpRouter.post('/meetupentries', authUser, newMeetupController);
 //muestra todas las entradaas
 meetUpRouter.get('/meetupentries', listMeetUpController);
 
-//muestra una entrada en concreta ANGELLLLL
+//muestra una entrada en concreta
 meetUpRouter.get('/meetupentries/:meetupId', meetupExists, getMeetupController);
 
+// Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);
 
 //edita una entrada
@@ -49,7 +50,7 @@ meetUpRouter.post(
     '/meetupentries/:meetupId/inscription',
     authUser,
     meetupExists,
-    inscriptionMeetupController
+    inscriptionDateMeetupController
 );
 
 //cancela inscripcion meetup
@@ -87,8 +88,8 @@ meetUpRouter.put(
     '/meetupentries/:meetupId/validate',
     authUser,
     meetupExists,
-    canEditController,
-    canValidate,
+    canEditController, // Middleware para saber si el usuario puede editar el meetup
+    canValidate, // Middleware para saber si el usuario es administrador y puede validar el meetup (Establecerlo público)
     validateMeetupController
 );
 

@@ -25,7 +25,7 @@ const updateRecoverPassModel = async (email, recoverPassCode) => {
             Si no has sido tú ignora este email.
         `;
 
-    // Enviamos el email de verificación al usuario.
+    // Enviamos el mail para recuperar la contraseña.
     await sendMailUtil(email, emailSubject, emailBody);
 };
 

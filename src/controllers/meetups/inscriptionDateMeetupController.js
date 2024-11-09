@@ -1,6 +1,6 @@
 import insertInscriptionModel from '../../models/meetups/insertInscriptionModel.js';
 
-const inscriptionMeetupController = async (req, res, next) => {
+const inscriptionDateMeetupController = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
         const { date, user } = req.headers;
@@ -20,4 +20,4 @@ const inscriptionMeetupController = async (req, res, next) => {
     }
 };
 
-export default inscriptionMeetupController;
+export default inscriptionDateMeetupController;

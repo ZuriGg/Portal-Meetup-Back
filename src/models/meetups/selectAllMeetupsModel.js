@@ -47,7 +47,7 @@ const selectAllMeetupsModel = async (keyword = {}) => {
     //consulta parametrizada con limit y offset
     const query = `
        SELECT m.id, m.title, m.description, m.startDate, m.oneSession, m.hourMeetup, m.dayOfTheWeek,
-        m.aforoMax, m.userId, m.owner, m.locationId, m.categoryId,
+        m.aforoMax, m.userId, m.locationId, m.categoryId,
         AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
         FROM meetups m
         LEFT JOIN meetupVotes v ON v.id = m.id
@@ -71,7 +71,6 @@ const selectAllMeetupsModel = async (keyword = {}) => {
             `,
             [meetup.id]
         ); */
-
         // Agregamos las fotos a la entrada. Si no existe foto en la posición cero establecemos un valor null.
         /* meetup.photos = photos.length > 0 ? photos[0] : null; */
     }

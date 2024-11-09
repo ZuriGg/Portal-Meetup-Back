@@ -62,7 +62,7 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS category (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(50) NOT NULL
+                name VARCHAR(50) NOT NULL,
             )
         `);
 

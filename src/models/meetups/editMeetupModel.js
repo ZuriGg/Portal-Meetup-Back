@@ -12,7 +12,6 @@ const editMeetupModel = async (
     notes,
     zip,
     userId,
-    owner,
     hourMeetUp,
     dayOfTheWeek,
     aforoMax,
@@ -23,7 +22,7 @@ const editMeetupModel = async (
     await pool.query(
         `
             UPDATE meetups 
-            SET title=?, description=?, startDate=?, oneSession=?, hourMeetup=?, dayOfTheWeek=?, aforoMax=?, locationId=?, categoryId=?,userId=?,owner=? 
+            SET title=?, description=?, startDate=?, oneSession=?, hourMeetup=?, dayOfTheWeek=?, aforoMax=?, locationId=?, categoryId=?,userId=?
             WHERE id=?
         `,
         [
@@ -37,7 +36,6 @@ const editMeetupModel = async (
             locationId,
             categoryId,
             userId,
-            owner,
             meetupId,
         ]
     );

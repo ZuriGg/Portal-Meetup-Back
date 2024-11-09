@@ -8,14 +8,17 @@ import {
 
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
+//siempre que se use joi, necesario validateSchemaUtil
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+//esquema concreto
 import loginUserSchema from '../../schemas/users/loginUserSchema.js';
 
 const loginUserController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        // Validamos el body con Joi.
+        // Validamos el body con Joi antes de seguir con la lógica del controlador
         await validateSchemaUtil(loginUserSchema, req.body);
 
         const user = await selectUserByEmailModel(email, password);
@@ -30,14 +33,10 @@ const loginUserController = async (req, res, next) => {
             invalidCredentialsError();
         }
 
-        /*
-            comprobar que el active esté en 1
-        */
+        //comprobar que el usuario se active en 1
         if (user.active != 1) pendingActivationError();
 
-        /**
-         * generar el token
-         */
+        //generamos el token
         const tokenInfo = {
             id: user.id,
             role: user.role,

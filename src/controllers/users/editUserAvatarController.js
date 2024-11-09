@@ -6,9 +6,10 @@ import {
     deletePhotoService,
 } from '../../services/photoService.js';
 
+//importar siempre validateSchemaUtil para poder usar Joi
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
-// Importamos el esquema.
+// Importamos el esquema concreto
 import editUserAvatarSchema from '../../schemas/users/editUserAvatarSchema.js';
 
 const editUserAvatarController = async (req, res, next) => {

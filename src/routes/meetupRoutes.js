@@ -25,20 +25,20 @@ import {
 const meetUpRouter = express.Router();
 
 //crea una nueva entrada
-meetUpRouter.post('/meetupentries', authUser, newMeetupController);
+meetUpRouter.post('/meetups', authUser, newMeetupController);
 
 //muestra todas las entradaas
-meetUpRouter.get('/meetupentries', listMeetUpController);
+meetUpRouter.get('/meetups', listMeetUpController);
 
 //muestra una entrada en concreta
-meetUpRouter.get('/meetupentries/:meetupId', meetupExists, getMeetupController);
+meetUpRouter.get('/meetups/:meetupId', meetupExists, getMeetupController);
 
 // Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);
 
-//edita una entrada
+//edita un meetup
 meetUpRouter.put(
-    '/meetupentries/edit/:meetupId',
+    '/meetups/edit/:meetupId',
     authUser,
     meetupExists,
     canEditController,
@@ -47,7 +47,7 @@ meetUpRouter.put(
 
 //Inscripcion a un meetup
 meetUpRouter.post(
-    '/meetupentries/:meetupId/inscription',
+    '/meetups/:meetupId/inscription',
     authUser,
     meetupExists,
     inscriptionDateMeetupController
@@ -68,7 +68,7 @@ meetUpRouter.put(
 
 //borra una entrada
 meetUpRouter.delete(
-    '/meetupentries/:meetupId',
+    '/meetups/:meetupId',
     authUser,
     meetupExists,
     canEditController,
@@ -76,7 +76,7 @@ meetUpRouter.delete(
 );
 
 meetUpRouter.delete(
-    '/meetupentries/:meetupId/photos/:photoId',
+    '/meetups/:meetupId/photos/:photoId',
     authUser,
     meetupExists,
     canEditController,
@@ -85,7 +85,7 @@ meetUpRouter.delete(
 
 // Endpoint de validación de meetup (Establecerlo como público, verificado por un admin)
 meetUpRouter.put(
-    '/meetupentries/:meetupId/validate',
+    '/meetups/:meetupId/validate',
     authUser,
     meetupExists,
     canEditController, // Middleware para saber si el usuario puede editar el meetup
@@ -95,7 +95,7 @@ meetUpRouter.put(
 
 //endpoint de rating (1-5) y comentario de un meetup después de la fecha de realización
 meetUpRouter.post(
-    '/meetupentries/:meetupId/votes',
+    '/meetups/:meetupId/votes',
     authUser, // que el usuario esté autenticado
     meetupExists, // que el meetup existe
     newVoteController //logica para gestionar el nuevo voto

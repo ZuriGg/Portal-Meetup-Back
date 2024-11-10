@@ -62,12 +62,33 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS category (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(50) NOT NULL,
+                name VARCHAR(50) NOT NULL
             )
         `);
 
         await pool.query(`
-                INSERT INTO category(name) VALUES("default")
+                INSERT INTO category(name) VALUES("Viajes y aire libre")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Actividades sociales")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Aficiones y pasiones")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Deportes y fitness")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Salud y bienestar")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Tecnología")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Arte y cultura")
+            `);
+        await pool.query(`
+                INSERT INTO category(name) VALUES("Juegos")
             `);
 
         // Tabla de meetups --> registra los eventos creados por los usuarios

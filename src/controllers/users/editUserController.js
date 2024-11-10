@@ -12,8 +12,7 @@ const editUserController = async (req, res, next) => {
     try {
         const { userId } = req.params;
 
-        const { firstName, lastname, email, username, password, avatar } =
-            req.body;
+        const { firstName, lastname, email, username, password } = req.body;
 
         // Validamos el body con Joi antes de seguir con la lógica del controlador
         await validateSchemaUtil(editUserSchema, req.body);
@@ -28,7 +27,6 @@ const editUserController = async (req, res, next) => {
             username,
             email,
             password,
-            avatar,
             userId
         );
 

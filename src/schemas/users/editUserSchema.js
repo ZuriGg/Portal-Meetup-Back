@@ -9,7 +9,6 @@ const editUserSchema = joi.object({
     email: joi.string().email().messages(joiErrorMessages),
     username: joi.string().messages(joiErrorMessages),
     password: joi.string().messages(joiErrorMessages),
-    avatar: imgSchema /* .required(), no es obligatorio subir un avatar*/,
 });
 
 export default editUserSchema;

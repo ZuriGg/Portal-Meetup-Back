@@ -45,15 +45,12 @@ export const notAuthenticatedError = () => {
 };
 
 export const notFoundError = (resource) => {
-    const error = new Error(
-        `El recurso requerido '${resource}' no existe`,
-        path
-    );
-    error.httpStatus = path;
-    (error.httpStatus = '404'), // Forbbiden
-        (error.code = 'RESOURCE_NOT_FOUND');
+    const error = new Error(`El recurso requerido '${resource}' no existe`);
+    error.httpStatus = '404'; // Forbbiden
+    error.code = 'RESOURCE_NOT_FOUND';
+
     return error;
-};
+}; //se elimina el path por ser segundo argumento y dar fallo en el endpoint
 
 export const pendingActivationError = () => {
     const error = new Error('error email, o contraseña incorrecta', path);

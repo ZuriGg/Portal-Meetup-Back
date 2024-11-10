@@ -6,6 +6,13 @@ const validateUserController = async (req, res, next) => {
         // Obtenemos el código de registro de los path params.
         const { registrationCode } = req.params;
 
+        if (!registrationCode || typeof registrationCode !== 'string') {
+            return res.status(400).send({
+                status: 'error',
+                message: 'Código de registro no válido',
+            });
+        }
+
         // Activamos el usuario.
         await updateUserRegCodeModel(registrationCode);
 

@@ -22,7 +22,7 @@ const newMeetupController = async (req, res, next) => {
             hourMeetUp,
             dayOfTheWeek,
             aforoMax,
-            userId,
+            userId, //ERROR DE SEGURIDAD!!!! NO PASAR EL ID DE USUARIO X AQUÍ
         } = req.body;
 
         // aplicamos la validacion con joi antes de seguir con el controlador

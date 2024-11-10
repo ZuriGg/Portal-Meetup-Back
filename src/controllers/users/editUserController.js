@@ -10,7 +10,7 @@ import editUserSchema from '../../schemas/users/editUserSchema.js';
 
 const editUserController = async (req, res, next) => {
     try {
-        const { userId } = req.params;
+        const { userId } = req.params; //HAY QUE CAMBIAR ESTO!!! NO SE PUEDE PASAR POR PARAMS EL ID DEL USUARIO
 
         const { firstName, lastname, email, username, password } = req.body;
 

@@ -8,12 +8,12 @@ import editUserPassSchema from '../../schemas/users/editUserPassSchema.js';
 
 const editUserPassController = async (req, res, next) => {
     try {
-        const { email, recoverPassCode, newPass } = req.body;
+        const { recoverPassCode, newPass } = req.body; //eliminamos el email, que se obtiene del recoverPassCode
 
         // Validamos el body con Joi antes de seguir con la lógica del controlador
         await validateSchemaUtil(editUserPassSchema, req.body);
 
-        await updateUserPassModel(email, recoverPassCode, newPass);
+        await updateUserPassModel(recoverPassCode, newPass);
 
         res.send({
             status: 'ok',

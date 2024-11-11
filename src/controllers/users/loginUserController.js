@@ -48,6 +48,7 @@ const loginUserController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
+            tokenInfo: tokenInfo,
             token: {
                 token,
             },

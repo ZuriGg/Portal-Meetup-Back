@@ -101,6 +101,13 @@ Ejemplo del Home de nuestra página Web
 
 Para facilitar las pruebas de la API, se incluye una [Colección de Postman](https://file.notion.so/f/f/9468aeea-910c-4177-a820-cdb83aa983a9/4afebcb0-b29e-4f63-8b5b-8af6ec63f15b/meetups.postman_collection.json?table=block&id=126d98ff-1bfc-8012-a499-c0a15d84c8d7&spaceId=9468aeea-910c-4177-a820-cdb83aa983a9&expirationTimestamp=1730764800000&signature=SJwFV7FVaiXgrjpwRezAzOopsgqrUXxtGdUUp8GUD0Q&downloadName=meetups.postman_collection.json) en el archivo .
 
+## Extras
+
+- Admin puede ver la lista de usuarios y eliminar
+- Los usuarios que no tienen actividad durante un tiempo determinado (por ejemplo: 1 año) y que un mes antes le mande un correo para avisar de que en la fecha exacta que vaya a ocurrir, que se le caducará la cuenta
+- Admin puede eliminar un meetup
+- 
+
 1. Abre Postman.
 2. Ve a **File > Import**.
 3. Selecciona el archivo de colección `portal_meetups.postman_collection.json` ubicado en la raiz del proyecto.

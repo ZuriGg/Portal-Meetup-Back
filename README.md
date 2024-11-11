@@ -103,10 +103,12 @@ Para facilitar las pruebas de la API, se incluye una [Colección de Postman](htt
 
 ## Extras
 
-- Admin puede ver la lista de usuarios y eliminar
-- Los usuarios que no tienen actividad durante un tiempo determinado (por ejemplo: 1 año) y que un mes antes le mande un correo para avisar de que en la fecha exacta que vaya a ocurrir, que se le caducará la cuenta
-- Admin puede eliminar un meetup
-- 
+-   Admin puede ver la lista de usuarios y eliminar
+-   Los usuarios que no tienen actividad durante un tiempo determinado (por ejemplo: 1 año) y que un mes antes le mande un correo para avisar de que en la fecha exacta que vaya a ocurrir, que se le caducará la cuenta
+-   Admin puede eliminar un meetup
+-   Cuando caduque un usuario que se haya registrado pero no se haya validado, se tendria que eliminar de la bbdd, siendo esta condicion activada en un margen de tiempo , 1 mes por ejemplo.
+
+## Instrucciones postman
 
 1. Abre Postman.
 2. Ve a **File > Import**.

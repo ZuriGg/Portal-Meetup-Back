@@ -8,7 +8,6 @@ Este proyecto es una API RESTful para gestionar meetups (eventos y reuniones). P
 2. Paula Fernández
 3. Jonathan Mendez
 4. Diego Iván García
-5. Angel Suárez
 
 ## Descripción
 
@@ -25,39 +24,43 @@ Esta API facilita la creación y gestión de meetups. Los usuarios pueden buscar
 
 ## Instalación
 
-1. Clonar este repositorio:  
+1. Clonar este repositorio:
 
-   `git clone git@github.com:ZuriGg/Proyecto-integrador.git`  
-   `cd Proyecto-integrador`
+    `git clone git@github.com:ZuriGg/Proyecto-integrador.git`  
+    `cd Proyecto-integrador`
 
-2. Instalar las dependencias:  
+2. Instalar las dependencias:
 
-   `npm i`
+    `npm i`
 
 3. Crear un archivo .env a partir del .env.example en la raíz del proyecto con las siguientes variables de entorno:
 
-   MYSQL_HOST=  
-   MYSQL_USER=  
-   MYSQL_PASS=  
-   MYSQL_DB=  
-   MYSQL_PORT=  
-   PORT=  
-   SECRET=  
-   SMTP_HOST=  
-   SMTP_PORT=  
-   SMTP_USER=  
-   SMTP_PASS=  
-   URL_FRONT=  
+    MYSQL_HOST=  
+    MYSQL_USER=  
+    MYSQL_PASS=  
+    MYSQL_DB=  
+    MYSQL_PORT=  
+    PORT=  
+    SECRET=  
+    SMTP_HOST=  
+    SMTP_PORT=  
+    SMTP_USER=  
+    SMTP_PASS=  
+    URL_FRONT=
 
-4. Para la ejecución en modo desarrollo:  
+4. Para la creación de las tablas de la base de datos:
 
-   `npm run dev`
+    `npm run initDb`
 
-5. Para la ejecución en producción:  
+5. Para la ejecución en modo desarrollo:
 
-   `npm start`
+    `npm run dev`
 
-6. La API estará disponible en `http://localhost:(puerto que configures)`.
+6. Para la ejecución en producción:
+
+    `npm start`
+
+7. La API estará disponible en `http://localhost:(puerto que configures)`.
 
 ## Base de Datos
 
@@ -75,23 +78,24 @@ Ejemplo del Home de nuestra página Web
 
 ### Meetups
 
-- __post__ `/meetupentries` - _Crea un nuevo meetup_
-- __get__ `/meetupentries` - _Muestra las entradas según el filtro_
-- __get__ `/meetupentries/:meetupId` - _Muestra la entrada clicada_
-- __get__ `/categories` - _Muestra la lista de las categorías de meetup_
-- __put__ `/meetupentries/edit/:meetupId` - _Permite editar un meetup_
-- __post__ `/meetupentries/:meetupId/inscription` - _Para inscribirse a un meetup_
-- __delete__ `/meetups/:meetupId/registration` - _Para cancelar inscripción_
+-   **post** `/meetupentries` - _Crea un nuevo meetup_
+-   **get** `/meetupentries` - _Muestra las entradas según el filtro_
+-   **get** `/meetupentries/:meetupId` - _Muestra la entrada clicada_
+-   **get** `/categories` - _Muestra la lista de las categorías de meetup_
+-   **put** `/meetupentries/edit/:meetupId` - _Permite editar un meetup_
+-   **post** `/meetupentries/:meetupId/inscription` - _Para inscribirse a un meetup_
+-   **delete** `/meetups/:meetupId/registration` - _Para cancelar inscripción_
 
 ### Users
-- __post__ `/users/register` - _Permite registrar un usuario nuevo_
-- __get__ `/users/validate/:registrationCode` - _Envía un mensaje de verificación or correo_
-- __post__ `/users/login` - _Permite loguear a un usuario_
-- __get__ `/users` - _Obtener perfil privado de un usuario_
-- __put__ `/users/edit/:userId` - _Permite editar un usuario_
-- __put__ `/users/avatar` - _Permite agregar un avatar a un usuario_
-- __post__ `/users/password/recover` - _Envía un mensaje de cambio de contraseña_
-- __put__ `/users/password` - _Permite cambiar la contraseña de un usuario_
+
+-   **post** `/users/register` - _Permite registrar un usuario nuevo_
+-   **get** `/users/validate/:registrationCode` - _Envía un mensaje de verificación or correo_
+-   **post** `/users/login` - _Permite loguear a un usuario_
+-   **get** `/users` - _Obtener perfil privado de un usuario_
+-   **put** `/users/edit/:userId` - _Permite editar un usuario_
+-   **put** `/users/avatar` - _Permite agregar un avatar a un usuario_
+-   **post** `/users/password/recover` - _Envía un mensaje de cambio de contraseña_
+-   **put** `/users/password` - _Permite cambiar la contraseña de un usuario_
 
 ## Pruebas con Postman
 

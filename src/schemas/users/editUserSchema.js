@@ -1,6 +1,7 @@
 import joi from 'joi';
 
 import joiErrorMessages from '../joiErrorMessages.js';
+import imgSchema from '../imgSchema.js';
 
 // Esquema donde comprobamos todas las propiedades necesarias.
 const editUserSchema = joi.object({

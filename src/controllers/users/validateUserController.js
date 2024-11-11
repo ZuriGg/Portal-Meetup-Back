@@ -16,11 +16,13 @@ const validateUserController = async (req, res, next) => {
         // Activamos el usuario.
         await updateUserRegCodeModel(registrationCode);
 
-        res.send({
-            status: 'ok',
-            message: 'Usuario activado',
-        });
+        //reddericcionamos la respuesta
+        res.redirect('http://localhost:5173/user/validate');
     } catch (err) {
+        res.send({
+            status: 'error',
+            message: 'Usuario no activado',
+        });
         next(err);
     }
 };

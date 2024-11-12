@@ -13,7 +13,6 @@ const newMeetupController = async (req, res, next) => {
             description,
             startDate,
             oneSession,
-            locationId,
             categoryId,
             city,
             address,
@@ -22,10 +21,10 @@ const newMeetupController = async (req, res, next) => {
             hourMeetUp,
             dayOfTheWeek,
             aforoMax,
-            userId, //ERROR DE SEGURIDAD!!!! NO PASAR EL ID DE USUARIO X AQUÍ
+            userId,
         } = req.body;
 
-        // aplicamos la validacion con joi antes de seguir con el controlador
+        // aplicamos la validacion con joi antes de seguir con el model
         await validateSchemaUtil(newMeetupSchema, req.body);
 
         await insertMeetupModel(
@@ -33,7 +32,6 @@ const newMeetupController = async (req, res, next) => {
             description,
             startDate,
             oneSession,
-            locationId,
             categoryId,
             city,
             address,
@@ -68,24 +66,7 @@ const newMeetupController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            data: {
-                entry: {
-                    title,
-                    description,
-                    startDate,
-                    oneSession,
-                    categoryId,
-                    address,
-                    notes,
-                    zip,
-                    hourMeetUp,
-                    dayOfTheWeek,
-                    aforoMax,
-                    userId,
-
-                    createdAt: new Date(),
-                },
-            },
+            data: 'Meetup creado satisfactoriamente',
         });
     } catch (error) {
         next(error);

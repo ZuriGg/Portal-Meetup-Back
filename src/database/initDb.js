@@ -1,4 +1,5 @@
 import getPool from './getPool.js';
+import { MYSQL_DB } from '../../env.js';
 
 const main = async () => {
     let pool;
@@ -8,15 +9,15 @@ const main = async () => {
 
         console.log('Eliminando base de datos...');
 
-        await pool.query('DROP DATABASE IF EXISTS meetup');
+        await pool.query(`DROP DATABASE IF EXISTS ${MYSQL_DB}`);
 
-        console.log('Creando base de datos meetup...');
+        console.log(`Creando base de datos ${MYSQL_DB}...`);
 
-        await pool.query('CREATE DATABASE meetup');
+        await pool.query(`CREATE DATABASE ${MYSQL_DB}`);
 
         console.log('Seleccionando base de datos...');
 
-        await pool.query('USE meetup');
+        await pool.query(`USE ${MYSQL_DB}`);
 
         console.log('Borrando tablas...');
 

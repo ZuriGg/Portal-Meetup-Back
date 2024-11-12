@@ -1,15 +1,13 @@
 import getPool from '../../database/getPool.js';
 
-const meetUpCategoryModel = async (id) => {
+const meetUpCategoryModel = async () => {
     const pool = await getPool();
 
     const [categories] = await pool.query(
         `
-            SELECT name
+            SELECT id, name
             FROM category
-            WHERE ?
-        `,
-        [id]
+        `
     );
 
     return categories;

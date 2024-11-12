@@ -52,7 +52,6 @@ const insertMeetupModel = async (
         ]
     );
 
-    console.log(meetupResult);
     const { insertId } = meetupResult;
     return insertId;
 };

@@ -19,7 +19,7 @@ const newMeetupSchema = joi.object({
         .max(52006) //máximo para un código postal en España
         .required()
         .messages(joiErrorMessages),
-    hourMeetUp: joi
+    hourMeetup: joi
         .string()
         .pattern(/^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/) // HH:MM
         .messages(joiErrorMessages),

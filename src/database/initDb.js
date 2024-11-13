@@ -53,7 +53,6 @@ const main = async () => {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 city VARCHAR(50) NOT NULL,
                 address VARCHAR(100),
-                notes VARCHAR(100) NOT NULL,
                 zip CHAR(5) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP 
             )

@@ -8,9 +8,8 @@ const insertMeetupModel = async (
     categoryId,
     city,
     address,
-    notes,
     zip,
-    hourMeetUp,
+    hourMeetup,
     dayOfTheWeek,
     aforoMax,
     userId
@@ -19,10 +18,10 @@ const insertMeetupModel = async (
 
     // Inserta la ubicación y obtiene el idLocation
     const [locationResult] = await pool.query(
-        `INSERT INTO location (city, address, notes, zip) VALUES (?, ?, ?, ?)`,
-        [city, address, notes, zip]
+        `INSERT INTO location (city, address, zip) VALUES (?, ?, ?)`,
+        [city, address, zip]
     );
-    const idLocation = locationResult.insertId;
+    const locationId = locationResult.insertId;
 
     // Inserta el meetup usando el idLocation obtenido
     const [meetupResult] = await pool.query(
@@ -33,7 +32,7 @@ const insertMeetupModel = async (
             oneSession,
             categoryId,
             locationId,
-            hourMeetUp,
+            hourMeetup,
             dayOfTheWeek,
             aforoMax, 
             userId
@@ -44,8 +43,8 @@ const insertMeetupModel = async (
             startDate,
             oneSession,
             categoryId,
-            idLocation,
-            hourMeetUp,
+            locationId,
+            hourMeetup,
             dayOfTheWeek,
             aforoMax,
             userId,

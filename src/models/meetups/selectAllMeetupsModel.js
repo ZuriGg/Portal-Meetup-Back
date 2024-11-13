@@ -59,6 +59,8 @@ const selectAllMeetupsModel = async (keyword = {}) => {
         LIMIT ? OFFSET ?
     `;
 
+    console.log();
+
     values.push(Number(limit), Number(offset));
 
     //devuelve un array de objetos (meetup)

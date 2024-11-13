@@ -25,8 +25,17 @@ import {
 
 const meetUpRouter = express.Router();
 
-//crea una nueva entrada
+//crea un meetup
 meetUpRouter.post('/meetups', authUser, newMeetupController);
+
+//edita un meetup
+meetUpRouter.put(
+    '/meetups/edit/:meetupId',
+    authUser,
+    meetupExists,
+    /*     canEditController, */
+    editMeetupController
+);
 
 //muestra todas las entradaas
 meetUpRouter.get('/meetups', listMeetUpController);
@@ -39,15 +48,6 @@ meetUpRouter.get('/meetups/:locationId', getLocationController);
 
 // Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);
-
-//edita un meetup
-meetUpRouter.put(
-    '/meetups/edit/:meetupId',
-    authUser,
-    meetupExists,
-    canEditController,
-    editMeetupController
-);
 
 //Inscripcion a un meetup
 meetUpRouter.post(

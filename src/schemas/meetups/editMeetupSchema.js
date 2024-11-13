@@ -11,18 +11,7 @@ const newMeetupSchema = joi.object({
         .default(false)
         .optional()
         .messages(joiErrorMessages),
-    locationId: joi.number().integer().required().messages(joiErrorMessages),
     categoryId: joi.number().integer().required().messages(joiErrorMessages),
-    city: joi.string().max(50).optional().messages(joiErrorMessages),
-    address: joi.string().max(100).optional().messages(joiErrorMessages),
-    notes: joi.string().max(100).optional().messages(joiErrorMessages),
-    zip: joi
-        .number()
-        .integer()
-        .min(10000) // Mínimo 5 dígitos
-        .max(99999) // Máximo 5 dígitos
-        .optional()
-        .messages(joiErrorMessages),
     hourMeetUp: joi
         .string()
         .pattern(/^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/) // HH:MM

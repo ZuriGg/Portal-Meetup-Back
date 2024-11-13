@@ -12,7 +12,6 @@ const newMeetupSchema = joi.object({
     categoryId: joi.number().integer().required().messages(joiErrorMessages),
     city: joi.string().max(50).required().messages(joiErrorMessages),
     address: joi.string().max(100).messages(joiErrorMessages),
-    notes: joi.string().max(100).required().messages(joiErrorMessages),
     zip: joi
         .number()
         .integer()

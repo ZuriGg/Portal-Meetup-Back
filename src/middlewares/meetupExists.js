@@ -3,7 +3,6 @@ import getPool from '../database/getPool.js';
 const meetupExists = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
-        console.log(`Existe el meetup ${meetupId}?`);
 
         const pool = await getPool();
 

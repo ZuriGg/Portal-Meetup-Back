@@ -20,6 +20,7 @@ import {
     validateMeetupController,
     newVoteController,
     invalidDayMeetupController,
+    getLocationController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
@@ -32,6 +33,9 @@ meetUpRouter.get('/meetups', listMeetUpController);
 
 //muestra una entrada en concreta
 meetUpRouter.get('/meetups/:meetupId', meetupExists, getMeetupController);
+
+//muestra una localización en concreto //AGREGADO RECIENTE
+meetUpRouter.get('/meetups/:locationId', getLocationController);
 
 // Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);

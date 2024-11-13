@@ -1,8 +1,5 @@
 import joi from 'joi';
 
-// Importamos el esquema que verifica una imagen.
-import imgSchema from '../imgSchema.js';
-
 // Mensajes de error personalizados.
 import joiErrorMessages from '../joiErrorMessages.js';
 
@@ -19,8 +16,8 @@ const newMeetupSchema = joi.object({
     zip: joi
         .number()
         .integer()
-        .min(1500)
-        .max(99999)
+        .min(1001) //mínimo para un codigo postal en España
+        .max(52006) //máximo para un código postal en España
         .required()
         .messages(joiErrorMessages),
     hourMeetUp: joi
@@ -43,7 +40,7 @@ const newMeetupSchema = joi.object({
         .number()
         .integer() //número entero
         .min(0)
-        .max(255) // Máximo de 255 (porque es UNSIGNED)
+        .max(80000) // grandes eventos como conciertos, festivales etc
         .messages(joiErrorMessages),
     userId: joi
         .number() //número

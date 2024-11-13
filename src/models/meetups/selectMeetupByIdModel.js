@@ -2,7 +2,7 @@ import getPool from '../../database/getPool.js';
 import { notFoundError } from '../../services/errorService.js';
 
 // Realizamos una consulta a la BBDD para obtener información de un meetup concreto.
-const selectMeetupByIdModel = async (meetupId, userId = '') => {
+const selectMeetupByIdModel = async (meetupId) => {
     const pool = await getPool();
 
     // Obtenemos la información del meetup.
@@ -12,17 +12,17 @@ const selectMeetupByIdModel = async (meetupId, userId = '') => {
 
     // Verifica que el meetup exista
     if (meetups.length === 0) {
-        return notFoundError(); // o lanza un error si prefieres
+        return notFoundError(); // o lanza un error
     }
 
     // Obtenemos el array de fotos del meetup.
-/*     const [photos] = await pool.query(
+    /*     const [photos] = await pool.query(
         `SELECT id, name FROM meetupPhotos WHERE meetupId = ?`,
         [meetupId]
     ); */
 
     // Agregamos el array de fotos al meetup.
-/*     meetups[0].photos = photos; */
+    /*     meetups[0].photos = photos; */
 
     // Establecemos como valores booleanos "votedByMe" y "owner"
     /*     meetups[0].votedByMe = Boolean(meetups[0].votedByMe);
@@ -39,4 +39,4 @@ const selectMeetupByIdModel = async (meetupId, userId = '') => {
 
 export default selectMeetupByIdModel;
 
-/* La función selectMeetupByIdModel obtiene información detallada de un "meetup" específico a partir de su ID. xxx */
+/* selectMeetupByIdModel --> obtiene información detallada de un "meetup" específico a partir de su ID */

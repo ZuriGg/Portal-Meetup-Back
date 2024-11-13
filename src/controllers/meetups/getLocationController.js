@@ -1,3 +1,4 @@
+import selectLocationByIdModel from '../../models/meetups/selectLocationByIdModel.js';
 import { notFoundError } from '../../services/errorService.js';
 
 const getLocationController = async (req, res, next) => {

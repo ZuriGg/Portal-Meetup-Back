@@ -1,9 +1,10 @@
 import insertVoteModel from '../../models/meetups/insertVoteModel.js';
+import meetupExistsController from '../../middlewares/meetupExistsController.js';
+
 import {
     cantVoteBeforeEventError,
     invalidVoteValueError,
 } from '../../services/errorService.js';
-import getMeetupController from './getMeetupController.js';
 
 //para validar el body con el esquema proporcionado
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
@@ -14,14 +15,14 @@ import voteMeetupSchema from '../../schemas/meetups/voteMeetupSchema.js';
 const newVoteController = async (req, res, next) => {
     try {
         const { attendanceId } = req.params; //id de la sesión del meetup
-        const { userId } = req.user; // id del usuario autenticado
+        const { id: userId } = req.user; // id del usuario autenticado
         const { value, coment } = req.body; //puntuación y comentario
 
         // aplicamos la validacion con joi antes de seguir con el controlador
         await validateSchemaUtil(voteMeetupSchema, req.body);
 
         //asegurar que la fecha del meetup haya pasado
-        const meetup = await getMeetupController(attendanceId); // Asegúrate de tener esta función
+        const meetup = req.meetup; //agregamos el meetup al req en el middleware
         if (new Date() < new Date(meetup.date)) {
             throw cantVoteBeforeEventError();
         }
@@ -31,7 +32,7 @@ const newVoteController = async (req, res, next) => {
             throw invalidVoteValueError();
         }
 
-        //llamamos a newVoteModel para interactuar con la BBDD
+        //insertamos voto y comentario en la BBDD
         await insertVoteModel(value, coment, userId, attendanceId);
 
         res.status(201).send({

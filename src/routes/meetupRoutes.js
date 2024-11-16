@@ -5,6 +5,7 @@ import {
     meetupExists,
     authUser,
     canValidate,
+    meetupExistsController,
 } from '../middlewares/index.js';
 
 import {
@@ -99,10 +100,10 @@ meetUpRouter.put(
 
 //endpoint de rating (1-5) y comentario de un meetup después de la fecha de realización
 meetUpRouter.post(
-    '/meetups/:meetupId/votes',
+    '/meetups/:attendanceId/votes',
     authUser, // que el usuario esté autenticado
-    meetupExists, // que el meetup existe
-    newVoteController //logica para gestionar el nuevo voto
+    meetupExistsController,
+    newVoteController
 );
 
 export default meetUpRouter;

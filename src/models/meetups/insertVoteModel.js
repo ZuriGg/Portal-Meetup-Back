@@ -16,7 +16,7 @@ const insertVoteModel = async (value, coment, userId, attendanceId) => {
             throw voteAlreadyExistsError();
         }
 
-        //creamos la query base
+        //creamos la query para insertar el voto
         const query = `
        INSERT INTO meetupVotes (value, coment, userId, attendanceId) VALUES (?, ?, ?, ?)
        `;
@@ -29,14 +29,14 @@ const insertVoteModel = async (value, coment, userId, attendanceId) => {
             attendanceId,
         ]);
 
-        // Buscar el voto insertado usando insertId.
-        const [vote] = await pool.query(
-            `SELECT * FROM meetupVotes WHERE id = ?`,
-            [result.insertId]
-        );
-
-        // Devolver el voto insertado.
-        return vote[0];
+        // Devolvemos el voto insertado usando el insertId del resultado
+        return {
+            id: result.insertId,
+            value,
+            coment,
+            userId,
+            attendanceId,
+        };
     } catch (error) {
         throw error;
     }

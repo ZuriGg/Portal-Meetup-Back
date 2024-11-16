@@ -16,7 +16,7 @@ const meetupExistsController = async (req, res, next) => {
 
         // Error si meetup NO existe.
         if (meetups.length < 1) {
-            notFoundError('meetup');
+            return next(notFoundError('meetup'));
         }
 
         next();

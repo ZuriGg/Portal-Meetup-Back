@@ -48,17 +48,11 @@ userRouter.put(
 // email de recuperación de contraseña.
 userRouter.post(
     '/users/password/recover',
-    authUser,
-    userExistsController,
+
     sendRecoverPassController
 );
 
 // Editar la contraseña de un usuario con un código de recuperación.
-userRouter.put(
-    '/users/password',
-    authUser,
-    userExistsController,
-    editUserPassController
-);
+userRouter.put('/users/password', editUserPassController);
 
 export default userRouter;

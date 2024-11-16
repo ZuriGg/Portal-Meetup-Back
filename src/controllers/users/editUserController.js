@@ -5,8 +5,8 @@ import { notFoundError } from '../../services/errorService.js';
 //importar siempre validateSchemaUtil para poder usar Joi
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
-// Importamos el esquema concreto
-import editUserSchema from '../../schemas/users/editUserSchema.js';
+//importamos el esquema concreto
+import newUserSchema from '../../schemas/users/newUserSchema.js';
 
 const editUserController = async (req, res, next) => {
     try {
@@ -15,7 +15,7 @@ const editUserController = async (req, res, next) => {
         const { firstName, lastname, email, username, password } = req.body;
 
         // Validamos el body con Joi antes de seguir con la lógica del controlador
-        await validateSchemaUtil(editUserSchema, req.body);
+        await validateSchemaUtil(newUserSchema, req.body);
 
         const { id } = await selectUserByIdModel(userId);
 

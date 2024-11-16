@@ -10,7 +10,11 @@ import newUserSchema from '../../schemas/users/newUserSchema.js';
 
 const editUserController = async (req, res, next) => {
     try {
-        const userId = req.user.id; //recogemos el id de forma segura
+        // Verifica si req.user existe y tiene un id
+        if (!req.user || !req.user.id) {
+            return notFoundError('ID de usuario');
+        }
+        const { userId } = req.user; //recogemos el id de forma segura
 
         const { firstName, lastname, email, username } = req.body;
 

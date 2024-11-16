@@ -9,16 +9,10 @@ import selectUserByEmailModel from './selectUserByEmailModel.js';
 import { recoveryCodeError } from '../../services/errorService.js';
 
 //Realización de una consulta a BBDD para actualizar la contraseña de un usuario.
-const updateUserPassModel = async (email, recoverPassCode, newPass) => {
+const updateUserPassModel = async (recoverPassCode, newPass) => {
     const pool = await getPool();
-
-    // Obtenemos al usuario en base al email recibido.
-    const user = await selectUserByEmailModel(email);
-
+    //he elimando el email tanto de la req como de la logica general
     // Si no encontramos ningún usuario o si el código es incorrecto lanzamos un error.
-    if (!user || user.recoverPassCode !== recoverPassCode) {
-        recoveryCodeError();
-    }
 
     // Encriptamos la nueva contraseña.
     const hashedPass = await bcrypt.hash(newPass, 10);

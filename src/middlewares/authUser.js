@@ -12,14 +12,19 @@ const authUser = (req, res, next) => {
         const { authorization } = req.headers; //coge el token del header
         if (!authorization) {
             notAuthenticatedError(res); //401 --> error de autorización
+            return;
         }
 
         let tokenInfo; //serán los datos del usuario
 
         try {
-            tokenInfo = jwt.verify(authorization, process.env.SECRET); //decodifica el token con la clave secreta
+            tokenInfo = jwt.verify(
+                authorization.split(' ')[1],
+                process.env.SECRET
+            ); //decodifica el token con la clave secreta
         } catch (error) {
             invalidCredentialsError(res);
+            return;
         }
 
         req.user = tokenInfo; //guarda la info decodificada en req.user

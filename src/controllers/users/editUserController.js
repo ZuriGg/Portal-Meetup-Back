@@ -6,7 +6,7 @@ import { notFoundError } from '../../services/errorService.js';
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
 //importamos el esquema, que será el mismo que el del usuario normal
-import newUserSchema from '../../schemas/users/newUserSchema.js';
+import editUserSchema from '../../schemas/users/editUserSchema.js';
 
 const editUserController = async (req, res, next) => {
     try {
@@ -14,12 +14,12 @@ const editUserController = async (req, res, next) => {
         if (!req.user || !req.user.id) {
             return notFoundError('ID de usuario');
         }
-        const { userId } = req.user; //recogemos el id de forma segura
+        const { id: userId } = req.user; //recogemos el id de forma segura
 
         const { firstName, lastname, email, username } = req.body;
 
         // Validamos el body con Joi antes de seguir con la lógica del controlador
-        await validateSchemaUtil(newUserSchema, req.body);
+        await validateSchemaUtil(editUserSchema, req.body);
 
         // comprobamos si el usuario existe
         const user = await selectUserByIdModel(userId);

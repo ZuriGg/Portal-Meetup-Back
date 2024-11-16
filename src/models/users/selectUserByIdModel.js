@@ -3,6 +3,9 @@ import getPool from '../../database/getPool.js';
 // Realizamos una consulta a BBDD para seleccionar a un usuario con un id dado.
 const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
+    if (!pool) {
+        throw new Error('No se pudo obtener la conexión a la base de datos'); //cambiar por error personalizado
+    }
 
     // Comprobamos si hay algún usuario con el email proporcionado.
     const [users] = await pool.query(

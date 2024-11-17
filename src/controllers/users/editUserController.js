@@ -10,25 +10,22 @@ import editUserSchema from '../../schemas/users/editUserSchema.js';
 
 const editUserController = async (req, res, next) => {
     try {
-        const { userId } = req.params; //HAY QUE CAMBIAR ESTO!!! NO SE PUEDE PASAR POR PARAMS EL ID DEL USUARIO
+        const { id: userId } = req.user;
+        console.log('userId desde req.user:', userId);
 
-        const { firstName, lastname, email, username, password } = req.body;
+        const { firstName, lastname, email, username } = req.body;
 
         // Validamos el body con Joi antes de seguir con la lógica del controlador
         await validateSchemaUtil(editUserSchema, req.body);
 
+        //verificamos que el usuario existe
         const { id } = await selectUserByIdModel(userId);
+        console.log('id desde la base de datos:', id);
 
-        if (userId != id) throw notFoundError('userId');
+        if (userId !== id) throw notFoundError('userId');
 
-        await editUserModel(
-            firstName,
-            lastname,
-            username,
-            email,
-            password,
-            userId
-        );
+        //actualizamos el usuario
+        await editUserModel(firstName, lastname, username, email, userId);
 
         res.send({
             message: 'Ok, usuario editado',

@@ -102,7 +102,6 @@ meetUpRouter.put(
 meetUpRouter.post(
     '/meetups/:attendanceId/votes',
     authUser, // que el usuario esté autenticado
-    meetupExistsController,
     newVoteController
 );
 

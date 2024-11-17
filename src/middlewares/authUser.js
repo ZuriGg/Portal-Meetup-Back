@@ -9,26 +9,23 @@ import {
 // Controlador de ruta para el TOKEN
 const authUser = (req, res, next) => {
     try {
-        const { authorization } = req.headers; //coge el token del header
+        const { authorization } = req.headers; // El Header contiene el token JWT.
         if (!authorization) {
-            notAuthenticatedError(res); //401 --> error de autorización
-            return;
+            //si no hay autorización en el header, se lanza un error
+            notAuthenticatedError(); //401 --> error de autorización
         }
 
-        let tokenInfo; //serán los datos del usuario
+        // const token = authorization.split(' ')[1];
+
+        let tokenInfo; //para guardar la verificación del token --> tokenInfo serán los datos del usuario
 
         try {
-            tokenInfo = jwt.verify(
-                authorization.split(' ')[1],
-                process.env.SECRET
-            ); //decodifica el token con la clave secreta
+            tokenInfo = jwt.verify(authorization, process.env.SECRET); //'authorization' es el token y 'process.env.SECRET' es la clave secreta
         } catch (error) {
-            invalidCredentialsError(res);
-            return;
+            invalidCredentialsError();
         }
 
-        req.user = tokenInfo; //guarda la info decodificada en req.user
-        console.log('User decoded from token:', req.user);
+        req.user = tokenInfo; //Se asigna la información decodificada del token (almacenada en tokenInfo) al objeto req.user. Esto q permite que los siguientes controladores en la cadena puedan acceder a los datos del usuario autenticado.
         next();
     } catch (error) {
         next(error);

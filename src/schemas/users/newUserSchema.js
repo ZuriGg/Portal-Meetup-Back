@@ -12,8 +12,8 @@ const newUserSchema = joi.object({
         .required()
         .messages(joiErrorMessages),
 
-    firstName: joi.string().required().messages(joiErrorMessages),
-    lastname: joi.string().required().messages(joiErrorMessages),
+    firstName: joi.string().required().messages(joiErrorMessages), // Agregado
+    lastname: joi.string().required().messages(joiErrorMessages), // Agregado
 });
 
 export default newUserSchema;

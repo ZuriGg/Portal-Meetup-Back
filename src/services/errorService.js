@@ -1,5 +1,3 @@
-//AGREGAR PATH DEL ERRORRRRRRRRRRRRRRRR!
-
 import path from 'path';
 
 export const cannotVoteOwnMeetupError = () => {
@@ -10,9 +8,16 @@ export const cannotVoteOwnMeetupError = () => {
     return error;
 };
 
+// export const deleteFileError = () => {
+//     const error = new Error('error email, o contraseña incorrecta', path);
+//     error.httpStatus = path;
+//     return error;
+// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
+
 export const deleteFileError = () => {
-    const error = new Error('error email, o contraseña incorrecta', path);
-    error.httpStatus = path;
+    const error = new Error('Error al eliminar el archivo');
+    error.httpStatus = 500; // Internal Server Error
+    error.code = 'FILE_DELETE_FAILED';
     return error;
 };
 
@@ -24,15 +29,29 @@ export const emailAlreadyRegisteredError = () => {
     return error;
 };
 
+// export const invalidCredentialsError = () => {
+//     const error = new Error('error email, o contraseña incorrecta', path);
+//     error.httpStatus = path;
+//     return error;
+// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
+
 export const invalidCredentialsError = () => {
-    const error = new Error('error email, o contraseña incorrecta', path);
-    error.httpStatus = path;
+    const error = new Error('Email o contraseña incorrectos');
+    error.httpStatus = 401; // Unauthorized
+    error.code = 'INVALID_CREDENTIALS';
     return error;
 };
 
+// export const invalidTokenError = () => {
+//     const error = new Error('error en el token', path);
+//     error.httpStatus = path;
+//     return error;
+// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
+
 export const invalidTokenError = () => {
-    const error = new Error('error en el token', path);
-    error.httpStatus = path;
+    const error = new Error('Token inválido');
+    error.httpStatus = 401; // Unauthorized
+    error.code = 'INVALID_TOKEN';
     return error;
 };
 
@@ -52,9 +71,16 @@ export const notFoundError = (resource) => {
     return error;
 }; //se elimina el path por ser segundo argumento y dar fallo en el endpoint
 
+// export const pendingActivationError = () => {
+//     const error = new Error('error email, o contraseña incorrecta', path);
+//     error.httpStatus = path;
+//     return error;
+// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
+
 export const pendingActivationError = () => {
-    const error = new Error('error email, o contraseña incorrecta', path);
-    error.httpStatus = path;
+    const error = new Error('Tu cuenta está pendiente de activación');
+    error.httpStatus = 403; // Forbidden
+    error.code = 'ACCOUNT_PENDING_ACTIVATION';
     return error;
 };
 
@@ -127,20 +153,14 @@ export const voteAlreadyExistsError = () => {
 };
 
 export const cantVoteBeforeEventError = () => {
-    const error = new Error(
-        'No puedes votar un evento antes de que suceda.',
-        path
-    );
+    const error = new Error('No puedes votar un evento antes de que suceda.');
     error.httpStatus = 403; // Forbidden
     error.code = 'CANT_VOTE_BEFORE_EVENT';
     return error;
 };
 
 export const invalidVoteValueError = () => {
-    const error = new Error(
-        'La calificación debe encontrarse entre 1 y 5.',
-        path
-    );
+    const error = new Error('La calificación debe encontrarse entre 1 y 5.');
     error.httpStatus = 400; // Bad Request
     error.code = 'INVALID_VOTE_VALUE';
     return error;

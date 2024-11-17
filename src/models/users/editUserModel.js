@@ -1,29 +1,23 @@
 import getPool from '../../database/getPool.js';
-import bcrypt from 'bcrypt';
+import { cantEditUser } from '../../services/errorService.js';
 
-const editUserModel = async (
-    firstName,
-    lastname,
-    username,
-    email,
-    password,
-    avatar,
-    userId
-) => {
+const editUserModel = async (firstName, lastname, username, email, userId) => {
     const pool = await getPool();
 
-    const hashedPass = await bcrypt.hash(password, 10);
+    console.log(`${email} de model`); //comprobación
 
-    console.log(`${email} de model`);
+    const query = `
+    UPDATE users
+    SET firstName = ?, lastname = ?, username = ?, email = ?
+    WHERE id = ?
+`;
+    const values = [firstName, lastname, username, email, userId];
 
-    await pool.query(
-        `
-            UPDATE users
-            SET firstName=?, lastname=?, username=?, password=?, avatar=?, email=?
-            WHERE id=?
-        `,
-        [firstName, lastname, username, hashedPass, avatar, email, userId]
-    );
+    const [result] = await pool.query(query, values);
+    if (result.affectedRows === 0) {
+        throw cantEditUser();
+    }
+    return result;
 };
 
 export default editUserModel;

@@ -5,7 +5,7 @@ import path from 'path';
 export const cannotVoteOwnMeetupError = () => {
     const error = new Error('No puedes votar tu propio meetup', path);
     error.httpStatus = path;
-    (error.httpStatus = '403'), // Conflict
+    (error.httpStatus = 403), // Conflict
         (error.code = 'CANNOT_VOTE_OWN_ENTRY');
     return error;
 };
@@ -19,7 +19,7 @@ export const deleteFileError = () => {
 export const emailAlreadyRegisteredError = () => {
     const error = new Error('error email, o contraseña incorrecta', path);
     error.httpStatus = path;
-    (error.httpStatus = '409'), // Conflict
+    (error.httpStatus = 409), // Conflict
         (error.code = 'EMAIL_ALREADY_REGISTERED');
     return error;
 };
@@ -39,14 +39,14 @@ export const invalidTokenError = () => {
 export const notAuthenticatedError = () => {
     const error = new Error('Debes enviar un token en el header', path);
     error.httpStatus = path;
-    (error.httpStatus = '401'), // Conflict
+    (error.httpStatus = 401), // Conflict
         (error.code = 'NOT_AUTHENTICATED');
     return error;
 };
 
 export const notFoundError = (resource) => {
     const error = new Error(`El recurso requerido '${resource}' no existe`);
-    error.httpStatus = '404'; // Forbbiden
+    error.httpStatus = 404; // Forbbiden
     error.code = 'RESOURCE_NOT_FOUND';
 
     return error;
@@ -64,7 +64,7 @@ export const photoLimitReachedError = () => {
         path
     );
     error.httpStatus = path;
-    (error.httpStatus = '409'), // Conflict
+    (error.httpStatus = 409), // Conflict
         (error.code = 'PHOTO_LIMIT_REACHED');
     return error;
 };
@@ -75,7 +75,7 @@ export const recoveryCodeError = () => {
         path
     );
     error.httpStatus = path;
-    (error.httpStatus = '401'), // Unauthorized
+    (error.httpStatus = 401), // Unauthorized
         (error.code = 'INVALID_RECOVERY_CODE');
     return error;
 };
@@ -83,7 +83,7 @@ export const recoveryCodeError = () => {
 export const saveFileError = () => {
     const error = new Error('Error al guardar el archivo en el disco', path);
     error.httpStatus = path;
-    (error.httpStatus = '500'), // Internal Server Error
+    (error.httpStatus = 500), // Internal Server Error
         (error.code = 'FILE_SAVE_FAILED');
     return error;
 };
@@ -91,7 +91,7 @@ export const saveFileError = () => {
 export const sendEmailError = () => {
     const error = new Error('Error al enviar el email', path);
     error.httpStatus = path;
-    (error.httpStatus = '500'), // Internal Server Error
+    (error.httpStatus = 500), // Internal Server Error
         (error.code = 'SEND_EMAIL_FAILED');
     return error;
 };
@@ -99,7 +99,7 @@ export const sendEmailError = () => {
 export const userAlreadyRegisteredError = () => {
     const error = new Error('El nombre de usuario ya está registrado', path);
     error.httpStatus = path;
-    (error.httpStatus = '409'), // Conflict
+    (error.httpStatus = 409), // Conflict
         (error.code = 'USER_ALREADY_REGISTERED');
     return error;
 };
@@ -110,7 +110,7 @@ export const unauthorizedUserError = () => {
         path
     );
     error.httpStatus = path;
-    (error.httpStatus = '409'), // Conflict
+    (error.httpStatus = 409), // Conflict
         (error.code = 'UNAUTHORIZED');
     return error;
 };
@@ -121,7 +121,7 @@ export const voteAlreadyExistsError = () => {
         path
     );
     error.httpStatus = path;
-    (error.httpStatus = '409'), // Conflict
+    (error.httpStatus = 409), // Conflict
         (error.code = 'VOTE_ALREADY_EXISTS');
     return error;
 };
@@ -131,7 +131,7 @@ export const cantVoteBeforeEventError = () => {
         'No puedes votar un evento antes de que suceda.',
         path
     );
-    error.httpStatus = '403'; // Forbidden
+    error.httpStatus = 403; // Forbidden
     error.code = 'CANT_VOTE_BEFORE_EVENT';
     return error;
 };
@@ -141,7 +141,7 @@ export const invalidVoteValueError = () => {
         'La calificación debe encontrarse entre 1 y 5.',
         path
     );
-    error.httpStatus = '400'; // Bad Request
+    error.httpStatus = 400; // Bad Request
     error.code = 'INVALID_VOTE_VALUE';
     return error;
 };
@@ -152,5 +152,13 @@ export const trueOrFalseError = () => {
         path
     );
     error.httpStatus = path;
-    (error.httpStatus = '400')((error.code = 'INVALID_KEY'));
+    (error.httpStatus = 400)((error.code = 'INVALID_KEY'));
+};
+
+export const cantEditUser = (path = '') => {
+    const error = new Error('No se pudo actualizar el usuario');
+    error.httpStatus = 400; // Bad Request
+    error.code = 'CANT_EDIT_USER';
+    error.path = path;
+    return error;
 };

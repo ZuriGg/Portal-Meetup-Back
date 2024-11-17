@@ -6,12 +6,23 @@ const editMeetupModel = async (
     startDate,
     oneSession,
     categoryId,
+    locationId,
+    city,
+    address,
+    zip,
     hourMeetup,
     dayOfTheWeek,
     aforoMax,
     meetupId
 ) => {
     const pool = await getPool();
+
+    await pool.query(
+        `UPDATE location 
+        SET city=?, address=?, zip=? 
+        WHERE id=?`,
+        [city, address, zip, locationId]
+    );
 
     await pool.query(
         `

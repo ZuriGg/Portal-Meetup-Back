@@ -16,13 +16,17 @@ const editMeetupController = async (req, res, next) => {
             startDate,
             oneSession,
             categoryId,
+            locationId,
+            city,
+            address,
+            zip,
             hourMeetup,
             dayOfTheWeek,
             aforoMax,
         } = req.body;
 
         // aplicamos la validacion con joi antes de seguir con el controlador
-        /* await validateSchemaUtil(editMeetupSchema, req.body); */
+        await validateSchemaUtil(editMeetupSchema, req.body);
 
         await editMeetupModel(
             title,
@@ -30,6 +34,10 @@ const editMeetupController = async (req, res, next) => {
             startDate,
             oneSession,
             categoryId,
+            locationId,
+            city,
+            address,
+            zip,
             hourMeetup,
             dayOfTheWeek,
             aforoMax,

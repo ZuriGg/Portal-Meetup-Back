@@ -7,9 +7,16 @@ const selectAttendanceByIdModel = async (attendanceId) => {
 
     // Obtenemos la información de la sesión.
     const [attendance] = await pool.query(
-        'SELECT * FROM attendance WHERE id = ?',
+        `
+        SELECT A.id, A.date, A.userId, M.userId AS ownerUser
+        FROM attendance AS A
+        JOIN meetups AS M ON M.id = A.meetupId
+        WHERE A.id = ?;
+        `,
         [attendanceId]
     );
+
+    //impedir que el dueño de un evento pueda votarlo
 
     // Verifica que la sesión exista
     if (attendance.length === 0) {

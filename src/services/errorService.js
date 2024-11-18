@@ -39,16 +39,15 @@ export const invalidTokenError = () => {
 export const notAuthenticatedError = () => {
     const error = new Error('Debes enviar un token en el header', path);
     error.httpStatus = path;
-    (error.httpStatus = '401'), // Conflict
+    (error.httpStatus = 401), // Conflict
         (error.code = 'NOT_AUTHENTICATED');
     return error;
 };
 
 export const notFoundError = (resource) => {
     const error = new Error(`El recurso requerido '${resource}' no existe`);
-    error.httpStatus = '404'; // Forbbiden
+    error.httpStatus = 404; // Forbbiden
     error.code = 'RESOURCE_NOT_FOUND';
-
     return error;
 }; //se elimina el path por ser segundo argumento y dar fallo en el endpoint
 

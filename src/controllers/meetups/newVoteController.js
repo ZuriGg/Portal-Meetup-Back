@@ -14,24 +14,32 @@ const newVoteController = async (req, res, next) => {
     try {
         const { attendanceId } = req.params; //id de la sesión del meetup
         const { value, coment } = req.body; //puntuación y comentario
+        console.log('Log0...');
 
         //aplicamos joi antes de seguir con el controlador
         await validateSchemaUtil(voteMeetupSchema, req.body);
+        console.log('Log1...');
 
         //Obtenemos los detalles de la sesión:
         const attendance = await selectAttendanceByIdModel(attendanceId);
         if (!attendance) {
             throw new Error('No se encontró la sesión para este ID.');
         }
+        console.log('Log2...');
 
-        //asegurar que la fecha del meetup haya pasado
-        const meetup = req.meetup; //agregamos el meetup al req en el middleware
-        if (new Date() < new Date(meetup.date)) {
+        //asegurar que la fecha de la sesión haya pasado
+        if (new Date() < new Date(attendance.date)) {
             throw cantVoteBeforeEventError();
         }
+        console.log('Log3...');
 
-        // Si somos los dueños del meetup lanzamos un error.
-        if (meetup.userId === req.user.id) {
+        //comprobar que la persona que asistió al evento es la que vota
+        if (attendance.userId !== req.user.id) {
+            throw new Error('no se puede votar algo a lo q no has ido'); //crear nmuevo erro personalizado
+        }
+        console.log('Log4...');
+
+        if (attendance.ownerUser === req.user.id) {
             throw cannotVoteOwnMeetupError();
         }
 
@@ -42,6 +50,7 @@ const newVoteController = async (req, res, next) => {
             attendanceId,
             req.user.id
         );
+        console.log('Log5...');
 
         res.status(201).send({
             status: 'ok',

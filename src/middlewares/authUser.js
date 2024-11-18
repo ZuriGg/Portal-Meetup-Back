@@ -12,7 +12,7 @@ const authUser = (req, res, next) => {
         const { authorization } = req.headers; // El Header contiene el token JWT.
         if (!authorization) {
             //si no hay autorización en el header, se lanza un error
-            throw notAuthenticatedError();
+            notAuthenticatedError();
         }
 
         let tokenInfo; //para guardar la verificación del token
@@ -20,7 +20,7 @@ const authUser = (req, res, next) => {
         try {
             tokenInfo = jwt.verify(authorization, process.env.SECRET); //'authorization' es el token y 'process.env.SECRET' es la clave secreta
         } catch (error) {
-            throw invalidCredentialsError();
+            invalidCredentialsError();
         }
 
         req.user = tokenInfo; //Se asigna la información decodificada del token (almacenada en tokenInfo) al objeto req.user.

@@ -170,8 +170,8 @@ export const trueOrFalseError = () => {
         'No se ha recibido un valor "true" o "false", no se ha podido realizar la operación',
         path
     );
-    error.httpStatus = path;
-    (error.httpStatus = 400)((error.code = 'INVALID_KEY'));
+    error.httpStatus = 400;
+    /* (error.httpStatus = 400)((error.code = 'INVALID_KEY')); */
 };
 
 export const cantEditUser = (path = '') => {

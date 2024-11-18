@@ -13,29 +13,24 @@ const validateMeetupController = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
         const { validated } = req.body;
+
+        /* const token = authHeader.split(' ')[1]; */
         let mensajeValidacion = '';
 
         // aplicamos la validacion con joi antes de seguir con el controlador
         await validateSchemaUtil(validateMeetupSchema, req.body);
 
-        const isValidated =
-            validated === 'true' ? true : validated === 'false' ? false : null;
-
         console.log(`La id del meetup es: ${meetupId}`);
         console.log(`El meetup está validado? ${validated}`);
 
-        if (isValidated === null) {
-            throw trueOrFalseError();
-        }
-
-        if (isValidated) {
+        if (validated) {
             mensajeValidacion = 'se ha validado';
         } else {
             mensajeValidacion = 'ha sido invalidado';
         }
 
         //Ejecución del model para validar el meetup ingresado
-        await validateMeetupModel(meetupId, isValidated);
+        await validateMeetupModel(meetupId, validated);
 
         res.send({
             status: 'ok',

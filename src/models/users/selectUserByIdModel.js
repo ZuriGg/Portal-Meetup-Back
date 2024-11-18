@@ -1,4 +1,5 @@
 import getPool from '../../database/getPool.js';
+import { notFoundError } from '../../services/errorService.js';
 
 // Realizamos una consulta a BBDD para seleccionar a un usuario con un id dado.
 const selectUserByIdModel = async (userId) => {
@@ -11,12 +12,10 @@ const selectUserByIdModel = async (userId) => {
     );
 
     if (users.length === 0) {
-        //manejo de error
-        throw new Error('Usuario no encontrado');
+        throw notFoundError('usuario');
     }
 
-    // El array de usuarios solo podrá contener 1 usuario xq el email no puede repetirse. Retornamos al usuario que se encuentra en la posición 0,
-    // es decir, retornamos el objeto en lugar de retornar un array con un elemento.
+    // El array de usuarios solo podrá contener 1 usuario xq el email no puede repetirse. Usuario de la posición 0
     return users[0];
 };
 

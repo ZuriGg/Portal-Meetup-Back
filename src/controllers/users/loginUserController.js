@@ -25,16 +25,19 @@ const loginUserController = async (req, res, next) => {
 
         let validPass;
 
-        if (user) {
-            validPass = await bcrypt.compare(password, user.password);
+        validPass = await bcrypt.compare(password, user.password);
+        if (!validPass) {
+            throw invalidCredentialsError();
         }
 
-        if (!user || !validPass) {
-            invalidCredentialsError();
+        if (!user) {
+            throw invalidCredentialsError();
         }
 
         //comprobar que el usuario se active en 1
-        if (user.active != 1) pendingActivationError();
+        if (user.active !== 1) {
+            return pendingActivationError();
+        }
 
         //generamos el token
         const tokenInfo = {

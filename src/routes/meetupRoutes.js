@@ -5,7 +5,6 @@ import {
     meetupExists,
     authUser,
     canValidate,
-    meetupExistsController,
 } from '../middlewares/index.js';
 
 import {
@@ -45,7 +44,7 @@ meetUpRouter.get('/meetups', listMeetUpController);
 meetUpRouter.get('/meetups/:meetupId', meetupExists, getMeetupController);
 
 //muestra una localización en concreto //AGREGADO RECIENTE
-meetUpRouter.get('/meetups/:locationId', getLocationController);
+meetUpRouter.get('/location/:locationId', getLocationController);
 
 // Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);

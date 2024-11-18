@@ -1,47 +1,39 @@
 import getPool from '../../database/getPool.js';
 import { voteAlreadyExistsError } from '../../services/errorService.js';
 
-const insertVoteModel = async (value, coment, userId, attendanceId) => {
+const insertVoteModel = async (value, coment, attendanceId, userId) => {
     try {
-        //creamos pool de conexiones
         const pool = await getPool();
 
-        //verificar si el voto ya existe
-        const [existingVote] = await pool.query(
-            `SELECT * FROM meetupVotes WHERE attendanceId = ? AND userId = ?`,
-            [attendanceId, userId] // Asegúrate de que los parámetros estén dentro de la misma array
+        // Verificar si el usuario ya ha votado en esta asistencia
+        const [votes] = await pool.query(
+            `SELECT id FROM meetupVotes WHERE userId = ? AND attendanceId = ?`,
+            [userId, attendanceId]
         );
 
-        if (existingVote.length > 0) {
+        if (votes.length > 0) {
             throw voteAlreadyExistsError();
         }
 
-        //creamos la query base
-        const query = `
-       INSERT INTO meetupVotes (value, coment, userId, attendanceId) VALUES (?, ?, ?, ?)
-       `;
-
-        //insertamos el voto en la BBDD
-        const [result] = await pool.query(query, [
-            value,
-            coment,
-            userId,
-            attendanceId,
-        ]);
-
-        // Buscar el voto insertado usando insertId.
-        const [vote] = await pool.query(
-            `SELECT * FROM meetupVotes WHERE id = ?`,
-            [result.insertId]
+        // Insertar el voto en la base de datos
+        await pool.query(
+            `INSERT INTO meetupVotes (value, coment, userId, attendanceId) VALUES (?, ?, ?, ?)`,
+            [value, coment, userId, attendanceId]
         );
 
-        // Devolver el voto insertado.
-        return vote[0];
+        // Calcular la nueva media de votos para el meetup relacionado
+        const [votesAvg] = await pool.query(
+            `SELECT AVG(value) AS avg FROM meetupVotes 
+             JOIN attendance ON meetupVotes.attendanceId = attendance.id 
+             WHERE attendance.meetupId = ?`,
+            [attendanceId] // Cambiar por el meetupId relacionado
+        );
+
+        // Retornar la media de los votos
+        return Number(votesAvg[0].avg);
     } catch (error) {
         throw error;
     }
 };
 
 export default insertVoteModel;
-
-//insertId --> propiedad del objeto de resultado que devuelve MySQL después de una operación INSERT. Es el ID generado automáticamente por la BBDD para la nueva fila insertada, siempre que esa tabla tenga una columna configurada como AUTO_INCREMENT.

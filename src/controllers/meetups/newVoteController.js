@@ -1,42 +1,63 @@
 import insertVoteModel from '../../models/meetups/insertVoteModel.js';
+import selectAttendanceByIdModel from '../../models/meetups/selectAttendanceByIdModel.js';
+
 import {
+    cannotVoteOwnMeetupError,
     cantVoteBeforeEventError,
     invalidVoteValueError,
 } from '../../services/errorService.js';
-import getMeetupController from './getMeetupController.js';
 
-//para validar el body con el esquema proporcionado
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
-
-//importamos el esquema concreto
 import voteMeetupSchema from '../../schemas/meetups/voteMeetupSchema.js';
 
 const newVoteController = async (req, res, next) => {
     try {
         const { attendanceId } = req.params; //id de la sesión del meetup
-        const { userId } = req.user; // id del usuario autenticado
         const { value, coment } = req.body; //puntuación y comentario
+        console.log('Log0...');
 
-        // aplicamos la validacion con joi antes de seguir con el controlador
+        //aplicamos joi antes de seguir con el controlador
         await validateSchemaUtil(voteMeetupSchema, req.body);
+        console.log('Log1...');
 
-        //asegurar que la fecha del meetup haya pasado
-        const meetup = await getMeetupController(attendanceId); // Asegúrate de tener esta función
-        if (new Date() < new Date(meetup.date)) {
+        //Obtenemos los detalles de la sesión:
+        const attendance = await selectAttendanceByIdModel(attendanceId);
+        if (!attendance) {
+            throw new Error('No se encontró la sesión para este ID.');
+        }
+        console.log('Log2...');
+
+        //asegurar que la fecha de la sesión haya pasado
+        if (new Date() < new Date(attendance.date)) {
             throw cantVoteBeforeEventError();
         }
+        console.log('Log3...');
 
-        //aseguramos que el valor sea 1-5
-        if (value < 1 || value > 5) {
-            throw invalidVoteValueError();
+        //comprobar que la persona que asistió al evento es la que vota
+        if (attendance.userId !== req.user.id) {
+            throw new Error('no se puede votar algo a lo q no has ido'); //crear nmuevo erro personalizado
+        }
+        console.log('Log4...');
+
+        if (attendance.ownerUser === req.user.id) {
+            throw cannotVoteOwnMeetupError();
         }
 
-        //llamamos a newVoteModel para interactuar con la BBDD
-        await insertVoteModel(value, coment, userId, attendanceId);
+        //insertamos voto y comentario en la BBDD
+        const votesAvg = await insertVoteModel(
+            value,
+            coment,
+            attendanceId,
+            req.user.id
+        );
+        console.log('Log5...');
 
         res.status(201).send({
             status: 'ok',
             message: `La sesión con id ${attendanceId} ha sido calificada con un valor de ${value} sobre un total de 5 puntos`,
+            data: {
+                votesAvg,
+            },
         });
     } catch (error) {
         next(error);

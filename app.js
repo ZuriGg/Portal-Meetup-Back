@@ -34,11 +34,11 @@ app.use('/uploads', express.static(staticDir)); //uploads es un directorio está
 // Middleware que indica a express dónde están las rutas.
 app.use(routes);
 
-//middleware de manejo de errores
-app.use(errorController);
-
 //middelware de ruta no encontrada
 app.use(notFoundController);
+
+//middleware de manejo de errores
+app.use(errorController);
 
 // Iniciar el servidor en el puerto 3000
 const PORT = process.env.PORT || 3000;

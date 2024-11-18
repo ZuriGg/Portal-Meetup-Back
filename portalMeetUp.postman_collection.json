@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "19330b0a-ad82-4391-91df-53e092678af1",
+		"name": "GOODportalMeetUp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37413813"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Marmeladee\",\r\n    \"email\":\"better_days1996+2@hotmail.com\",\r\n    \"password\":\"Root1...\",\r\n    \"firstName\":\"Elver\",\r\n    \"lastname\":\"Galarga\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "validate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/validate/DjQYBdcMDN",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"validate",
+								"DjQYBdcMDN"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"better_days1996@hotmail.com\",\r\n    \"password\":\"Root2...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "edit user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/edit/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"edit",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user public",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "avatar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/bette/Pictures/20160818_123748.jpg"
+								}
+							]
+						},
+						"url": "http://localhost:3000/users/avatar"
+					},
+					"response": []
+				},
+				{
+					"name": "recover password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"better_days1996@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/password/recover"
+					},
+					"response": []
+				},
+				{
+					"name": "edit pass",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recoverPassCode\":\"CghUtCMSL2\",\r\n    \"newPass\":\"Root1...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/password"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "meetup",
+			"item": [
+				{
+					"name": "new meetup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTAwMjIxNywiZXhwIjoxNzMxNjA3MDE3fQ.UJMw43pht85ref9xW74MIaKaYzaBvfyucNb03DneGJE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Reunión de ridículas\",\r\n    \"description\":\"entrañable reunión para estúpidas que no se saben ser normales\",\r\n    \"startDate\":\"2024-11-19\",\r\n    \"oneSession\":true,\r\n    \"categoryId\":\"1\",\r\n    \"city\":\"A Coruña\",\r\n    \"address\":\"Rua da Piruleta, n20\",\r\n    \"zip\":\"15172\",\r\n    \"hourMeetup\": \"20:00\",\r\n    \"dayOfTheWeek\":\"domingo\",\r\n    \"aforoMax\":\"80\",\r\n    \"userId\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups"
+					},
+					"response": []
+				},
+				{
+					"name": "see meetups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/meetups?location=&category=&search=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"meetups"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": ""
+								},
+								{
+									"key": "category",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "see meet up by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/meetups/3"
+					},
+					"response": []
+				},
+				{
+					"name": "see categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "edit meetup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Reunión de estúpidas\",\r\n    \"description\":\"entrañable reunión para estúpidas que no se saben ser normales\",\r\n    \"startDate\":\"2024-11-25\",\r\n    \"oneSession\":true,\r\n    \"categoryId\":\"1\",\r\n    \"city\":\"A Coruña\",\r\n    \"address\":\"Rua da Cona, n20\",\r\n    \"zip\":\"15172\",\r\n    \"hourMeetup\":\"15:45\",\r\n    \"dayOfTheWeek\":\"domingo\",\r\n    \"aforoMax\":\"80\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups/edit/1"
+					},
+					"response": []
+				},
+				{
+					"name": "inscribirse a un meetup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "2024-12-10",
+								"type": "text"
+							},
+							{
+								"key": "User",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/meetups/3/inscription?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"meetups",
+								"3",
+								"inscription"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelar inscripción",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "User",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups/3/registration"
+					},
+					"response": []
+				},
+				{
+					"name": "cancelar fecha meet up",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"2024-12-25\",\r\n    \"notes\":\"se cancela porque la tipa esta mala\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups/3/1/outservice"
+					},
+					"response": []
+				},
+				{
+					"name": "votes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\":\"2\",\r\n    \"coment\":\"me parecio una mierda. le doy un 2 porque soy generosa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups/1/votes"
+					},
+					"response": []
+				},
+				{
+					"name": "validate meetup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTczMTkzNzU3NiwiZXhwIjoxNzMyNTQyMzc2fQ.K69IrJpI0AnwLSku28FEWg5FSfPTnIXVcX2dZ5jCpDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"validated\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/meetups/3/validate"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

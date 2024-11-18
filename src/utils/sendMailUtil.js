@@ -8,10 +8,13 @@ import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from '../../env.js';
 const transport = nodemailer.createTransport({
     host: SMTP_HOST,
     port: SMTP_PORT,
-    /* secure: false, // Usar false para el puerto 587 (STARTTLS) */
+    /* secure: true, */
     auth: {
         user: SMTP_USER,
         pass: SMTP_PASS,
+    },
+    tls: {
+        rejectUnauthorized: false, // Ignorar la validación de certificados
     },
 });
 
@@ -25,8 +28,7 @@ const sendMailUtil = async (email, subject, body) => {
             html: body,
         };
 
-        const algo = await transport.sendMail(mailOptions);
-        console.log('ALGO>>>>>>>', algo);
+        await transport.sendMail(mailOptions);
     } catch (err) {
         console.error(err);
         sendEmailError();

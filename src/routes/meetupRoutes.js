@@ -43,7 +43,7 @@ meetUpRouter.get('/meetups', listMeetUpController);
 //muestra una entrada en concreta
 meetUpRouter.get('/meetups/:meetupId', meetupExists, getMeetupController);
 
-//muestra una localización en concreto //AGREGADO RECIENTE
+//muestra una localización en concreto
 meetUpRouter.get('/location/:locationId', getLocationController);
 
 // Endpoint que muestra la categoría

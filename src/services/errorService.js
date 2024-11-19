@@ -8,12 +8,6 @@ export const cannotVoteOwnMeetupError = () => {
     return error;
 };
 
-// export const deleteFileError = () => {
-//     const error = new Error('error email, o contraseña incorrecta', path);
-//     error.httpStatus = path;
-//     return error;
-// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
-
 export const deleteFileError = () => {
     const error = new Error('Error al eliminar el archivo');
     error.httpStatus = 500; // Internal Server Error
@@ -29,24 +23,12 @@ export const emailAlreadyRegisteredError = () => {
     return error;
 };
 
-// export const invalidCredentialsError = () => {
-//     const error = new Error('error email, o contraseña incorrecta', path);
-//     error.httpStatus = path;
-//     return error;
-// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
-
 export const invalidCredentialsError = () => {
     const error = new Error('Email o contraseña incorrectos');
     error.httpStatus = 401; // Unauthorized
     error.code = 'INVALID_CREDENTIALS';
     return error;
 };
-
-// export const invalidTokenError = () => {
-//     const error = new Error('error en el token', path);
-//     error.httpStatus = path;
-//     return error;
-// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
 
 export const invalidTokenError = () => {
     const error = new Error('Token inválido');
@@ -70,12 +52,6 @@ export const notFoundError = (resource) => {
     return error;
 }; //se elimina el path por ser segundo argumento y dar fallo en el endpoint
 
-// export const pendingActivationError = () => {
-//     const error = new Error('error email, o contraseña incorrecta', path);
-//     error.httpStatus = path;
-//     return error;
-// }; NO SE LE PUEDE ASIGNAR UN "PATH" A UN HTTPSTATUS
-
 export const pendingActivationError = () => {
     const error = new Error('Tu cuenta está pendiente de activación');
     error.httpStatus = 403; // Forbidden
@@ -95,10 +71,7 @@ export const photoLimitReachedError = () => {
 };
 
 export const recoveryCodeError = () => {
-    const error = new Error(
-        'Se ha alcanzado el límite de tres fotos en el meetup',
-        path
-    );
+    const error = new Error('Código de recuperación incorrecto', path);
     error.httpStatus = path;
     (error.httpStatus = 401), // Unauthorized
         (error.code = 'INVALID_RECOVERY_CODE');

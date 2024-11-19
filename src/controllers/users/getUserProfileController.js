@@ -13,7 +13,6 @@ const getUserProfileController = async (req, res, next) => {
 
         // Eliminamos los datos privados del usuario.
         delete user.password; // No enviar la contraseña.
-        delete user.email; // No enviar el correo electrónico.
         delete user.registrationCode; // No enviar el código de registro.
         delete user.recoverPassCode; // No enviar el código de recuperación de contraseña.
 

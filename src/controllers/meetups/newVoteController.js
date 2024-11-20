@@ -15,6 +15,9 @@ const newVoteController = async (req, res, next) => {
         const { attendanceId } = req.params; //id de la sesión del meetup
         const { value, coment } = req.body; //puntuación y comentario
         console.log('Log0...');
+        console.log('attendanceId:', attendanceId);
+        console.log('value:', value);
+        console.log('coment:', coment);
 
         //aplicamos joi antes de seguir con el controlador
         await validateSchemaUtil(voteMeetupSchema, req.body);
@@ -35,7 +38,7 @@ const newVoteController = async (req, res, next) => {
 
         //comprobar que la persona que asistió al evento es la que vota
         if (attendance.userId !== req.user.id) {
-            throw new Error('no se puede votar algo a lo q no has ido'); //crear nmuevo erro personalizado
+            throw new Error('no se puede votar algo a lo q no has ido'); //crear nmuevo error personalizado
         }
         console.log('Log4...');
 

@@ -7,7 +7,6 @@ import path from 'path';
 // Importamos las rutas.
 import routes from './src/routes/index.js';
 
-
 import {
     errorController,
     notFoundController,
@@ -15,6 +14,9 @@ import {
 
 //creación del servidor
 const app = express();
+
+// Establecemos la carpeta /Uploads como pública accesible desde el enlace "http://localhost:3000/uploads/"
+app.use('/uploads', express.static(path.join(process.cwd(), 'src', 'uploads')));
 
 app.use(express.json());
 

@@ -5,8 +5,24 @@ import { v4 as uuid } from 'uuid';
 
 import { saveFileError, deleteFileError } from './errorService.js';
 
+// Asegura que el directorio de uploads exista
+const ensureUploadsDirectoryExists = async () => {
+    const uploadsDir = path.join(process.cwd(), 'src', 'uploads');
+
+    try {
+        // Creamos el directorio si no existe (recursivamente si es necesario)
+        await fs.mkdir(uploadsDir, { recursive: true });
+    } catch (err) {
+        console.error('Error al crear el directorio de uploads:', err);
+        throw err;
+    }
+};
+
 export const savePhotoService = async (img, width) => {
     try {
+        // Aseguramos que el directorio de uploads exista
+        await ensureUploadsDirectoryExists();
+
         // Ruta absoluta al directorio de subida de archivos.
         const uploadsDir = path.join(process.cwd(), 'src', 'uploads');
 
@@ -35,10 +51,13 @@ export const savePhotoService = async (img, width) => {
 
 export const deletePhotoService = async (imgName) => {
     try {
+        // Aseguramos que el directorio de uploads exista antes de intentar eliminar un archivo
+        await ensureUploadsDirectoryExists();
+
         // Ruta absoluta al archivo para eliminar:
         const imgPath = path.join(process.cwd(), 'src', 'uploads', imgName);
 
-        // Eliminamos erl archivo de la carpeta de subida de archivos.
+        // Eliminamos el archivo de la carpeta de subida de archivos.
         await fs.unlink(imgPath);
     } catch (err) {
         console.error(err);

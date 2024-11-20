@@ -29,10 +29,6 @@ app.use(cors());
 //middleware que "desencripta" un body "form-data", creando las propiedades "body" y "files" en el objeto "request"
 app.use(fileUpload());
 
-//ruta estática para ser usada desde el front para pedir el envio de una imagen o cualquier archivo estatico
-const staticDir = path.join(process.cwd(), './src/uploads');
-app.use('/uploads', express.static(staticDir)); //uploads es un directorio estático/endpoint para pedir una imagen
-
 // Middleware que indica a express dónde están las rutas.
 app.use(routes);
 

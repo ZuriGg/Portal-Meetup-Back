@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import getPool from '../../database/getPool.js';
 
 // Importamos los modelos.
-import selectUserByEmailModel from './selectUserByEmailModel.js';
+import selectUserByRecoverPassModel from './selectUserByRecoverPassCodeModel.js';
 
 // Importamos los servicios.
 import { recoveryCodeError } from '../../services/errorService.js';
@@ -11,12 +11,11 @@ import { recoveryCodeError } from '../../services/errorService.js';
 const updateUserPassModel = async (recoverPassCode, newPass) => {
     const pool = await getPool();
 
-    // Obtenemos al usuario en base al email recibido.RECOVER PASSCODE
-    const user = await /* selectUserByRecoverPassCodeModel */ recoverPassCode;
-
-    // Si no encontramos ningún usuario o si el código es incorrecto lanzamos un error.
+    // Obtenemos al usuario en base al RECOVER PASSCODE
+    const user = await selectUserByRecoverPassModel(recoverPassCode);
     console.log({ user, recoverPassCode });
 
+    // Si no encontramos ningún usuario o si el código es incorrecto lanzamos un error.
     if (!user) {
         throw recoveryCodeError();
     }

@@ -1,4 +1,4 @@
-import selectVotesByUserIdModel from '../../models/meetups/selectVotesByUserIdModel.js';
+//import selectVotesByUserIdModel from '../../models/meetups/selectVotesByUserIdModel.js';
 
 const getUserVotesController = async (req, res, next) => {
     try {

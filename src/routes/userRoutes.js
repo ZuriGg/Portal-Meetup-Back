@@ -52,7 +52,7 @@ userRouter.post('/users/password/recover', sendRecoverPassController);
 // Editar la contraseña de un usuario con un código de recuperación.
 userRouter.put('/users/password', editUserPassController);
 
-// Ruta para obtener todas las valoraciones de un usuario
+// Ruta para obtener todas las valoraciones de un usuario //EN CONSTRUCCIÓN
 userRouter.get('/votes', authUser, getUserVotesController);
 
 export default userRouter;

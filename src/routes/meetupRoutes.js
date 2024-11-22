@@ -33,7 +33,7 @@ meetUpRouter.put(
     '/meetups/edit/:meetupId',
     authUser,
     meetupExists,
-    /*     canEditController, */
+    canEditController,
     editMeetupController
 );
 

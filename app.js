@@ -24,10 +24,16 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 //middleware CORS: evita que interfieran cuando conectemos front con back
-app.use(cors());
+app.use(
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+);
 
 //middleware que "desencripta" un body "form-data", creando las propiedades "body" y "files" en el objeto "request"
-app.use(fileUpload());
+app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
 
 // Middleware que indica a express dónde están las rutas.
 app.use(routes);

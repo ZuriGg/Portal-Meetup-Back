@@ -48,7 +48,7 @@ const selectAllMeetupsModel = async (keyword = {}) => {
     const query = `
     SELECT m.id, m.title, m.description, m.startDate, m.oneSession, 
            m.hourMeetup, m.dayOfTheWeek, m.aforoMax, m.userId, 
-           m.locationId, l.city, m.categoryId,
+           m.locationId, l.city, m.categoryId, m.validated,
            AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
     FROM meetups m
     LEFT JOIN meetupVotes v ON v.id = m.id

@@ -10,6 +10,7 @@ import {
 const authUser = (req, res, next) => {
     try {
         const { authorization } = req.headers; // El Header contiene el token JWT.
+
         if (!authorization) {
             //si no hay autorización en el header, se lanza un error
             notAuthenticatedError();
@@ -22,9 +23,10 @@ const authUser = (req, res, next) => {
         } catch (error) {
             invalidCredentialsError();
         }
+        console.log('Información del token:', tokenInfo);
 
         req.user = tokenInfo; //Se asigna la información decodificada del token (almacenada en tokenInfo) al objeto req.user.
-        console.log('Información del token:', tokenInfo);
+
         next();
     } catch (error) {
         next(error);

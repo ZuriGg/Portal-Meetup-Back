@@ -46,20 +46,19 @@ const selectAllMeetupsModel = async (keyword = {}) => {
 
     //consulta parametrizada con limit y offset
     const query = `
-    SELECT m.id, m.title, m.description, m.startDate, m.oneSession, 
-           m.hourMeetup, m.dayOfTheWeek, m.aforoMax, m.userId, 
-           m.locationId, l.city, m.categoryId,
-           AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
-    FROM meetups m
-    LEFT JOIN meetupVotes v ON v.id = m.id
-    INNER JOIN users u ON u.id = m.userId
-    INNER JOIN location l ON m.locationId = l.id
-    ${category ? 'INNER JOIN category c ON m.categoryId = c.id' : ''}
-    ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
-    GROUP BY m.id
-    ORDER BY ${order === 'votes' ? 'votes DESC' : 'm.createdAt DESC'}
-    LIMIT ? OFFSET ?
-`;
+       SELECT m.id, m.title, m.description, m.startDate, m.oneSession, m.hourMeetup, m.dayOfTheWeek,
+        m.aforoMax, m.userId, m.locationId, m.categoryId,
+        AVG(IFNULL(v.value, 0)) AS votes, m.createdAt
+        FROM meetups m
+        LEFT JOIN meetupVotes v ON v.id = m.id
+        INNER JOIN users u ON u.id = m.userId
+        INNER JOIN location l ON m.locationId = l.id
+        ${category ? 'INNER JOIN category c ON m.categoryId = c.id' : ''}
+        ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
+        GROUP BY m.id
+        ORDER BY ${order === 'votes' ? 'votes DESC' : 'm.createdAt DESC'}
+        LIMIT ? OFFSET ?
+    `;
 
     console.log();
 

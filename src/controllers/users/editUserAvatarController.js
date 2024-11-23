@@ -29,8 +29,7 @@ const editUserAvatarController = async (req, res, next) => {
             await deletePhotoService(user.avatar);
         }
 
-        // Guardamos el avatar en la carpeta de subida de archivos. Redimensionamos a un ancho
-        // de 100 píxeles.
+        // Guardamos el avatar en la carpeta de subida de archivos. Redimensionamos a un ancho de 500 píxeles.
         const avatarName = await savePhotoService(avatar, 500);
 
         // Actualizamos los datos del usuario con el nombre de avatar que hemos obtenido.
@@ -38,7 +37,8 @@ const editUserAvatarController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            message: 'avatar de usuario actualizado',
+            message: 'Avatar de usuario actualizado',
+            url: `http://localhost:3000/uploads/${avatarName}`, // COMPROBAR ESTA PARTE O ELIMINAR!!
         });
     } catch (err) {
         next(err);

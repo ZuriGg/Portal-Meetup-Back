@@ -9,6 +9,8 @@ import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 import editUserSchema from '../../schemas/users/editUserSchema.js';
 
 const editUserController = async (req, res, next) => {
+    console.log('req.user:', req.user);
+
     try {
         const { id: userId } = req.user;
         console.log('userId desde req.user:', userId);
@@ -27,9 +29,14 @@ const editUserController = async (req, res, next) => {
         //actualizamos el usuario
         await editUserModel(firstName, lastname, username, email, userId);
 
+        // Obtener los datos actualizados desde la base de datos //AÑADIENDO RESPUESTA PARA QUE LA TOME EL FRONT
+        const updatedUser = await selectUserByIdModel(userId);
+        console.log('Datos actualizados desde la base de datos:', updatedUser);
+
         res.send({
             message: 'Ok, usuario editado',
             status: 200,
+            data: updatedUser, // Datos actualizados
         });
     } catch (error) {
         next(error);

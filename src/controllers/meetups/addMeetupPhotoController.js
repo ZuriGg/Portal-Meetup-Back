@@ -3,7 +3,7 @@ import insertPhotoModel from '../../models/meetups/insertPhotoModel.js';
 import selectMeetupByIdModel from '../../models/meetups/selectMeetupByIdModel.js';
 
 // Importamos los servicios.
-import { savePhotoService } from '../../services/photoService.js';
+import { savePhotoService } from '../../services/savePhotoService.js';
 
 // Importamos los servicios.
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';

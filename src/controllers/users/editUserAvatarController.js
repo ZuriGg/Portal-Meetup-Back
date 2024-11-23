@@ -4,7 +4,7 @@ import updateUserAvatarModel from '../../models/users/updateUserAvatarModel.js';
 import {
     savePhotoService,
     deletePhotoService,
-} from '../../services/photoService.js';
+} from '../../services/savePhotoService.js';
 
 //importar siempre validateSchemaUtil para poder usar Joi
 import validateSchemaUtil from '../../utils/validateSchemaUtil.js';

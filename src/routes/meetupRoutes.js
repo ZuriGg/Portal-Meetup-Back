@@ -21,6 +21,7 @@ import {
     newVoteController,
     invalidDayMeetupController,
     getLocationController,
+    listAttendanceController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
@@ -49,7 +50,7 @@ meetUpRouter.get('/location/:locationId', getLocationController);
 // Endpoint que muestra la categoría
 meetUpRouter.get('/categories', meetUpCategoryController);
 
-//Inscripcion a un meetup
+// Inscripcion a un meetup
 meetUpRouter.post(
     '/meetups/:meetupId/inscription',
     authUser,
@@ -57,20 +58,23 @@ meetUpRouter.post(
     inscriptionDateMeetupController
 );
 
-//cancela inscripcion meetup
+// Lista de asistencias
+meetUpRouter.get('/attendance', authUser, listAttendanceController);
+
+// cancela inscripcion meetup
 meetUpRouter.delete(
     '/meetups/:meetupId/registration',
     cancelMeetUpRegistrationController
 );
 
-//cancela fecha meetup establecida
+// cancela fecha meetup establecida
 meetUpRouter.put(
     '/meetups/:meetupId/:userId/outservice',
     authUser,
     invalidDayMeetupController
 );
 
-//borra una entrada
+// borra una entrada
 meetUpRouter.delete(
     '/meetups/:meetupId',
     authUser,

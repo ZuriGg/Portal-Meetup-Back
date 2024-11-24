@@ -15,6 +15,7 @@ import {
     editUserController,
     getUserProfileController,
     getUserVotesController,
+    listUsersController,
 } from '../controllers/users/index.js';
 
 const userRouter = express.Router();
@@ -25,15 +26,16 @@ userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 userRouter.post('/users/login', loginUserController);
 
-// Obtener perfil privado de un usuario. (Entregar los datos del usuario segun su token, para el panel de usuario)
-userRouter.get('/users', authUser, userExistsController, getOwnUserController);
+//obtener todos los perfiles de usuarios (públicos)
+userRouter.get('/users', listUsersController);
 
 //editar usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);
 
-// Obtener perfil público de un usuario. (Para poder mostrar datos de usuarios (En el detalles meetup) seleccionados por su id)
+//obtener perfil privado de un usuario cuando se loguea.
 userRouter.get(
     '/users/:userId',
+    authUser,
     userExistsController,
     getUserProfileController
 );
@@ -53,6 +55,6 @@ userRouter.post('/users/password/recover', sendRecoverPassController);
 userRouter.put('/users/password', editUserPassController);
 
 // Ruta para obtener todas las valoraciones de un usuario //EN CONSTRUCCIÓN
-userRouter.get('/votes', authUser, getUserVotesController);
+userRouter.get('/users/votes', authUser, getUserVotesController);
 
 export default userRouter;

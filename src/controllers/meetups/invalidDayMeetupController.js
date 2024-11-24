@@ -8,7 +8,7 @@ import invalidDayMeetupSchema from '../../schemas/meetups/invalidDayMeetupSchema
 
 const invalidDayMeetupController = async (req, res, next) => {
     try {
-        const { meetupId } = req.params;
+        const { attendanceId } = req.params;
         const { date } = req.body;
         const { notes } = req.body;
 
@@ -21,13 +21,13 @@ const invalidDayMeetupController = async (req, res, next) => {
             );
         }
 
-        const resultId = await invalidDayMeetupModel(meetupId, date, notes);
+        const resultId = await invalidDayMeetupModel(attendanceId, date, notes);
 
         res.send({
             status: 'ok',
             message: 'Día del meetup inhabilitado correctamente',
             data: {
-                meetupId,
+                meetupId: attendanceId,
                 date,
                 notes,
                 recordId: resultId,

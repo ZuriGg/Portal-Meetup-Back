@@ -65,7 +65,7 @@ meetUpRouter.delete(
 
 //cancela fecha meetup establecida
 meetUpRouter.put(
-    '/meetups/:meetupId/:userId/outservice',
+    '/attendance/:attendanceId/outservice',
     authUser,
     invalidDayMeetupController
 );

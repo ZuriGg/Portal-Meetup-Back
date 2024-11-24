@@ -1,11 +1,11 @@
 import getPool from '../../database/getPool.js';
 
-const invalidDayMeetupModel = async (meetupId, date, notes) => {
+const invalidDayMeetupModel = async (attendanceId, date, notes) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-        `INSERT INTO outOfService (notes, date, meetupId) VALUES (?, ?, ?)`,
-        [notes, date, meetupId]
+        `INSERT INTO outOfService (notes, date, attendanceId) VALUES (?, ?, ?)`,
+        [notes, date, attendanceId]
     );
 
     return result.insertId;

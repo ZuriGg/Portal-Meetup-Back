@@ -143,8 +143,8 @@ const main = async () => {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 notes VARCHAR(100) DEFAULT 'Día inhabilitado: ',
                 date DATETIME NOT NULL,
-                meetupId INT NOT NULL,
-                FOREIGN KEY (meetupId) REFERENCES meetups(id)
+                attendanceId INT NOT NULL,
+                FOREIGN KEY (attendanceId) REFERENCES attendance(id)
             )
         `);
 

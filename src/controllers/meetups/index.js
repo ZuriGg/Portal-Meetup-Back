@@ -13,6 +13,7 @@ import invalidDayMeetupController from './invalidDayMeetupController.js';
 import addMeetupPhotoController from './addMeetupPhotoController.js';
 import getLocationController from './getLocationController.js';
 import listAttendanceController from './listAttendanceController.js';
+import getListVotesController from './getListVotesController.js';
 
 export {
     cancelMeetUpRegistrationController,
@@ -30,4 +31,5 @@ export {
     addMeetupPhotoController,
     getLocationController,
     listAttendanceController,
+    getListVotesController,
 };

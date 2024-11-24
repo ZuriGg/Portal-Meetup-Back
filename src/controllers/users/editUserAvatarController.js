@@ -30,7 +30,7 @@ const editUserAvatarController = async (req, res, next) => {
         }
 
         // Guardamos el avatar en la carpeta de subida de archivos. Redimensionamos a un ancho de 500 píxeles.
-        const avatarName = await savePhotoService(avatar, 500);
+        const avatarName = await savePhotoService(avatar, 600);
 
         // Actualizamos los datos del usuario con el nombre de avatar que hemos obtenido.
         await updateUserAvatarModel(avatarName, req.user.id);

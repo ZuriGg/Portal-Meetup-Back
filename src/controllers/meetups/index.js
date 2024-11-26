@@ -14,6 +14,8 @@ import addMeetupPhotoController from './addMeetupPhotoController.js';
 import getLocationController from './getLocationController.js';
 import listAttendanceController from './listAttendanceController.js';
 import getListVotesController from './getListVotesController.js';
+import newPhotoMeetupController from './newPhotoMeetupController.js';
+import listMeetupPhotoController from './listMeetupPhotoController.js';
 
 export {
     cancelMeetUpRegistrationController,
@@ -32,4 +34,6 @@ export {
     getLocationController,
     listAttendanceController,
     getListVotesController,
+    newPhotoMeetupController,
+    listMeetupPhotoController,
 };

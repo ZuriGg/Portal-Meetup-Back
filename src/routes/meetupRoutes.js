@@ -10,7 +10,7 @@ import {
 import {
     cancelMeetUpRegistrationController,
     deleteMeetupController,
-    deletePhotoController,
+    /*     deletePhotoController, */
     editMeetupController,
     listMeetUpController,
     meetUpCategoryController,
@@ -23,12 +23,24 @@ import {
     getLocationController,
     listAttendanceController,
     getListVotesController,
+    newPhotoMeetupController,
+    listMeetupPhotoController,
 } from '../controllers/meetups/index.js';
 
 const meetUpRouter = express.Router();
 
 //crea un meetup
 meetUpRouter.post('/meetups', authUser, newMeetupController);
+
+//Agrega imagenes a un meetup
+meetUpRouter.put(
+    '/meetups/:meetupId/photo/:photoId',
+    authUser,
+    newPhotoMeetupController
+);
+
+// Obtiene las imagenes de un meetup
+meetUpRouter.get('/meetups/:meetupId/photos', listMeetupPhotoController);
 
 //edita un meetup
 meetUpRouter.put(
@@ -84,13 +96,13 @@ meetUpRouter.delete(
     deleteMeetupController
 );
 
-meetUpRouter.delete(
+/* meetUpRouter.delete(
     '/meetups/:meetupId/photos/:photoId',
     authUser,
     meetupExists,
     canEditController,
     deletePhotoController
-);
+); */
 
 // Endpoint de validación de meetup (Establecerlo como público, verificado por un admin)
 meetUpRouter.put(

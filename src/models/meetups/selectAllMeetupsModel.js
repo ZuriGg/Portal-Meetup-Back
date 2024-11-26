@@ -65,16 +65,6 @@ const selectAllMeetupsModel = async (keyword = {}) => {
     //devuelve un array de objetos (meetup)
     const [meetups] = await pool.query(query, values);
 
-    for (let meetup of meetups) {
-        /* const [photos] = await pool.query(
-            `
-                SELECT id, name FROM meetup_photos WHERE meetupId=?
-            `,
-            [meetup.id]
-        ); */
-        // Agregamos las fotos a la entrada. Si no existe foto en la posición cero establecemos un valor null.
-        /* meetup.photos = photos.length > 0 ? photos[0] : null; */
-    }
     return meetups;
 };
 

@@ -38,7 +38,6 @@ const editUserAvatarController = async (req, res, next) => {
         res.send({
             status: 'ok',
             message: 'Avatar de usuario actualizado',
-            url: `http://localhost:3000/uploads/${avatarName}`, // COMPROBAR ESTA PARTE O ELIMINAR!!
         });
     } catch (err) {
         next(err);

@@ -26,7 +26,7 @@ const newMeetupController = async (req, res, next) => {
         // aplicamos la validacion con joi antes de seguir con el model
         await validateSchemaUtil(newMeetupSchema, req.body);
 
-        await insertMeetupModel(
+        const newMeetupId = await insertMeetupModel(
             title,
             description,
             startDate,
@@ -39,32 +39,12 @@ const newMeetupController = async (req, res, next) => {
             dayOfTheWeek,
             aforoMax,
             userId
-            /* meetUpPhotos, */
-            /*             req.user.id */
         );
-
-        /*         let photos = []; */
-
-        /*         if (req.files) {
-            for (let photo of Object.values(req.files).slice(0, 3)) {
-                let photoName = await savePhotoUtils(photo, 600);
-
-                //NO SE HA CREADO SERVICIO insertPhotoEntrieService
-                                 const photoId = await insertPhotoEntrieService(
-                    photoName,
-                    entryId
-                ); 
-
-                                 photos.push({
-                    id: photoId,
-                    name: photoName,
-                }); 
-            }
-        } */
 
         res.send({
             status: 'ok',
             data: 'Meetup creado satisfactoriamente',
+            newMeetupId,
         });
     } catch (error) {
         next(error);

@@ -36,11 +36,17 @@ meetUpRouter.post('/meetups', authUser, newMeetupController);
 meetUpRouter.put(
     '/meetups/:meetupId/photo/:photoId',
     authUser,
+    meetupExists,
+    canEditController,
     newPhotoMeetupController
 );
 
 // Obtiene las imagenes de un meetup
-meetUpRouter.get('/meetups/:meetupId/photos', listMeetupPhotoController);
+meetUpRouter.get(
+    '/meetups/:meetupId/photos',
+    meetupExists,
+    listMeetupPhotoController
+);
 
 //edita un meetup
 meetUpRouter.put(

@@ -5,7 +5,9 @@ import imgSchema from '../imgSchema.js';
 
 // Esquema donde comprobamos todas las propiedades necesarias.
 const editMeetupImgSchema = joi.object({
-    image: imgSchema /* .required(), no es obligatorio subir un avatar*/,
+    image1: imgSchema /* .required(), no es obligatorio subir un avatar*/,
+    image2: imgSchema /* .required(), no es obligatorio subir un avatar*/,
+    image3: imgSchema /* .required(), no es obligatorio subir un avatar*/,
 });
 
 export default editMeetupImgSchema;

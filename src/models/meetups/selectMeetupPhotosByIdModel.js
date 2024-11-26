@@ -1,22 +1,21 @@
 import getPool from '../../database/getPool.js';
 import { notFoundError } from '../../services/errorService.js';
 
-// Realizamos una consulta a BBDD para seleccionar a un usuario con un id dado.
 const selectMeetupPhotosByIdModel = async (meetupId, photoId) => {
     const pool = await getPool();
 
-    // Comprobamos si hay algún usuario con el email proporcionado.
+    // Realizamos la consulta para buscar la foto
     const [meetupPhoto] = await pool.query(
         `SELECT * FROM meetupPhotos WHERE meetupId = ? AND id = ?`,
         [meetupId, photoId]
     );
 
     if (meetupPhoto.length === 0) {
-        throw notFoundError('meetupPhoto');
+        // Si no se encuentra la foto, devolvemos null
+        return null;
     }
 
-    // El array de usuarios solo podrá contener 1 usuario xq el email no puede repetirse. Usuario de la posición 0
-    return meetupPhoto;
+    return meetupPhoto[0]; // Devolvemos el primer resultado (solo puede haber uno)
 };
 
 export default selectMeetupPhotosByIdModel;

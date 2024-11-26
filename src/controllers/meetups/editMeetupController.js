@@ -47,6 +47,7 @@ const editMeetupController = async (req, res, next) => {
         res.send({
             status: 'ok',
             message: 'Entrada actualizada',
+            meetupId,
         });
     } catch (error) {
         next(error);

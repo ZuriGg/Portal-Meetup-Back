@@ -1,5 +1,6 @@
 import getPool from '../../database/getPool.js';
 import { notFoundError } from '../../services/errorService.js';
+import sendMailUtil from '../../utils/sendMailUtil.js';
 
 // Realizamos una consulta a la BBDD para votar un meetup.
 const insertInscriptionModel = async (user, meetupId, date) => {

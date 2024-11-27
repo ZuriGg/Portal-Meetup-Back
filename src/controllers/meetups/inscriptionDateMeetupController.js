@@ -3,7 +3,8 @@ import insertInscriptionModel from '../../models/meetups/insertInscriptionModel.
 const inscriptionDateMeetupController = async (req, res, next) => {
     try {
         const { meetupId } = req.params;
-        const { date, user } = req.headers;
+        const { user } = req.headers;
+        const { date } = req.body;
 
         console.log(`La id del meetup es: ${meetupId}`);
         console.log(`La id del usuario es: ${user}`);

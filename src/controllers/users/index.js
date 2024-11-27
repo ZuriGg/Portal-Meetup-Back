@@ -1,6 +1,5 @@
 import newUserController from './newUserController.js';
 import loginUserController from './loginUserController.js';
-import getOwnUserController from './getOwnUserController.js';
 import editUserAvatarController from './editUserAvatarController.js';
 import editUserPassController from './editUserPassController.js';
 import validateUserController from './validateUserController.js';
@@ -13,7 +12,6 @@ import listUsersController from './listUsersController.js';
 export {
     newUserController,
     loginUserController,
-    getOwnUserController,
     editUserAvatarController,
     editUserPassController,
     validateUserController,

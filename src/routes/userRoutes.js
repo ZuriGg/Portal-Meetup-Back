@@ -7,7 +7,6 @@ import { authUser, userExistsController } from '../middlewares/index.js';
 import {
     newUserController,
     loginUserController,
-    getOwnUserController,
     editUserAvatarController,
     editUserPassController,
     validateUserController,

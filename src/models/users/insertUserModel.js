@@ -8,6 +8,7 @@ import sendMailUtil from '../../utils/sendMailUtil.js';
 // Importamos los errores.
 import {
     emailAlreadyRegisteredError,
+    sendEmailError,
     userAlreadyRegisteredError,
 } from '../../services/errorService.js';
 
@@ -32,7 +33,7 @@ const insertUserModel = async (
 
     // Si existe usuario con ese nombre --> error.
     if (users.length > 0) {
-        emailAlreadyRegisteredError();
+        throw emailAlreadyRegisteredError();
     }
 
     // Buscamos en la BBDD algún usuario con ese email.
@@ -40,7 +41,7 @@ const insertUserModel = async (
 
     // Si existe usuario con ese email --> error.
     if (users.length > 0) {
-        userAlreadyRegisteredError();
+        throw userAlreadyRegisteredError();
     }
 
     // Encriptamos la contraseña.
@@ -63,16 +64,25 @@ const insertUserModel = async (
 
     // Creamos el contenido del email
     const emailBody = `
-            ¡Bienvenide, ${username}!
+            <p>¡Bienvenide, ${username}!</p>
 
-            💌 Le damos las gracias por registrarse en nuestra app de Meet Ups. <br>
-            ➡️ Para activar su cuenta, haga click en el siguiente enlace:
+            <p>💌 Le damos las gracias por registrarse en nuestra app de Meet Ups.</p>
+            <p>➡️ Para activar su cuenta, haga click en el siguiente enlace:</p>
 
-            <a href="${URL_FRONT}${registrationCode}">Activar mi cuenta</a>
+            <p><a href="${URL_FRONT}${registrationCode}">Activar mi cuenta</a></p>
+
+            <p>Un saludo,</p>
+            <p>El equipo de Meetup</p>
         `;
 
     // Enviamos el email de verificación al usuario.
-    await sendMailUtil(email, emailSubject, emailBody);
+    try {
+        await sendMailUtil(email, emailSubject, emailBody);
+        console.log('Correo enviado exitosamente');
+    } catch (err) {
+        console.error('Error al enviar el correo:', err);
+        throw sendEmailError();
+    }
 };
 
 export default insertUserModel;

@@ -14,13 +14,15 @@ const insertInscriptionModel = async (user, meetupId, date) => {
         [meetupId]
     );
 
+    console.log('Datos del meetup:', meetupData);
+
     // Verificar si los datos del meetup fueron encontrados
-    if (!meetupData) {
+    if (!meetupData || meetupData.length === 0) {
         throw notFoundError('meetup');
     }
 
     // Información del meetup
-    const { title, categoryName } = meetupData;
+    const { title, categoryName } = meetupData[0];
 
     // Verificar si ya existe una inscripción con los mismos datos
     const [existingAttendance] = await pool.query(
@@ -44,28 +46,38 @@ const insertInscriptionModel = async (user, meetupId, date) => {
         [user]
     );
 
-    const { username, email } = userData;
+    if (!userData || userData.length === 0) {
+        throw notFoundError('user');
+    }
+    console.log(userData);
+
+    const { username, email } = userData[0];
 
     // Creamos el asunto del email de confirmación.
-    const emailSubject =
-        '❤️ Inscripción satisfactoria para el evento "${title}" ❤️';
+    const emailSubject = `❤️ Inscripción satisfactoria para el evento "${title}" ❤️`;
 
     // Creamos el contenido del email
     const emailBody = `
              ¡Buenas, ${username}!
  
-             💌 ¡Se ha inscrito correctamente a la sesión del meetup "${title}" de la categoría "${categoryName}"!<br>
-             📅 Fecha de la sesión: ${date}<br>
-             ➡️ Si desea ver más detalles o realizar algún cambio, puede hacerlo a través de su cuenta.<br>
+             <p>💌 ¡Se ha inscrito correctamente a la sesión del meetup "${title}" de la categoría "${categoryName}"!</p>
+             <p>📅 Fecha de la sesión: ${date}</p>
+             <p>➡️ Si desea ver más detalles o realizar algún cambio, puede hacerlo a través de su cuenta.</p>
  
-            ¡Nos vemos pronto en el evento!
+            <p>¡Nos vemos pronto en el evento!</p>
 
-        Un saludo,<br>
-        El equipo de Meetup
+        <p>Un saludo,</p>
+        <p>El equipo de Meetup</p>
          `;
 
-    // Enviamos el email de confirmación al usuario.
-    await sendMailUtil(email, emailSubject, emailBody);
+    console.log(`Enviando correo a: ${email} con asunto: ${emailSubject}`);
+    try {
+        await sendMailUtil(email, emailSubject, emailBody);
+        console.log('Correo enviado exitosamente');
+    } catch (err) {
+        console.error('Error al enviar el correo:', err);
+        throw err;
+    }
 };
 
 export default insertInscriptionModel;

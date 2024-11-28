@@ -63,7 +63,9 @@ const newVoteController = async (req, res, next) => {
             },
         });
     } catch (error) {
-        next(error);
+        res.status(409).send({
+            error: error.message || 'Error desconocido',
+        });
     }
 };
 

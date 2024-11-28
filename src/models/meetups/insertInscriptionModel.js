@@ -1,5 +1,9 @@
 import getPool from '../../database/getPool.js';
-import { notFoundError } from '../../services/errorService.js';
+import {
+    attendanceAlreadyRegistered,
+    notFoundError,
+    sendEmailError,
+} from '../../services/errorService.js';
 import sendMailUtil from '../../utils/sendMailUtil.js';
 
 const insertInscriptionModel = async (user, meetupId, date) => {
@@ -31,7 +35,7 @@ const insertInscriptionModel = async (user, meetupId, date) => {
     );
 
     if (existingAttendance.length > 0) {
-        throw new Error('Ya estás inscrito para este meetup en esta fecha.');
+        throw attendanceAlreadyRegistered();
     }
 
     // Insertar si no hay duplicados
@@ -66,8 +70,8 @@ const insertInscriptionModel = async (user, meetupId, date) => {
  
             <p>¡Nos vemos pronto en el evento!</p>
 
-        <p>Un saludo,</p>
-        <p>El equipo de Meetup</p>
+            <p>Un saludo,</p>
+            <p>El equipo de Meetup</p>
          `;
 
     console.log(`Enviando correo a: ${email} con asunto: ${emailSubject}`);
@@ -76,7 +80,7 @@ const insertInscriptionModel = async (user, meetupId, date) => {
         console.log('Correo enviado exitosamente');
     } catch (err) {
         console.error('Error al enviar el correo:', err);
-        throw err;
+        throw sendEmailError();
     }
 };
 

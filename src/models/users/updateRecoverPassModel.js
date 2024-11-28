@@ -1,4 +1,5 @@
 import getPool from '../../database/getPool.js';
+import { sendEmailError } from '../../services/errorService.js';
 
 // Importamos los servicios.
 import sendMailUtil from '../../utils/sendMailUtil.js';
@@ -14,19 +15,30 @@ const updateRecoverPassModel = async (email, recoverPassCode) => {
     ]);
 
     // Creamos el asunto del email de recuperación de contraseña.
-    const emailSubject = 'Recuperación de contraseña en Meet Ups 🌟';
+    const emailSubject = '❤️‍🩹Recuperación de contraseña en Meet Ups ❤️‍🩹';
 
     // Creamos el contenido del email
     const emailBody = `
-            Se ha solicitado la recuperación de contraseña para este email en Meet Ups. 
-                
-            Utiliza el siguiente código para crear una nueva contraseña: ${recoverPassCode}
+            <p>¡Hola hola, caracona!😊</p>
+            <p>Se ha solicitado la recuperación de contraseña para este email en Meet Ups.</p>
 
-            Si no has sido tú ignora este email.
+            <p>🆕 Use el siguiente código para crear una nueva contraseña: ${recoverPassCode}</p>
+
+            <p>🦝 Si no ha sido usted, puede ignorar este email</p>
+
+            <p>Un saludo,</p>
+            <p>El equipo de Meetup</p>
+
         `;
 
     // Enviamos el mail para recuperar la contraseña.
-    await sendMailUtil(email, emailSubject, emailBody);
+    try {
+        await sendMailUtil(email, emailSubject, emailBody);
+        console.log('Correo enviado exitosamente');
+    } catch (err) {
+        console.error('Error al enviar el correo:', err);
+        throw sendEmailError();
+    }
 };
 
 export default updateRecoverPassModel;

@@ -6,10 +6,6 @@ const inscriptionDateMeetupController = async (req, res, next) => {
         const { user } = req.headers;
         const { date } = req.body;
 
-        console.log(`La id del meetup es: ${meetupId}`);
-        console.log(`La id del usuario es: ${user}`);
-        console.log(`La mierda de date es: ${date}`);
-
         await insertInscriptionModel(user, meetupId, date);
 
         res.send({
@@ -17,7 +13,15 @@ const inscriptionDateMeetupController = async (req, res, next) => {
             message: 'Se ha inscrito correctamente',
         });
     } catch (error) {
-        next(error);
+        if (error.message === 'duplicate_attendance') {
+            // Si el error es por inscripción duplicada
+            res.status(400).send({
+                status: 'error',
+                message: 'Ya estás inscrito para este meetup en esta fecha.',
+            });
+        } else {
+            next(error);
+        }
     }
 };
 

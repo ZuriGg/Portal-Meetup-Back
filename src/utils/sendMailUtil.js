@@ -30,8 +30,9 @@ const sendMailUtil = async (email, subject, body) => {
 
         await transport.sendMail(mailOptions);
     } catch (err) {
-        console.error(err);
-        sendEmailError();
+        console.error('Error al enviar correo:', err);
+        sendEmailError(err.message || 'Error desconocido al enviar correo');
+        throw err;
     }
 };
 

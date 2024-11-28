@@ -154,3 +154,14 @@ export const cantEditUser = (path = '') => {
     error.path = path;
     return error;
 };
+
+export const attendanceAlreadyRegistered = () => {
+    const error = new Error(
+        'El usuario ya se ha inscrito para asistir a este meetup en esta fecha.',
+        path
+    );
+    error.httpStatus = path;
+    (error.httpStatus = 409), // Conflict
+        (error.code = 'ATTENDANCE_ALREADY_APPLIED');
+    return error;
+};

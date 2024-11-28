@@ -59,18 +59,17 @@ const insertUserModel = async (
     );
 
     // Creamos el asunto del email de verificación.
-    const emailSubject = 'Activa tu usuario en nuestra app de Meet Ups 🌟';
+    const emailSubject = '🌟 Active su usuario en nuestra app de Meet Ups 🌟';
 
     // Creamos el contenido del email
     const emailBody = `
             ¡Bienvenide, ${username}!
 
-            Gracias por registrarte en nuestra app de Meet Ups. Para activar tu cuenta, haz clic en el siguiente enlace:
+            💌 Le damos las gracias por registrarse en nuestra app de Meet Ups. <br>
+            ➡️ Para activar su cuenta, haga click en el siguiente enlace:
 
             <a href="${URL_FRONT}${registrationCode}">Activar mi cuenta</a>
         `;
-
-    // Crear en el .env una variable de entorno URL_FRONT.
 
     // Enviamos el email de verificación al usuario.
     await sendMailUtil(email, emailSubject, emailBody);

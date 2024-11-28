@@ -1,10 +1,5 @@
 import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
 
-//AGREGAR VALIDACIÓN JOI
-
-//necesario validateSchemaUtil para trabajar con joi
-import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
-
 // Importamos el esquema concreto
 
 const getUserProfileController = async (req, res, next) => {

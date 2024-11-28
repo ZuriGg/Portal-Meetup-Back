@@ -50,7 +50,7 @@ export const notFoundError = (resource) => {
     error.httpStatus = 404; // Forbbiden
     error.code = 'RESOURCE_NOT_FOUND';
     return error;
-}; //se elimina el path por ser segundo argumento y dar fallo en el endpoint
+};
 
 export const pendingActivationError = () => {
     const error = new Error('Tu cuenta está pendiente de activación');
@@ -140,11 +140,11 @@ export const invalidVoteValueError = () => {
 
 export const trueOrFalseError = () => {
     const error = new Error(
-        'No se ha recibido un valor "true" o "false", no se ha podido realizar la operación',
-        path
+        'No se ha recibido un valor "true" o "false", no se ha podido realizar la operación'
     );
     error.httpStatus = 400;
-    /* (error.httpStatus = 400)((error.code = 'INVALID_KEY')); */
+    error.code = 'INVALID_KEY';
+    return error;
 };
 
 export const cantEditUser = (path = '') => {

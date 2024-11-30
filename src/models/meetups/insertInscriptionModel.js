@@ -71,7 +71,7 @@ const insertInscriptionModel = async (user, meetupId, date) => {
             <p>¡Nos vemos pronto en el evento!</p>
 
             <p>Un saludo,</p>
-            <p>El equipo de Meetup</p>
+            <p>El equipo de OurMeetup🫂</p>
          `;
 
     console.log(`Enviando correo a: ${email} con asunto: ${emailSubject}`);

@@ -66,13 +66,13 @@ const insertUserModel = async (
     const emailBody = `
             <p>¡Bienvenide, ${username}!</p>
 
-            <p>💌 Le damos las gracias por registrarse en nuestra app de Meet Ups.</p>
+            <p>💌 Le damos las gracias por registrarse en OurMeetup.</p>
             <p>➡️ Para activar su cuenta, haga click en el siguiente enlace:</p>
 
             <p><a href="${URL_FRONT}${registrationCode}">Activar mi cuenta</a></p>
 
             <p>Un saludo,</p>
-            <p>El equipo de Meetup</p>
+            <p>El equipo de OurMeetup🫂</p>
         `;
 
     // Enviamos el email de verificación al usuario.

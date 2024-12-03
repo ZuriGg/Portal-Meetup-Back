@@ -60,7 +60,7 @@ const insertUserModel = async (
     );
 
     // Creamos el asunto del email de verificación.
-    const emailSubject = '🌟 Active su usuario en nuestra app de Meet Ups 🌟';
+    const emailSubject = '🌟 Active su usuario en OurMeetup 🌟';
 
     // Creamos el contenido del email
     const emailBody = `

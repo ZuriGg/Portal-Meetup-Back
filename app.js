@@ -26,7 +26,10 @@ app.use(morgan('dev'));
 //middleware CORS: evita que interfieran cuando conectemos front con back
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: [
+            'http://localhost:5173',
+            'https://portal-meetup-front-3vnphax9h-zuriggs-projects.vercel.app/',
+        ],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization', 'user', 'date'],
     })

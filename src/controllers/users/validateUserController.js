@@ -17,7 +17,7 @@ const validateUserController = async (req, res, next) => {
         await updateUserRegCodeModel(registrationCode);
 
         //reddericcionamos la respuesta
-        res.redirect('http://localhost:5173/user/validate');
+        res.redirect('https://portal-meetup-front.vercel.app/user/validate');
     } catch (err) {
         res.send({
             status: 'error',

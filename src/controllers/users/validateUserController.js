@@ -1,4 +1,5 @@
 import updateUserRegCodeModel from '../../models/users/updateUserRegCodeModel.js';
+import { URL_FRONT_VERDADERA } from '../../../env.js';
 
 //valida a un usuario recién registrado:
 const validateUserController = async (req, res, next) => {
@@ -17,7 +18,7 @@ const validateUserController = async (req, res, next) => {
         await updateUserRegCodeModel(registrationCode);
 
         //reddericcionamos la respuesta
-        res.redirect('https://portal-meetup-front.vercel.app/user/validate');
+        res.redirect(`${URL_FRONT_VERDADERA}/user/validate`);
     } catch (err) {
         res.send({
             status: 'error',

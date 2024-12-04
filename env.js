@@ -15,4 +15,5 @@ export const {
     SMTP_USER,
     SMTP_PASS,
     URL_FRONT,
+    URL_FRONT_VERDADERA,
 } = process.env;
